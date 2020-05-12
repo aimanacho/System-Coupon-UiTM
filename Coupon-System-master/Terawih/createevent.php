@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 {
@@ -53,7 +54,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <input type="time" id="timestart" name="timestart"><br>
            <label >Time End</label>
               <input type="time" id="timeend" name="timeend"><br>
-           <label >Merit: </label>
+      <!--     <label >Merit: </label>
               <select id="eventmerit" name="eventmerit">
                  <option>1</option>
                  <option>2</option>
@@ -61,19 +62,19 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
                  <option>4</option>
                  <option>5</option>
               </select> <br>
-         <!--<label >Coupon Quantity: </label>-->
-         <!--     <input type="text" id="couponq" name="couponq"><br>
-         <label >Event Status: </label>
-              <input type="text" id="eventstatus" name="eventstatus"><br>-->
+               <label >Coupon Quantity: </label>
+                  <input type="text" id="couponq" name="couponq"><br>
+              <label >Event Status: </label>
+                  <input type="text" id="eventstatus" name="eventstatus"><br>
           <label >Club Code</label>
-              <input type="text" id="clubcode" name="clubcode"><br><br>
+              <input type="text" id="clubcode" name="clubcode"><br><br>-->
               <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
          </div>
        </form> <br />
    </div>
 <!-- script -->
   <script>
-    /* Loop through all dropdown buttons to toggle between hiding and showing  dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
 
