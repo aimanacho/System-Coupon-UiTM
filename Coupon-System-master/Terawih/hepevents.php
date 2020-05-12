@@ -45,7 +45,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p style = "text-align: center;font-size: 23px;">Event details </p><br>
     <?php
       include ("connection.php");
-      $eventcode =  $_POST['eventcode'];
+      $eventcode =  $_SESSION['eventcode'];
       $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$eventcode."'";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
@@ -55,8 +55,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Event Date:".$row["eventdate"]."</p>";
           echo "<p> Event Time Start:".$row["timestart"]."</p>";
           echo "<p> Event Time End:".$row["timeend"]."</p>";
-          echo "<p> Merit:".$row["meritE"]."</p>";
-          echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
+        //  echo "<p> Merit:".$row["meritE"]."</p>";
+          //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
           echo "<p> Organizer:".$row["clubName"]."</p>";
         }
       ?>
@@ -79,8 +79,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           $eventcode = $_SESSION['eventcode'];
           $sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
           $result = mysqli_query($conn, $sql);
-          mysqli_query($conn,$sqlupdate);
-          echo "<script language = 'javascript'>alert('Event approved!');window.location='pendingevent.php';</script>";
+          mysqli_query($conn,$sql);
+          echo "<script language = 'javascript'>alert('Event accepted!');window.location='accEvent.php';</script>";
       }
       function rejected()
       {
