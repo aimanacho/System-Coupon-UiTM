@@ -20,7 +20,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <body>
     <!-- topbar-->
     <ul class="topnav" id= "main">
-      <li class="right"><a href="index.php">Logout</a></li>
+      <li class="right"><a href="index.php">Logoutssss</a></li>
     </ul>
 
     <!-- sidebar-->
