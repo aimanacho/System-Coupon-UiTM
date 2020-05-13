@@ -47,7 +47,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <table class="table table-bordered" id= "tablemeow">
     <thead>
       <tr>
-        <th>Event</th>
+        <th>Events</th>
         <th>Date</th>
         <th>Organizer</th>
         <th>Status</th>
