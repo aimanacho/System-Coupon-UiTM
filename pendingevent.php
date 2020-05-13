@@ -77,7 +77,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<td>Pendings</td>";
 >>>>>>> 7de18375b7f7870171de799e291db80f87d84d2c
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />;
-          <td><button>Hit me</button></td>
+          <td><button>Hit mes</button></td>
           </tr>
         </form>";
       }
