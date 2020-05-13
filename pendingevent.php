@@ -67,13 +67,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <td>".$row["eventname"]."</td>
           <td>".$row["eventdate"]."</td>
           <td>".$row["clubName"]."</td>";
-          echo "<td>Pendings</td>";
+          echo "<td>Pending</td>";
           if ($row["eventstatus"] == 1 )
           {
               echo "<td>Pending</td>";
           }
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />;
-          <td><button>Hit me</button></td>
+          <td><button id = eventcode value = ".$_SESSION['eventcode'].">Hit me</button></td>
           </tr>
         </form>";
       }
@@ -104,6 +104,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
