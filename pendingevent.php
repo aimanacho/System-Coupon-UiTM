@@ -67,7 +67,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <td>".$row["eventname"]."</td>
           <td>".$row["eventdate"]."</td>
           <td>".$row["clubName"]."</td>";
-          echo "<td>Pending</td>";
+          echo "<td>Pendings</td>";
           if ($row["eventstatus"] == 1 )
           {
               echo "<td>Pending</td>";
