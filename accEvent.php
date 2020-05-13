@@ -31,7 +31,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="studentinfo.php" class = "btn">Student Info</a>
     <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
       <i class = "fa fa-caret-down"></i>
-    </a>
+    </a>https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp
     <div class = "dropdown-container" >
       <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
       <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
@@ -40,7 +40,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </div>
 
   <div class = "content">
-    <form action = "createeventp.php" method = "post" id = "login" name = "login" target = "_self">
+    <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">
        <label >Merit: </label>
            <select id="eventmerit" name="eventmerit">
@@ -50,9 +50,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <option>4</option>
               <option>5</option>
            </select> <br>
-           <?php echo $_SESSION['eventcode']; ?>
             <label >Coupon Quantity: </label>
                <input type="text" id="couponq" name="couponq"><br>
+               <?php echo $_SESSION['eventcode'] ?>
            <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
       </div>
     </form> <br />
