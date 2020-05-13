@@ -50,7 +50,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <option>4</option>
               <option>5</option>
            </select> <br>
-           <?php echo $_SESSION['eventcode']; ?>
+           <?php echo $_POST['eventcode']; ?>
             <label >Coupon Quantity: </label>
                <input type="text" id="couponq" name="couponq"><br>
            <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
