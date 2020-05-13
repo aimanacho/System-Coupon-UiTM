@@ -63,7 +63,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Organizer:".$row["clubName"]."</p>";
         }
       ?>
-      
+
       <?php
       if (array_key_exists('approve', $_POST))
       {
