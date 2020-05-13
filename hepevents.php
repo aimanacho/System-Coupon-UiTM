@@ -42,10 +42,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <!-- content -->
   <div class = "content">
     <form action = "pendingevent.php" style = "text-align: center;">
-          <button type="submit" class="btn btn-primary"> Backs</button>
-        </form>
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
     <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event details </p><br>
+    <p style = "text-align: center;font-size: 23px;">Event detailss </p><br>
     <?php
       include ("connection.php");
       $eventcode =  $_SESSION['eventcode'];
@@ -57,7 +57,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Event Venue:".$row["eventvenue"]."</p>";
           echo "<p> Event Date:".$row["eventdate"]."</p>";
           echo "<p> Event Time Start:".$row["timestart"]."</p>";
-          echo "<p> Event Time End:".$row["timeend"]."</p>";
+          echo "<p> Event Times End:".$row["timeend"]."</p>";
         //  echo "<p> Merit:".$row["meritE"]."</p>";
           //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
           echo "<p> Organizer:".$row["clubName"]."</p>";
@@ -79,10 +79,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       function approved()
       {
           include ("connection.php");
-          $eventcode = $_SESSION['eventcode'];
-          $sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
-          $result = mysqli_query($conn, $sql);
-          mysqli_query($conn,$sql);
+          //$eventcode = $_SESSION['eventcode'];
+          //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
+          //$result = mysqli_query($conn, $sql);
+          //mysqli_query($conn,$sql);
           echo "<script language = 'javascript'>alert('Event accepted!');window.location='accEvent.php';</script>";
       }
       function rejected()
