@@ -48,7 +48,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p style = "text-align: center;font-size: 23px;">Event detailss </p><br>
     <?php
       include ("connection.php");
-      $eventcode =  $_POST['eventcode'];
+      $eventcode =  $_SESSION['eventcode'];
       $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$eventcode."'";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
