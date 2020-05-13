@@ -45,7 +45,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <button type="submit" class="btn btn-primary"> Back</button>
     </form>
     <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event details </p><br>
+    <p style = "text-align: center;font-size: 23px;">Event detailss </p><br>
     <?php
       include ("connection.php");
       $eventcode =  $_SESSION['eventcode'];
