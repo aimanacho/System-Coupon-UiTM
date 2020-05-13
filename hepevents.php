@@ -57,7 +57,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Event Venue:".$row["eventvenue"]."</p>";
           echo "<p> Event Date:".$row["eventdate"]."</p>";
           echo "<p> Event Time Start:".$row["timestart"]."</p>";
-          echo "<p> Event Time End:".$row["timeend"]."</p>";
+          echo "<p> Event Times End:".$row["timeend"]."</p>";
         //  echo "<p> Merit:".$row["meritE"]."</p>";
           //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
           echo "<p> Organizer:".$row["clubName"]."</p>";
