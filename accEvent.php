@@ -31,7 +31,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="studentinfo.php" class = "btn">Student Info</a>
     <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
       <i class = "fa fa-caret-down"></i>
-    </a>https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp
+    </a>
     <div class = "dropdown-container" >
       <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
       <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
@@ -52,8 +52,32 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            </select> <br>
             <label >Coupon Quantity: </label>
                <input type="text" id="couponq" name="couponq"><br>
-               <?php echo $_SESSION['eventcode'] ?>
            <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+           <?php echo $_SESSION['eventcode'] ?>
       </div>
     </form> <br />
  </div>
+ <!-- script -->
+ <script>
+   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+   var i;
+
+   for (i = 0; i < dropdown.length; i++)
+   {
+     dropdown[i].addEventListener("click", function()
+     {
+       this.classList.toggle("active");
+       var dropdownContent = this.nextElementSibling;
+       if (dropdownContent.style.display === "block")
+       {
+         dropdownContent.style.display = "none";
+       }
+       else
+       {
+         dropdownContent.style.display = "block";
+       }
+       });
+   }
+
+ </script>
