@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 {
@@ -67,9 +67,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <td>".$row["eventname"]."</td>
           <td>".$row["eventdate"]."</td>
           <td>".$row["clubName"]."</td>";
-          echo "<td>Pendings</td>";
+          echo "<td>Pending</td>";
+          if ($row["eventstatus"] == 1 )
+          {
+              echo "<td>Pending</td>";
+          }
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />;
-          <td><button>Hit mes</button></td>
+          <td><button>Hit me</button></td>
           </tr>
         </form>";
       }
