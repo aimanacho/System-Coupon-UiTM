@@ -81,7 +81,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </tbody>
   </table>
 
-
 <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
