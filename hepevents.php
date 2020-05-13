@@ -61,6 +61,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         //  echo "<p> Merit:".$row["meritE"]."</p>";
           //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
           echo "<p> Organizer:".$row["clubName"]."</p>";
+          $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
 
@@ -82,7 +83,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
           //$result = mysqli_query($conn, $sql);
           //mysqli_query($conn,$sql);
-          echo "<script language = 'javascript'>alert('Event accepted!');window.location='accEvent.php';</script>";
+          echo "<script language = 'javascript'>alert('Meow!');window.location='accEvent.php';</script>";
       }
       function rejected()
       {
@@ -123,6 +124,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+    $("button").click(function() {
+      var fired_button = $(this).val();
+      alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

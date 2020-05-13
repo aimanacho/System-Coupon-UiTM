@@ -39,6 +39,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn">Report</a>
   </div>
 
+  
   <div class = "content">
     <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">

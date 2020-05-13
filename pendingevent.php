@@ -68,8 +68,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <td>".$row["eventdate"]."</td>
           <td>".$row["clubName"]."</td>";
           echo "<td>Pending</td>";
-          echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />;
-          <td><button id = eventcode value = ".$_SESSION['eventcode'].">Hit me</button></td>
+          echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />
+          <td><button>Hit me</button></td>
           </tr>
         </form>";
       }
