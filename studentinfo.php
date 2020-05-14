@@ -57,17 +57,17 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <?php
       include("connection.php");
 
-      $sql = "SELECT * from students ORDER BY studentname";
+      $sql = "SELECT * from student ORDER BY studentname";
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0)
       {
         while ($row = mysqli_fetch_assoc($result))
         {
           echo "<tr>
-            <td><a>".$row["studentno"]."</a></td>
+            <td><a>".$row["matricNo"]."</a></td>
             <td>".$row["studentname"]."</td>
-            <td>".$row["userlevelid"]."</td>
-            <td>john@example.com</td>
+            <td>".$row["sem"]."</td>
+            <td>".$row["merit"]."</td>
           </tr>";
         }
       }

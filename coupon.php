@@ -35,7 +35,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </head>
   <body>
     <?php
-     $_SESSION['meritE'] = $_POST['meritE'];
+    $meritE = $_POST['meritE'];
+    $_SESSION['meritE'] = $meritE;
      echo $_SESSION['meritE'];
      ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
