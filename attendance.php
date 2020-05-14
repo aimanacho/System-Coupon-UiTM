@@ -73,6 +73,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<td>".$row["timeend"]."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
+            $_SESSION['meritE'] = $row["meritE"];
             echo "<td><button>Enter</button></td>";
             echo "</tr>";
             echo "</form>";

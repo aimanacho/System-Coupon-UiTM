@@ -24,6 +24,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      function searchmatric()
      {
        include("connection.php");
+       session_start();
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
        $sql = "UPDATE student SET merit = '".$meritE."' WHERE matricNo = '".$matricno."'";
@@ -35,8 +36,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </head>
   <body>
     <?php
-    $meritE = $_POST['meritE'];
-    $_SESSION['meritE'] = $meritE;
      echo $_SESSION['meritE'];
      ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
