@@ -82,10 +82,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           while ($row = mysqli_fetch_assoc($result))
           {
             echo "<tr>
-              <td><a>".$row["eventname"]."</a></td>
-              <td>".$row["eventdate"]."</td>
-              <td>".$row["timestart"]."</td>
-              <td>".$row["timeend"]."</td>";
+                  <td><a>".$row["eventname"]."</a></td>";
+            echo "<td>" .date("M jS, Y",strtotime($row["eventdate"])). "</td>";
+            echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "</tr>";
           }
         }
