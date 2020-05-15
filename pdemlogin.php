@@ -19,6 +19,7 @@ if ( $row > 0)
   $_SESSION['userlevelid'] = $r['userlevelid'];
   $_SESSION['clubName'] = $r['clubName'];
   $_SESSION['clubCode'] = $r['clubCode'];
+  $_SESSION['alert'] = 0;
 
   header("Location: dashboard.php");
 }
