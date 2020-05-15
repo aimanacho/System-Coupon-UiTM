@@ -56,7 +56,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <body>
     <!-- Countdown -->
     <p id="ended"></p>
-    <script>
+    <script type='text/javascript'>
+
 // Set the date we're counting down to
 var countDownDate = new Date("May 16, 2020 01:05:00").getTime();
 
@@ -93,6 +94,9 @@ var x = setInterval(function() {
       $_SESSION['meritE'] = $meritE;
        echo $_SESSION['meritE'];
         $_SESSION['test'] = 1;
+        $eventcode = $_POST['eventcode'];
+      $_SESSION['eventcode'] = $eventcode;
+      echo $_SESSION['eventcode'];
     }
     else
     {
