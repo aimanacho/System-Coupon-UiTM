@@ -24,6 +24,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      function searchmatric()
      {
        include("connection.php");
+       session_start();
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
        $sql = "UPDATE student SET merit = '".$meritE."' WHERE matricNo = '".$matricno."'";
@@ -35,7 +36,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </head>
   <body>
     <?php
-     $_SESSION['meritE'] = $_POST['meritE'];
      echo $_SESSION['meritE'];
      ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
@@ -47,4 +47,3 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>
-</html>
