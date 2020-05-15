@@ -65,7 +65,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<form method = post action = hepevents.php>
         <tr>
           <td>".$row["eventname"]."</td>
-          <td>".$row["eventdate"]."</td>
+          <td>".date("M jS, Y", strtotime($row["eventdate"]))."</td>
           <td>".$row["clubName"]."</td>";
           if ($row["eventstatus"] == 1 )
           {

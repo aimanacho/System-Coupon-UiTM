@@ -41,26 +41,29 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
   <!-- content -->
   <div class = "content">
+    <form action = "pendingevent.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
     <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event details </p><br>
+    <p style = "text-align: center;font-size: 23px;">Event detailss </p><br>
     <?php
       include ("connection.php");
-      $eventcode =  $_SESSION['eventcode'];
+      $eventcode =  $_POST['eventcode'];
       $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$eventcode."'";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
           echo "<p> Event Name:".$row["eventname"]."</p>";
           echo "<p> Event Venue:".$row["eventvenue"]."</p>";
-          echo "<p> Event Date:".$row["eventdate"]."</p>";
-          echo "<p> Event Time Start:".$row["timestart"]."</p>";
-          echo "<p> Event Time End:".$row["timeend"]."</p>";
+          echo "<p> Event Date:". date("M jS, Y",strtotime($row["eventdate"]))."</p>";
+          echo "<p> Event Time Start:".date("H:i",strtotime($row["timestart"]))."</p>";
+          echo "<p> Event Times End:".date("H:i",strtotime($row["timeend"]))."</p>";
         //  echo "<p> Merit:".$row["meritE"]."</p>";
           //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
           echo "<p> Organizer:".$row["clubName"]."</p>";
+          $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
-
 
       <?php
       if (array_key_exists('approve', $_POST))
@@ -76,11 +79,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       function approved()
       {
           include ("connection.php");
-          $eventcode = $_SESSION['eventcode'];
-          $sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
-          $result = mysqli_query($conn, $sql);
-          mysqli_query($conn,$sql);
-          echo "<script language = 'javascript'>alert('Event accepted!');window.location='accEvent.php';</script>";
+          //$eventcode = $_SESSION['eventcode'];
+          //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
+          //$result = mysqli_query($conn, $sql);
+          //mysqli_query($conn,$sql);
+          echo "<script language = 'javascript'>alert('Meow!');window.location='accEvent.php';</script>";
       }
       function rejected()
       {
@@ -121,6 +124,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+    $("button").click(function() {
+      var fired_button = $(this).val();
+      alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
