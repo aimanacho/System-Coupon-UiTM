@@ -65,7 +65,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
-            echo "<form action = 'coupon.php' method = 'post' target = '_blank'>";
+            echo "<form action = coupon.php method = post target = _blank>";
             echo "<tr>";
             echo "<td>".$row["eventname"]."</td>";
             echo "<td>".$row["eventdate"]."</td>";
@@ -73,11 +73,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<td>".$row["timeend"]."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
-            echo "<td><button>Enter</button></td>";
+            echo "<td><button onClick=window.location.reload();>Enter</button></td>";
             echo "</tr>";
             echo "</form>";
-
           }
+           $_SESSION['test'] =0;
           ?>
       </tbody>
     </table>
@@ -121,6 +121,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
