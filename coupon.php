@@ -57,9 +57,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <!-- Countdown -->
     <p id="ended"></p>
     <script>
-
 // Set the date we're counting down to
-var countDownDate = new Date("May 15, 2020 22:43:00").getTime();
+var countDownDate = new Date("May 16, 2020 01:05:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -82,8 +81,8 @@ var x = setInterval(function() {
   // If the count down is over, write some text
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("ended").innerHTML = "Event has ended!";
-    header("location:SystemCoupon/attendance.php");
+    alert('Event has expired');window.location='attendance.php';
+
   }
 }, 1000);
 </script>
@@ -108,5 +107,6 @@ var x = setInterval(function() {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script src="http://www.datejs.com/build/date.js" type="text/javascript"></script>
   </body>
 </html>
