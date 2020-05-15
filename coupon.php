@@ -26,15 +26,21 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        include("connection.php");
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
+       //repeat
        $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
        $resultR = mysqli_query($conn, $repeatsS);
-       $resultRow = mysqli_num_rows($resultR);
        $r = mysqli_fetch_assoc($resultR);
        $repeats = $r['repeats'];
+       //merit
+       $meritS = "SELECT merit FROM student WHERE matricNo = '".$matricno."'";
+       $resultM = mysqli_query($conn, $meritS);
+       $m = mysqli_fetch_assoc($resultM);
+       $merit = $m['merit'];
+       $merit = $merit + $meritE;
        if ( $repeats == 0)
        {
          $repeats = 1;
-         $sql = "UPDATE student SET merit = '".$meritE."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+         $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
          $result = mysqli_query($conn, $sql);
          echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
        }
