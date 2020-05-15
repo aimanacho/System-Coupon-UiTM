@@ -51,27 +51,30 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <th>Name</th>
         <th>Semester</th>
         <th>Total Merit</th>
+        <th>More Details</th>
       </tr>
     </thead>
     <tbody>
       <?php
       include("connection.php");
-
       $sql = "SELECT * from student ORDER BY studentname";
       $result = mysqli_query($conn, $sql);
-      if (mysqli_num_rows($result) > 0)
+      while ($row = mysqli_fetch_assoc($result))
       {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<tr>
-            <td><a>".$row["matricNo"]."</a></td>
+        $_SESSION['matricNo'] = $row['matricNo'];
+        echo "<form method = post action = student.php>";
+        echo
+          "<tr>
+            <td>".$row["matricNo"]."</td>
             <td>".$row["studentname"]."</td>
             <td>".$row["sem"]."</td>
             <td>".$row["merit"]."</td>
-          </tr>";
-        }
+            <input type = hidden name = matricNo value = ".$_SESSION['matricNo']." />
+            <td><button>Details</button></td>
+          </tr>
+        <form/>";
       }
-        ?>
+      ?>
     </tbody>
   </table>
 
@@ -97,6 +100,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
+
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
