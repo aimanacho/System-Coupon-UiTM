@@ -24,19 +24,39 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      function searchmatric()
      {
        include("connection.php");
-       session_start();
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
-       $sql = "UPDATE student SET merit = '".$meritE."' WHERE matricNo = '".$matricno."'";
-       $result = mysqli_query($conn, $sql);
+       $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
+       $resultR = mysqli_query($conn, $repeatsS);
+       $resultRow = mysqli_num_rows($resultR);
+       $r = mysqli_fetch_assoc($resultR);
+       $repeats = $r['repeats'];
+       if ( $repeats == 0)
+       {
+         $repeats = 1;
+         $sql = "UPDATE student SET merit = '".$meritE."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+         $result = mysqli_query($conn, $sql);
          echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+       }
+       else
+         echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
      }
 
      ?>
   </head>
   <body>
     <?php
-     echo $_SESSION['meritE'];
+    if ( $_SESSION['test'] == 0)
+    {
+      $meritE = $_POST['meritE'];
+      $_SESSION['meritE'] = $meritE;
+       echo $_SESSION['meritE'];
+        $_SESSION['test'] = 1;
+    }
+    else
+    {
+      echo $_SESSION['meritE'];
+    }
      ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
        <lable>Enter Matric No: </lable>
@@ -47,3 +67,4 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>
+</html>
