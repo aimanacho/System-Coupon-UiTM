@@ -54,10 +54,15 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <?php
     if ( $_SESSION['test'] == 0)
     {
+      //merit
       $meritE = $_POST['meritE'];
       $_SESSION['meritE'] = $meritE;
-       echo $_SESSION['meritE'];
-        $_SESSION['test'] = 1;
+      echo $_SESSION['meritE'];
+      $_SESSION['test'] = 1;
+      //eventcode
+      $eventcode = $_POST['eventcode'];
+      $_SESSION['eventcode'] = $eventcode;
+      echo $_SESSION['eventcode'];
     }
     else
     {
