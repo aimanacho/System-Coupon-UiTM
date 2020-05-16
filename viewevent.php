@@ -83,9 +83,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           {
             echo "<tr>
               <td><a>".$row["eventname"]."</a></td>
-              <td>".$row["eventdate"]."</td>
-              <td>".$row["timestart"]."</td>
-              <td>".$row["timeend"]."</td>";
+              <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+              <td>".date("H:i",strtotime($row["timestart"]))."</td>
+              <td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "</tr>";
           }
         }

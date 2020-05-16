@@ -68,9 +68,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<form action = coupon.php method = post target = _blank>";
             echo "<tr>";
             echo "<td>".$row["eventname"]."</td>";
-            echo "<td>".$row["eventdate"]."</td>";
-            echo "<td>".$row["timestart"]."</td>";
-            echo "<td>".$row["timeend"]."</td>";
+            echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
             echo "<td><button onClick=window.location.reload();>Enter</button></td>";

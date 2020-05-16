@@ -65,7 +65,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<form method = post action = hepevents.php>
         <tr>
           <td>".$row["eventname"]."</td>
-          <td>".$row["eventdate"]."</td>
+          <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
           <td>".$row["clubName"]."</td>";
           echo "<td>Pending</td>";
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />
