@@ -78,6 +78,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "</form>";
           }
            $_SESSION['test'] =0;
+           $_SESSION['coupon']=0;
           ?>
       </tbody>
     </table>

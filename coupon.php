@@ -26,6 +26,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        include("connection.php");
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
+       $eventcode = $_SESSION['eventcode'];
        //repeat
        $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
        $resultR = mysqli_query($conn, $repeatsS);
@@ -37,18 +38,31 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        $m = mysqli_fetch_assoc($resultM);
        $merit = $m['merit'];
        $merit = $merit + $meritE;
-       if ( $repeats == 0)
+       //coupon quantity
+       $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$eventcode."'";
+       $resultC = mysqli_query($conn, $couponQ);
+       $c = mysqli_fetch_assoc($resultC);
+       $coupon = $c['couponq'];
+       if  ($_SESSION['coupon'] < $coupon)
        {
-         $repeats = 1;
-         $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
-         $result = mysqli_query($conn, $sql);
-         echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-       }
-       else
-         echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
-     }
+         if ( $repeats == 0)
+         {
+           $repeats = 1;
+           $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+           $result = mysqli_query($conn, $sql);
+           $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
+           echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+         }
+         else
+            echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+      }
+      else
+      {
+        echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+      }
+    }
+?>
 
-     ?>
   </head>
   <body>
     <?php
@@ -58,15 +72,16 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $meritE = $_POST['meritE'];
       $_SESSION['meritE'] = $meritE;
       echo $_SESSION['meritE'];
-      $_SESSION['test'] = 1;
       //eventcode
       $eventcode = $_POST['eventcode'];
       $_SESSION['eventcode'] = $eventcode;
       echo $_SESSION['eventcode'];
+      $_SESSION['test'] = 1;
     }
     else
     {
       echo $_SESSION['meritE'];
+      echo $_SESSION['eventcode'];
     }
      ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
