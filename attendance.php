@@ -61,7 +61,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-        $sql = "SELECT * from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+         $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
@@ -73,7 +73,16 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
-            echo "<td><button onClick=window.location.reload();>Enter</button></td>";
+            if($row['date_dif']==0){
+              if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
+                echo "<td><button onClick=window.location.reload();>Enter</button></td>";
+              else {
+                echo "<td>Not available</td>";
+              }
+            }
+            else{
+              echo "<td>Not available</td>";
+            }
             echo "</tr>";
             echo "</form>";
           }
