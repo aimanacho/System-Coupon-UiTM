@@ -75,7 +75,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
             if($row['date_dif']==0){
+              if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
                 echo "<td><button onClick=window.location.reload();>Enter</button></td>";
+              else {
+                echo "<td>Not available</td>";
+              }
             }
             else{
               echo "<td>Not available</td>";
