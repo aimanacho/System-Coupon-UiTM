@@ -35,58 +35,43 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        include("connection.php");
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
+       $eventcode = $_SESSION['eventcode'];
+       $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$eventcode."'";
+       $result = mysqli_query($conn, $sqlE);
        $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
        $resultR = mysqli_query($conn, $repeatsS);
        $resultRow = mysqli_num_rows($resultR);
        $r = mysqli_fetch_assoc($resultR);
        $repeats = $r['repeats'];
-       if ( $repeats == 0)
-       {
-         $repeats = 1;
-         $sql = "UPDATE student SET merit = '".$meritE."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
-         $result = mysqli_query($conn, $sql);
-         echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+       while ($row = mysqli_fetch_assoc($result)){
+         if($row['cTime']<$row["timeend"]){
+
+               if ($repeats == 0)
+               {
+                   $repeats = 1;
+                   $sql = "UPDATE student SET merit = '".$meritE."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+                   $result = mysqli_query($conn, $sql);
+                   echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+                 }
+                 else
+                   echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+             }
+         else {
+             echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
+             $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$eventcode."'";
+             $result = mysqli_query($conn, $sqlUpdate);
+             mysqli_query($conn,$sqlUpdate);
+           }
+
+         }
+
+
+
        }
-       else
-         echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
-     }
 
      ?>
   </head>
   <body>
-    <!-- Countdown -->
-    <p id="ended"></p>
-    <script type='text/javascript'>
-
-// Set the date we're counting down to
-var countDownDate = new Date("May 16, 2020 01:05:00").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Output the result in an element with id="demo"
-  document.getElementById("ended").innerHTML = hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  // If the count down is over, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    alert('Event has expired');window.location='attendance.php';
-
-  }
-}, 1000);
-</script>
     <?php
     if ( $_SESSION['test'] == 0)
     {
