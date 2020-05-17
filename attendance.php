@@ -23,7 +23,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <li class="right"><a href="logout.php">Logout</a></li>
     </ul>
 
-    <!-- sidebar
+    <!-- sidebar-->
      <div class="sidenav">
         <img src = "uitm.jpg"/>
         <a href="dashboard.php" class = "btn "> Dashboard</a>
@@ -36,7 +36,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
         </div>
       </div>
--->
+
     <!-- content -->
     <p class = "content"><b>Select which event you organize</b></p>
     <input type="text" class = "searchbar"id="mySearch" onkeyup="myFunction()" placeholder="Search" title="Type in a category" style = "margin-left: 1400px;">
