@@ -59,7 +59,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content -->
     <p class = "content"><b>View events</b></p>
-    <br />
 
     <!-- table view event -->
     <table class="table table-bordered" id= "tablemeow">
@@ -69,13 +68,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <th>Date</th>
           <th>Time Start</th>
           <th>Time End</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-        $sql = "SELECT * from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+        $sql = "SELECT * from events WHERE clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0)
         {
@@ -86,6 +86,22 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
               <td>".date("H:i",strtotime($row["timestart"]))."</td>
               <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+              if ( $row["eventstatus"]==1)
+              {
+                echo "<td><a>Pending</a></td>";
+              }
+              else if ($row["eventstatus"]==2)
+              {
+                echo "<td><a>Accepted</a></td>";
+              }
+              else if ($row["eventstatus"]==3)
+              {
+                echo "<td><a>Rejected</a></td>";
+              }
+              else if ($row["eventstatus"]==4)
+              {
+                echo "<td><a>Past</a></td>";
+              }
             echo "</tr>";
           }
         }
