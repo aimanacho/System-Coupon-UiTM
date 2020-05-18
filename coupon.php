@@ -27,6 +27,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
        $eventcode = $_SESSION['eventcode'];
+       //time
+       $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$eventcode."'";
+       $resultT = mysqli_query($conn, $sqlE);
+       $t = mysqli_fetch_assoc($resultT);
        //repeat
        $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
        $resultR = mysqli_query($conn, $repeatsS);
@@ -43,22 +47,32 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        $resultC = mysqli_query($conn, $couponQ);
        $c = mysqli_fetch_assoc($resultC);
        $coupon = $c['couponq'];
-       if  ($_SESSION['coupon'] < $coupon)
+       if ($t['cTime']<$t["timeend"])
        {
-         if ( $repeats == 0)
+         if  ($_SESSION['coupon'] < $coupon)
          {
-           $repeats = 1;
-           $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
-           $result = mysqli_query($conn, $sql);
-           $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
-           echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-         }
-         else
-            echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+           if ( $repeats == 0)
+           {
+             $repeats = 1;
+             $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+             $result = mysqli_query($conn, $sql);
+             $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
+             echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+           }
+           else
+              echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+        }
+        else
+        {
+          echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+        }
       }
       else
       {
-        echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+        echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
+             $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$eventcode."'";
+             $result = mysqli_query($conn, $sqlUpdate);
+             mysqli_query($conn,$sqlUpdate);
       }
     }
 ?>
