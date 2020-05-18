@@ -90,7 +90,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     if ($t['cTime'] > $t["timeend"])
     {
       echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
-           $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$eventcode."'";
+           $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
            $result = mysqli_query($conn, $sqlUpdate);
            mysqli_query($conn,$sqlUpdate);
     }
