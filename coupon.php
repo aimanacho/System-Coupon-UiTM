@@ -15,7 +15,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <title></title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <?php
+  </head>
+  <body>
+    <!--process -->
+<?php
     include("connection.php");
      if (array_key_exists('searchmatric',$_POST))
      {
@@ -69,12 +72,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         }
         else
           echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
-  }
+      }
 ?>
-
-  </head>
-  <body>
-    <?php
+<!--post value/ test -->
+<?php
     if ( $_SESSION['test'] == 0)
     {
       //merit
@@ -103,13 +104,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            $result = mysqli_query($conn, $sqlUpdate);
            mysqli_query($conn,$sqlUpdate);
     }
-     ?>
+?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
        <lable>Enter Matric No: </lable>
        <input type ="text" id = "matricno" name = "matricno" />
        <button type="submit" class="btn btn-info" name = "searchmatric" onclick = "searchmatric()">Enter</button>
      </form>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>
