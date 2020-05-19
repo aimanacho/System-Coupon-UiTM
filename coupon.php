@@ -27,40 +27,49 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        $matricno = $_POST['matricno'];
        $meritE = $_SESSION['meritE'];
        $eventcode = $_SESSION['eventcode'];
-       //repeat
-       $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
-       $resultR = mysqli_query($conn, $repeatsS);
-       $r = mysqli_fetch_assoc($resultR);
-       $repeats = $r['repeats'];
-       //merit
-       $meritS = "SELECT merit FROM student WHERE matricNo = '".$matricno."'";
-       $resultM = mysqli_query($conn, $meritS);
-       $m = mysqli_fetch_assoc($resultM);
-       $merit = $m['merit'];
-       $merit = $merit + $meritE;
-       //coupon quantity
-       $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$eventcode."'";
-       $resultC = mysqli_query($conn, $couponQ);
-       $c = mysqli_fetch_assoc($resultC);
-       $coupon = $c['couponq'];
-         if  ($_SESSION['coupon'] < $coupon)
-         {
-           if ( $repeats == 0)
+       //found matric no
+       $foundM = "SELECT matricNo from student WHERE matricNo = '".$matricno."'";
+       $resultF = mysqli_query($conn, $foundM);
+       $f = mysqli_fetch_assoc($resultF);
+       if ( $f > 0)
+       {
+         //repeat
+         $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
+         $resultR = mysqli_query($conn, $repeatsS);
+         $r = mysqli_fetch_assoc($resultR);
+         $repeats = $r['repeats'];
+         //merit
+         $meritS = "SELECT merit FROM student WHERE matricNo = '".$matricno."'";
+         $resultM = mysqli_query($conn, $meritS);
+         $m = mysqli_fetch_assoc($resultM);
+         $merit = $m['merit'];
+         $merit = $merit + $meritE;
+         //coupon quantity
+         $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$eventcode."'";
+         $resultC = mysqli_query($conn, $couponQ);
+         $c = mysqli_fetch_assoc($resultC);
+         $coupon = $c['couponq'];
+           if  ($_SESSION['coupon'] < $coupon)
            {
-             $repeats = 1;
-             $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
-             $result = mysqli_query($conn, $sql);
-             $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
-             echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-           }
-           else
-              echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+             if ( $repeats == 0)
+             {
+               $repeats = 1;
+               $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+               $result = mysqli_query($conn, $sql);
+               $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
+               echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+             }
+             else
+                echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+          }
+          else
+          {
+            echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+          }
         }
         else
-        {
-          echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
-        }
-      }
+          echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
+  }
 ?>
 
   </head>
