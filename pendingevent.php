@@ -50,7 +50,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <th>Events</th>
         <th>Date</th>
         <th>Organizer</th>
-        <th>Status</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -67,7 +66,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <td>".$row["eventname"]."</td>
           <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
           <td>".$row["clubName"]."</td>";
-          echo "<td>Pending</td>";
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />
           <td><button>Hit me</button></td>
           </tr>
