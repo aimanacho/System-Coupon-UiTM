@@ -24,84 +24,35 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-
-    <?php if ($_SESSION['userlevelid']== 1){ ?>
-      <div class="sidenav">
-        <img src = "uitm.jpg"/>
-        <a href="dashboard.php" class = "btn "> Dashboard</a>
-        <a href="attendance.php" class = "btn">Attendance</a>
-        <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
-          <i class = "fa fa-caret-down"></i>
-        </a>
-        <div class = "dropdown-container" >
-          <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
-          <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
-        </div>
+    <div class="sidenav">
+      <img src = "uitm.jpg"/>
+      <a href="dashboard.php" class = "btn"> Dashboard</a>
+      <a href="clubs.php" class = "btn">Clubs</a>
+      <a href="studentinfo.php" class = "btn">Student Info</a>
+      <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
+        <i class = "fa fa-caret-down"></i>
+      </a>
+      <div class = "dropdown-container" >
+        <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+        <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
       </div>
-    <?php } ?>
+      <a href="report.php" class = "btn">Report</a>
+    </div>
 
   <!-- content -->
   <div class = "content">
-    <form action = "vieweventdem.php" style = "text-align: center;">
-      <button type="submit" class="btn btn-primary"> Back</button>
-    </form>
-    <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event details</p><br>
-    <?php
-      include ("connection.php");
-      $eventcode =  $_POST['eventcode'];
-      $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$eventcode."'";
-      $result = mysqli_query($conn, $sql);
-        if ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<p> Event Name:".$row["eventname"]."</p>";
-          echo "<p> Event Venue:".$row["eventvenue"]."</p>";
-          echo "<p> Event Date:".date("jS M Y",strtotime($row["eventdate"]))."</p>";
-          echo "<p> Event Time Start:".date("H:i",strtotime($row["timestart"]))."</p>";
-          echo "<p> Event Times End:".date("H:i",strtotime($row["timeend"]))."</p>";
-        //  echo "<p> Merit:".$row["meritE"]."</p>";
-          //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
-          echo "<p> Organizer:".$row["clubName"]."</p>";
-          echo "<p> Remarks:".$row["remarks"]."</p>";
-          $_SESSION['eventcode'] = $row["eventcode"];
-        }
-      ?>
-
-      <?php
-      if (array_key_exists('approve', $_POST))
-      {
-        approved();
-      }
-
-      if (array_key_exists('reject', $_POST))
-      {
-        rejected();
-      }
-
-      function approved()
-      {
-          include ("connection.php");
-          //$eventcode = $_SESSION['eventcode'];
-          //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
-          //$result = mysqli_query($conn, $sql);
-          //mysqli_query($conn,$sql);
-          echo "<script language = 'javascript'>alert('Meow!');window.location='accEvent.php';</script>";
-      }
-      function rejected()
-      {
-          include ("connection.php");
-          //$eventcode = $_SESSION['eventcode'];
-          //$sql = "UPDATE events SET eventstatus = '3' WHERE eventcode = '".$eventcode."'";
-          //$result = mysqli_query($conn, $sql);
-          //mysqli_query($conn,$sqlupdate);
-          echo "<script language = 'javascript'>alert('Event rejected!');window.location='rejectedp.php';</script>";
-      }
-       ?>
-
-      <form method = "post">
-        <button type= "submit" name ="approve" class = "btn btn-default" style = "background-color: #4CAF50;">Accept</button>
-        <button type= "submit" name = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
-      </form>
+    <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
+      <div class = "form-control" style = "text-align: center;">
+        <form action = "hepevents.php" style = "text-align: center;">
+          <button type="submit" class="btn btn-primary"> Back</button>
+        </form>
+        <br>
+            <label >Remarks: </label>
+               <input type="text" id="remarks" name="remarks"><br>
+           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+           <?php echo $_SESSION['eventcode'] ?>
+      </div>
+    </form> <br />
  </div>
 
   <!-- script -->
