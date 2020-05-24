@@ -77,34 +77,35 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         $clubcode = $_SESSION['clubCode'];
         $sql = "SELECT * from events WHERE clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0)
+        while ($row = mysqli_fetch_assoc($result))
         {
-          while ($row = mysqli_fetch_assoc($result))
-          {
-            echo "<tr>
-              <td><a>".$row["eventname"]."</a></td>
-              <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
-              <td>".date("H:i",strtotime($row["timestart"]))."</td>
-              <td>".date("H:i",strtotime($row["timeend"]))."</td>";
-              if ( $row["eventstatus"]==1)
-              {
-                echo "<td><a>Pending</a></td>";
-              }
-              else if ($row["eventstatus"]==2)
-              {
-                echo "<td><a>Accepted</a></td>";
-              }
-              else if ($row["eventstatus"]==3)
-              {
-                echo "<td><a>Rejected</a></td>";
-              }
-              else if ($row["eventstatus"]==4)
-              {
-                echo "<td><a>Past</a></td>";
-              }
-            echo "</tr>";
-          }
+          echo "<form method = post action = rejected.php>";
+          echo "<tr>
+            <td><a>".$row["eventname"]."</a></td>
+            <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+            <td>".date("H:i",strtotime($row["timestart"]))."</td>
+            <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+            if ( $row["eventstatus"]==1)
+            {
+              echo "<td>Pending</td>";
+            }
+            else if ($row["eventstatus"]==2)
+            {
+              echo "<td>Accepted</td>";
+            }
+            else if ($row["eventstatus"]==3)
+            {
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />";
+              echo "<td><button>Rejected</button></td>";
+            }
+            else if ($row["eventstatus"]==4)
+            {
+              echo "<td>Past</td>";
+            }
+          echo "</tr>";
+          echo "</form>";
         }
+
           ?>
       </tbody>
     </table>
@@ -131,6 +132,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
+
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

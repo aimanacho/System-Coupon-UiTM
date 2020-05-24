@@ -43,23 +43,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <div class = "content">
     <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">
-        <form action = "hepevents.php" style = "text-align: center;">
-          <button type="submit" class="btn btn-primary"> Back</button>
-        </form>
-        <br>
-       <label >Merit: </label>
-           <select id="eventmerit" name="eventmerit">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-           </select> <br>
-            <label >Coupon Quantity: </label>
-               <input type="text" id="couponq" name="couponq"><br>
-           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
-           <?php echo $_SESSION['eventcode'] ?>
-      </div>
+          <label >Remarks: </label>
+             <input type="text" id="remarks" name="remarks"><br>
+         <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+         <?php echo $_SESSION['eventcode'] ?>
+       </div>
     </form> <br />
  </div>
  <!-- script -->
@@ -83,10 +71,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          dropdownContent.style.display = "block";
        }
        });
-       $("button").click(function() {
-         var fired_button = $(this).val();
-         alert(fired_button);
-     });
    }
 
  </script>

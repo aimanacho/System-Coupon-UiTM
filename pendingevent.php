@@ -71,6 +71,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           </tr>
         </form>";
       }
+      $_SESSION['norepeat'] = 0;
       ?>
     </tbody>
   </table>
