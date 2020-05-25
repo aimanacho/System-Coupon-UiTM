@@ -52,19 +52,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          $resultC = mysqli_query($conn, $couponQ);
          $c = mysqli_fetch_assoc($resultC);
          $coupon = $c['couponq'];
-         //coupon used
-         $couponu = "SELECT couponused FROM events WHERE eventcode = '".$eventcode."'";
-         $resultcu = mysqli_query($conn, $couponu);
-         $cu = mysqli_fetch_assoc($resultcu);
-         $couponused = $cu['couponused'];
-           if  ($couponused < $coupon)
+           if  ($_SESSION['coupon'] < $coupon)
            {
              if ( $repeats == 0)
              {
                $repeats = 1;
-               $couponused = $couponused + 1;
-               $sql = "UPDATE student SET couponused = '".$couponused."' ,merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+               $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
                $result = mysqli_query($conn, $sql);
+               $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
                echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
              }
              else
@@ -115,7 +110,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        <input type ="text" id = "matricno" name = "matricno" />
        <button type="submit" class="btn btn-info" name = "searchmatric" onclick = "searchmatric()">Enter</button>
      </form>
-     <p style = "text-align:center;">Quantity Coupon left: <?php //echo $coupon - $couponused; ?></p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>

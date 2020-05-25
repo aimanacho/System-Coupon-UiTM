@@ -87,7 +87,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
             <td>".date("H:i",strtotime($row["timestart"]))."</td>
             <td>".date("H:i",strtotime($row["timeend"]))."</td>
-            <td>".date("H:i, j M Y",strtotime($row["hepmodify"]))."</td>";
+            <td>".date("H:i, j M Y",strtotime($row["time"]))."</td>";
             if ($row['eventstatus'] == 1)
               echo "<td>Pending</td>";
             if ($row['eventstatus'] == 2)
