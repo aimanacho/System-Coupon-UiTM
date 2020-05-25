@@ -26,17 +26,15 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <!-- sidebar-->
     <div class="sidenav">
       <img src = "uitm.jpg"/>
-      <a href="dashboard.php" class = "btn"> Dashboard</a>
-      <a href="clubs.php" class = "btn">Clubs</a>
-      <a href="studentinfo.php" class = "btn">Student Info</a>
-      <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
+      <a href="dashboard.php" class = "btn "> Dashboard</a>
+      <a href="attendance.php" class = "btn">Attendance</a>
+      <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
         <i class = "fa fa-caret-down"></i>
       </a>
       <div class = "dropdown-container" >
-        <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
-        <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+        <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
+        <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
       </div>
-      <a href="report.php" class = "btn">Report</a>
     </div>
 
   <!-- content -->
