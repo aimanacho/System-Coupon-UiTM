@@ -92,13 +92,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       function rejected()
       {
-        $_SESSION['norepeat'] = 0;
           include ("connection.php");
         //$eventcode = $_SESSION['eventcode'];
         //$sql = "UPDATE events SET eventstatus = '3' WHERE eventcode = '".$eventcode."'";
         //$result = mysqli_query($conn, $sql);
         //mysqli_query($conn,$sqlupdate);
-          echo "<script language = 'javascript'>alert('Event rejected!');window.location='rejected.php';</script>";
+        echo "<script language = 'javascript'>alert('Event rejected!');window.location='rejected.php';</script>";
       }
        ?>
 

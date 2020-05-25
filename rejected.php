@@ -39,11 +39,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
   <!-- content -->
   <div class = "content">
+    <form action = "hepevents.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
     <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">
-        <form action = "hepevents.php" style = "text-align: center;">
-          <button type="submit" class="btn btn-primary"> Back</button>
-        </form>
         <br>
             <label >Remarks: </label>
                <input type="text" id="remarks" name="remarks"><br>
