@@ -53,6 +53,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <div class = "dropdown-container" >
         <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
         <a class = "btn" href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+        <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
       </div>
       <a href="report.php" class = "btn">Report</a>
     </div>

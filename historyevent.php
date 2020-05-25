@@ -50,7 +50,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <i class = "fa fa-caret-down"></i>
         </a>
         <div class = "dropdown-container" >
-          <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+          <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
           <a class = "btn" href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
           <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
         </div>
@@ -70,13 +70,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <th>Time Start</th>
           <th>Time End</th>
           <th>Time Modify</th>
+          <th>Status</th>
           <th>Details</th>
         </tr>
       </thead>
       <tbody>
         <?php
         include("connection.php");
-        $sql = "SELECT * from events WHERE eventstatus = '2' ORDER BY eventdate";
+        $sql = "SELECT * from events ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result))
         {
@@ -86,12 +87,23 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
             <td>".date("H:i",strtotime($row["timestart"]))."</td>
             <td>".date("H:i",strtotime($row["timeend"]))."</td>
-            <td>".date("H:i, j M Y",strtotime($row["hepmodify"]))."</td>
-            <input type = hidden name = eventcode value = ".$row['eventcode']." />
+            <td>".date("H:i, j M Y",strtotime($row["hepmodify"]))."</td>";
+            if ($row['eventstatus'] == 1)
+              echo "<td>Pending</td>";
+            if ($row['eventstatus'] == 2)
+              echo "<td>Accepted</td>";
+            if ($row['eventstatus'] == 3)
+            {
+              echo "<td>Rejected</td>";
+            }
+            if ($row['eventstatus'] == 4)
+              echo "<td>Past</td>";
+            echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />
             <td><button>Hit me</button></td>
           </tr>";
           echo "</form>";
         }
+        $_SESSION['norepeat'] = 0;
           ?>
       </tbody>
     </table>
@@ -118,6 +130,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
