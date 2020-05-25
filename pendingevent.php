@@ -41,7 +41,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </div>
 
   <!-- content -->
-  <p class = "content"><b>Status of Events</b></p>
+  <p class = "content"><b>Pending Events</b></p>
 
 
   <!-- table -->

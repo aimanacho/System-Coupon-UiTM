@@ -77,7 +77,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <tbody>
         <?php
         include("connection.php");
-        $sql = "SELECT * from events ORDER BY eventdate";
+        $sql = "SELECT * from events WHERE eventstatus = '2' OR eventstatus = '3' OR eventstatus = '4' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result))
         {

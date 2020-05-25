@@ -77,8 +77,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
         $sql = "SELECT * from events WHERE eventstatus = '2' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0)
-        {
           while ($row = mysqli_fetch_assoc($result))
           {
             echo "<tr>
@@ -88,7 +86,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "</tr>";
           }
-        }
           ?>
       </tbody>
     </table>
@@ -115,6 +112,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
