@@ -52,15 +52,19 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          $resultC = mysqli_query($conn, $couponQ);
          $c = mysqli_fetch_assoc($resultC);
          $coupon = $c['couponq'];
-           if  ($_SESSION['coupon'] < $coupon)
+         //coupon used
+         $couponu = "SELECT couponused FROM events WHERE eventcode = '".$eventcode."'";
+         $resultcu = mysqli_query($conn, $couponu);
+         $cu = mysqli_fetch_assoc($resultcu);
+         $couponused = $cu['couponused'];
+           if  ($couponused < $coupon)
            {
              if ( $repeats == 0)
              {
                $repeats = 1;
-               $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+               $couponused = $couponused + 1;
+               $sql = "UPDATE student SET couponused = '".$couponused."' ,merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
                $result = mysqli_query($conn, $sql);
-               $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
-               $_SESSION['cpleft'] = $_SESSION['cpleft'] -1;
                echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
              }
              else
@@ -105,23 +109,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            $result = mysqli_query($conn, $sqlUpdate);
            mysqli_query($conn,$sqlUpdate);
     }
-
-    //coupon quantity output
-    $sqlcp = "SELECT couponq FROM events WHERE eventcode = '".$_SESSION['eventcode']."'";
-    $resultcp = mysqli_query($conn, $sqlcp);
-    $cp = mysqli_fetch_assoc($resultcp);
-    if ( $_SESSION['test'] == 0)
-    {
-      $_SESSION['cpleft'] = $cp['couponq'];
-      $_SESSION['test'] = 1;
-    }
 ?>
      <form method = "post" style = "text-align:center;margin-top: 200px;">
        <lable>Enter Matric No: </lable>
        <input type ="text" id = "matricno" name = "matricno" />
        <button type="submit" class="btn btn-info" name = "searchmatric" onclick = "searchmatric()">Enter</button>
      </form>
-     <p style = "text-align:center;">Quantity Coupon left: <?php echo $_SESSION['cpleft']; ?></p>
+     <p style = "text-align:center;">Quantity Coupon left: <?php //echo $coupon - $couponused; ?></p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>
