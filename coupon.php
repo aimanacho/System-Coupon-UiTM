@@ -52,18 +52,25 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          $resultC = mysqli_query($conn, $couponQ);
          $c = mysqli_fetch_assoc($resultC);
          $coupon = $c['couponq'];
-           if  ($_SESSION['coupon'] < $coupon)
+         //coupon quantity used
+         $couponU = "SELECT couponused FROM events WHERE eventcode = '".$eventcode."'";
+         $resultCU = mysqli_query($conn, $couponU);
+         $cu = mysqli_fetch_assoc($resultCU);
+         $couponused = $cu['couponused'];
+          if  ($couponused < $coupon)
+          {
+           if ( $repeats == 0)
            {
-             if ( $repeats == 0)
-             {
-               $repeats = 1;
-               $sql = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
-               $result = mysqli_query($conn, $sql);
-               $_SESSION['coupon'] = $_SESSION['coupon'] + 1;
-               echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-             }
-             else
-                echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+             $repeats = 1;
+             $couponused = $couponused  + 1;
+             $sqlstudent = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+             $result = mysqli_query($conn, $sqlstudent);
+             $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
+             $result = mysqli_query($conn, $sqlevent);
+             echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+           }
+           else
+              echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
           }
           else
           {
@@ -73,9 +80,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         else
           echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
       }
-?>
-<!--post value/ test -->
-<?php
+//post value/ test
     if ( $_SESSION['test'] == 0)
     {
       //merit
@@ -88,11 +93,19 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       echo $_SESSION['eventcode'];
       $_SESSION['test'] = 1;
     }
-    else
-    {
-      echo $_SESSION['meritE'];
-      echo $_SESSION['eventcode'];
-    }
+    // for quantity coupon left purposes
+    //coupon quantity
+    $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
+    $resultC = mysqli_query($conn, $couponQ);
+    $c = mysqli_fetch_assoc($resultC);
+    $coupon = $c['couponq'];
+    //coupon quantity used
+    $couponU = "SELECT couponused FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
+    $resultCU = mysqli_query($conn, $couponU);
+    $cu = mysqli_fetch_assoc($resultCU);
+    $couponused = $cu['couponused'];
+    $_SESSION['couponleft'] = ($coupon - $couponused);
+    //$couponleft = $coupon - $couponused;
     //time
     $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$_SESSION['eventcode']."'";
     $resultT = mysqli_query($conn, $sqlE);
@@ -109,6 +122,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        <lable>Enter Matric No: </lable>
        <input type ="text" id = "matricno" name = "matricno" />
        <button type="submit" class="btn btn-info" name = "searchmatric" onclick = "searchmatric()">Enter</button>
+       <br>
+       <p> Coupon Quantity left: <?php echo $_SESSION['couponleft']; ?> </p>
      </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
