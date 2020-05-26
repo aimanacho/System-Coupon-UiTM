@@ -24,22 +24,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-
-    <?php if ($_SESSION['userlevelid']== 1){ ?>
-      <div class="sidenav">
-        <img src = "uitm.jpg"/>
-        <a href="dashboard.php" class = "btn "> Dashboard</a>
-        <a href="attendance.php" class = "btn">Attendance</a>
-        <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
-          <i class = "fa fa-caret-down"></i>
-        </a>
-        <div class = "dropdown-container" >
-          <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
-          <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
-        </div>
-      </div>
-    <?php } ?>
-
     <?php if ($_SESSION['userlevelid']== 2){ ?>
       <div class="sidenav" id = "myDIV">
         <img src = "uitm.jpg"/>
@@ -65,9 +49,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <table class="table table-bordered" id= "tablemeow">
       <thead>
         <tr>
-          <th>Event Name</th>
+          <th><a>Event Name</a></th>
           <th>Date</th>
-          <th>Time Start</th>
+          <th>Time Start<</th>
           <th>Time End</th>
         </tr>
       </thead>
@@ -80,7 +64,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           while ($row = mysqli_fetch_assoc($result))
           {
             echo "<tr>
-              <td><a>".$row["eventname"]."</a></td>
+              <td>".$row["eventname"]."</td>
               <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
               <td>".date("H:i",strtotime($row["timestart"]))."</td>
               <td>".date("H:i",strtotime($row["timeend"]))."</td>";
