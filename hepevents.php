@@ -59,14 +59,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-          echo "<p> Event Name:".$row["eventname"]."</p>";
-          echo "<p> Event Venue:".$row["eventvenue"]."</p>";
-          echo "<p> Event Date:".date("jS M Y",strtotime($row["eventdate"]))."</p>";
-          echo "<p> Event Time Start:".date("H:i",strtotime($row["timestart"]))."</p>";
-          echo "<p> Event Times End:".date("H:i",strtotime($row["timeend"]))."</p>";
-        //  echo "<p> Merit:".$row["meritE"]."</p>";
-          //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
-          echo "<p> Organizer:".$row["clubName"]."</p>";
+          echo "<p> Event Name: ".$row["eventname"]."</p>";
+          echo "<p> Event Venue: ".$row["eventvenue"]."</p>";
+          echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
+          echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
+          echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
+          echo "<p> Merit: ".$row["meritE"]."</p>";
+          echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
+          echo "<p> Organizer: ".$row["clubName"]."</p>";
           $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
