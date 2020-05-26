@@ -86,11 +86,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       //merit
       $meritE = $_POST['meritE'];
       $_SESSION['meritE'] = $meritE;
-      echo $_SESSION['meritE'];
       //eventcode
       $eventcode = $_POST['eventcode'];
       $_SESSION['eventcode'] = $eventcode;
-      echo $_SESSION['eventcode'];
       $_SESSION['test'] = 1;
     }
     // for quantity coupon left purposes
