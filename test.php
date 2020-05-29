@@ -5,9 +5,12 @@
     <title></title>
   </head>
   <body>
-    <script>
-      localStorage.setItem('key', 'value');
-      localStorage.getItem('key');
+    <script type="text/javascript">
+      var matricno = new Array();
+      matricno.push("2018282566");
+      matricno.push("2018282567");
+      var matric = JSON.stringify(matricno);
+      localStorage.setItem('matricno', matric);
     </script>
   </body>
 </html>

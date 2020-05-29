@@ -24,24 +24,33 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      {
        searchmatric();
      }
+
+     function checkAttendance($conn, $matricno)
+     {
+       $found = false;
+       $foundM = "SELECT matricno from attendance WHERE matricno = '".$matricno."'";
+       $resultF = mysqli_query($conn, $foundM);
+       $row = mysqli_num_rows($resultF);
+       if ( $row > 0)
+       {
+         $found = true;
+       }
+       return $found;
+     }
+
      function searchmatric()
      {
        include("connection.php");
        $matricno = $_POST['matricno'];
-       $meritE = $_SESSION['meritE'];
+       //$meritE = $_SESSION['meritE'];
        $eventcode = $_SESSION['eventcode'];
        //found matric no
        $foundM = "SELECT matricNo from student WHERE matricNo = '".$matricno."'";
        $resultF = mysqli_query($conn, $foundM);
        $f = mysqli_fetch_assoc($resultF);
+       $matricnoS = $f['matricNo'];
        if ( $f > 0)
        {
-         //repeat
-         $repeatsS = "SELECT repeats FROM attendance WHERE matricno = '".$matricno."' AND eventcode = '".$eventcode."'";
-         $resultR = mysqli_query($conn, $repeatsS);
-         $r = mysqli_fetch_assoc($resultR);
-         $repeats = $r['repeats'];
-
          //coupon quantity
          $couponQ = "SELECT * FROM events WHERE eventcode = '".$eventcode."'";
          $resultC = mysqli_query($conn, $couponQ);
@@ -49,20 +58,24 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          $coupon = $c['couponq'];
          //coupon quantity used
          $couponused = $c['couponused'];
+         //validation if coupon is still not fully used
           if  ($couponused < $coupon)
           {
-           if ( $repeats == 0)
-           {
-             $repeats = 1;
-             $couponused = $couponused  + 1;
-             $sqlstudent = "INSERT INTO attendance (matricno, eventcode, repeats) VALUES ('".$matricno."', '".$eventcode."', '".$repeats."')";
-             $result = mysqli_query($conn, $sqlstudent);
-             $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
-             $result = mysqli_query($conn, $sqlevent);
-             echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-           }
-           else
-              echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+              //if matricno does not have data inside table attendance
+              if (checkAttendance($conn, $matricno) == true)
+              {
+                echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+              }
+              else
+              {
+                $repeats = 1;
+                $couponused = $couponused  + 1;
+                $sqlstudent = "INSERT INTO attendance (matricno, eventcode) VALUES ('".$matricno."', '".$eventcode."')";
+                $result = mysqli_query($conn, $sqlstudent);
+                $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
+                $result = mysqli_query($conn, $sqlevent);
+                echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+              }
           }
           else
           {
