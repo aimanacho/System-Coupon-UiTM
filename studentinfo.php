@@ -67,7 +67,7 @@ header("Location: index.php");
         echo "<td>".$row["matricNo"]."</td>";
         echo "<td>".$row["studentname"]."</td>";
         echo "<td>".$row["sem"]."</td>";
-        echo "<td>".$row["merit"]."</td>";
+        //echo "<td>".$row["merit"]."</td>";
         echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
         echo "<td><button>Enter</button></td>";
         echo "</tr>";

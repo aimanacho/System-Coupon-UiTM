@@ -37,33 +37,25 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        if ( $f > 0)
        {
          //repeat
-         $repeatsS = "SELECT repeats FROM student WHERE matricNo = '".$matricno."'";
+         $repeatsS = "SELECT repeats FROM attendance WHERE matricno = '".$matricno."' AND eventcode = '".$eventcode."'";
          $resultR = mysqli_query($conn, $repeatsS);
          $r = mysqli_fetch_assoc($resultR);
          $repeats = $r['repeats'];
-         //merit
-         $meritS = "SELECT merit FROM student WHERE matricNo = '".$matricno."'";
-         $resultM = mysqli_query($conn, $meritS);
-         $m = mysqli_fetch_assoc($resultM);
-         $merit = $m['merit'];
-         $merit = $merit + $meritE;
+
          //coupon quantity
-         $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$eventcode."'";
+         $couponQ = "SELECT * FROM events WHERE eventcode = '".$eventcode."'";
          $resultC = mysqli_query($conn, $couponQ);
          $c = mysqli_fetch_assoc($resultC);
          $coupon = $c['couponq'];
          //coupon quantity used
-         $couponU = "SELECT couponused FROM events WHERE eventcode = '".$eventcode."'";
-         $resultCU = mysqli_query($conn, $couponU);
-         $cu = mysqli_fetch_assoc($resultCU);
-         $couponused = $cu['couponused'];
+         $couponused = $c['couponused'];
           if  ($couponused < $coupon)
           {
            if ( $repeats == 0)
            {
              $repeats = 1;
              $couponused = $couponused  + 1;
-             $sqlstudent = "UPDATE student SET merit = '".$merit."', repeats = '".$repeats."' WHERE matricNo = '".$matricno."'";
+             $sqlstudent = "INSERT INTO attendance (matricno, eventcode, repeats) VALUES ('".$matricno."', '".$eventcode."', '".$repeats."')";
              $result = mysqli_query($conn, $sqlstudent);
              $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
              $result = mysqli_query($conn, $sqlevent);
@@ -92,18 +84,18 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $_SESSION['test'] = 1;
     }
     // for quantity coupon left purposes
-    //coupon quantity
-    $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
-    $resultC = mysqli_query($conn, $couponQ);
-    $c = mysqli_fetch_assoc($resultC);
-    $coupon = $c['couponq'];
-    //coupon quantity used
-    $couponU = "SELECT couponused FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
-    $resultCU = mysqli_query($conn, $couponU);
-    $cu = mysqli_fetch_assoc($resultCU);
-    $couponused = $cu['couponused'];
-    $_SESSION['couponleft'] = ($coupon - $couponused);
-    //$couponleft = $coupon - $couponused;
+      //coupon quantity
+      $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
+      $resultC = mysqli_query($conn, $couponQ);
+      $c = mysqli_fetch_assoc($resultC);
+      $coupon = $c['couponq'];
+      //coupon quantity used
+      $couponU = "SELECT couponused FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
+      $resultCU = mysqli_query($conn, $couponU);
+      $cu = mysqli_fetch_assoc($resultCU);
+      $couponused = $cu['couponused'];
+      $_SESSION['couponleft'] = ($coupon - $couponused);
+      //$couponleft = $coupon - $couponused;
     //time
     $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$_SESSION['eventcode']."'";
     $resultT = mysqli_query($conn, $sqlE);
