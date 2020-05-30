@@ -51,7 +51,6 @@ header("Location: index.php");
       <th>ID</th>
       <th>Name</th>
       <th>Semester</th>
-      <th>Total Merit</th>
       <th>More Details</th>
     </tr>
   </thead>

@@ -28,7 +28,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      function checkAttendance($conn, $matricno)
      {
        $found = false;
-       $foundM = "SELECT matricno from attendance WHERE matricno = '".$matricno."'";
+       $foundM = "SELECT matricno from attendance WHERE matricno = '".$matricno."' AND eventcode = '".$_SESSION["eventcode"]."'";
        $resultF = mysqli_query($conn, $foundM);
        $row = mysqli_num_rows($resultF);
        if ( $row > 0)
