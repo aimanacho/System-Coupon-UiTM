@@ -38,6 +38,18 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        return $found;
      }
 
+     function checkStudent($conn, $matricno)
+     {
+       $found = false;
+       $foundM = "SELECT matricNo from student WHERE matricNo = '".$matricno."'";
+       $resultF = mysqli_query($conn, $foundM);
+       $row = mysqli_num_rows($resultF);
+       if ( $row > 0)
+       {
+         $found = true;
+       }
+       return $found;
+     }
      function searchmatric()
      {
        include("connection.php");
@@ -45,11 +57,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        //$meritE = $_SESSION['meritE'];
        $eventcode = $_SESSION['eventcode'];
        //found matric no
-       $foundM = "SELECT matricNo from student WHERE matricNo = '".$matricno."'";
-       $resultF = mysqli_query($conn, $foundM);
-       $f = mysqli_fetch_assoc($resultF);
-       $matricnoS = $f['matricNo'];
-       if ( $f > 0)
+       if (checkStudent($conn, $matricno)== true)
        {
          //coupon quantity
          $couponQ = "SELECT * FROM events WHERE eventcode = '".$eventcode."'";
@@ -81,9 +89,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           {
             echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
           }
-        }
-        else
+       }
+       else
+       {
           echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
+       }
+
       }
 //post value/ test
     if ( $_SESSION['test'] == 0)
