@@ -39,11 +39,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content -->
     <p class = "content"><b>Select which event you organize</b></p>
-    <input type="text" class = "searchbar"id="mySearch" onkeyup="myFunction()" placeholder="Search" title="Type in a category" style = "margin-left: 1400px;">
-      <a href = "#">
-        <i class="fa fa-fw fa-search"></i>
-      </a>
-    <br />
+
 
 
     <!-- table -->
@@ -61,7 +57,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-         $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+        //change past event that hasnt change eventstatus
+        $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
