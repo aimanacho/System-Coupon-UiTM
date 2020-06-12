@@ -24,24 +24,36 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-  <div class="sidenav">
-    <img src = "uitm.jpg"/>
-    <a href="dashboard.php" class = "btn"> Dashboard</a>
-    <a href="clubs.php" class = "btn">Clubs</a>
-    <a href="studentinfo.php" class = "btn">Student Info</a>
-    <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
-      <i class = "fa fa-caret-down"></i>
-    </a>
-    <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
-      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
-      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
+    <div class="sidenav">
+      <img src = "uitm.jpg"/>
+      <a href="dashboard.php" class = "btn "> Dashboard</a>
+      <a href="attendance.php" class = "btn">Attendance</a>
+      <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+        <i class = "fa fa-caret-down"></i>
+      </a>
+      <div class = "dropdown-container" >
+        <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
+        <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
+      </div>
     </div>
-    <a href="report.php" class = "btn active">Report</a>
-  </div>
 
+  <!-- content -->
+  <div class = "content">
+    <form action = "hepevents.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
+    <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
+      <div class = "form-control" style = "text-align: center;">
+        <br>
+            <label >Remarks: </label>
+               <input type="text" id="remarks" name="remarks"><br>
+           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+           <?php echo $_SESSION['eventcode'] ?>
+      </div>
+    </form> <br />
+ </div>
 
-<!-- script -->
+  <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -63,6 +75,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+    $("button").click(function() {
+      var fired_button = $(this).val();
+      alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

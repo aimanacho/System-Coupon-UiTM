@@ -39,9 +39,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn">Report</a>
   </div>
 
+
   <div class = "content">
-    <form action = "createeventp.php" method = "post" id = "login" name = "login" target = "_self">
+    <form action = "hepevents.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
+    <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">
+        <br>
        <label >Merit: </label>
            <select id="eventmerit" name="eventmerit">
               <option>1</option>
@@ -50,10 +55,38 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <option>4</option>
               <option>5</option>
            </select> <br>
-           <?php echo $_SESSION['eventcode']; ?>
             <label >Coupon Quantity: </label>
                <input type="text" id="couponq" name="couponq"><br>
            <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+           <?php echo $_SESSION['eventcode'] ?>
       </div>
     </form> <br />
  </div>
+ <!-- script -->
+ <script>
+   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+   var i;
+
+   for (i = 0; i < dropdown.length; i++)
+   {
+     dropdown[i].addEventListener("click", function()
+     {
+       this.classList.toggle("active");
+       var dropdownContent = this.nextElementSibling;
+       if (dropdownContent.style.display === "block")
+       {
+         dropdownContent.style.display = "none";
+       }
+       else
+       {
+         dropdownContent.style.display = "block";
+       }
+       });
+       $("button").click(function() {
+         var fired_button = $(this).val();
+         alert(fired_button);
+     });
+   }
+
+ </script>

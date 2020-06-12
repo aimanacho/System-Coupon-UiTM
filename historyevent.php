@@ -24,6 +24,22 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
+
+    <?php if ($_SESSION['userlevelid']== 1){ ?>
+      <div class="sidenav">
+        <img src = "uitm.jpg"/>
+        <a href="dashboard.php" class = "btn "> Dashboard</a>
+        <a href="attendance.php" class = "btn">Attendance</a>
+        <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+          <i class = "fa fa-caret-down"></i>
+        </a>
+        <div class = "dropdown-container" >
+          <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
+          <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+        </div>
+      </div>
+    <?php } ?>
+
     <?php if ($_SESSION['userlevelid']== 2){ ?>
       <div class="sidenav" id = "myDIV">
         <img src = "uitm.jpg"/>
@@ -34,7 +50,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <i class = "fa fa-caret-down"></i>
         </a>
         <div class = "dropdown-container" >
-        <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
+          <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
           <a class = "btn" href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
           <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
         </div>
@@ -43,33 +59,51 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <?php } ?>
 
     <!-- content -->
-    <p class = "content"><b>Upcoming events</b></p>
+    <p class = "content"><b>History events</b></p>
 
     <!-- table view event -->
     <table class="table table-bordered" id= "tablemeow">
       <thead>
         <tr>
-          <th><a>Event Name</a></th>
+          <th>Event Name</th>
           <th>Date</th>
-          <th>Time Start<</th>
+          <th>Time Start</th>
           <th>Time End</th>
+          <th>Time Modify</th>
+          <th>Status</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
         <?php
         include("connection.php");
-
-        $sql = "SELECT * from events WHERE eventstatus = '2' ORDER BY eventdate";
+        $sql = "SELECT * from events WHERE eventstatus = '2' OR eventstatus = '3' OR eventstatus = '4' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
-          while ($row = mysqli_fetch_assoc($result))
-          {
-            echo "<tr>
-              <td>".$row["eventname"]."</td>
-              <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
-              <td>".date("H:i",strtotime($row["timestart"]))."</td>
-              <td>".date("H:i",strtotime($row["timeend"]))."</td>";
-            echo "</tr>";
-          }
+        while ($row = mysqli_fetch_assoc($result))
+        {
+          echo "<form method = post action = viewhistoryevent.php>";
+          echo "<tr>
+            <td>".$row["eventname"]."</td>
+            <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+            <td>".date("H:i",strtotime($row["timestart"]))."</td>
+            <td>".date("H:i",strtotime($row["timeend"]))."</td>
+            <td>".date("H:i, j M Y",strtotime($row["time"]))."</td>";
+            if ($row['eventstatus'] == 1)
+              echo "<td>Pending</td>";
+            if ($row['eventstatus'] == 2)
+              echo "<td>Accepted</td>";
+            if ($row['eventstatus'] == 3)
+            {
+              echo "<td>Rejected</td>";
+            }
+            if ($row['eventstatus'] == 4)
+              echo "<td>Past</td>";
+            echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />
+            <td><button>Hit me</button></td>
+          </tr>";
+          echo "</form>";
+        }
+        $_SESSION['norepeat'] = 0;
           ?>
       </tbody>
     </table>

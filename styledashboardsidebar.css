@@ -70,7 +70,6 @@ ul.topnav li.right {float: right;}
   /* border-bottom: 1px solid darkgrey; */
 }
 
-
 .sidenav a.active, .sidenav a:hover, .dropdown-btn a:hover{
   background-color: #4CAF50;
   color: white;
@@ -87,7 +86,6 @@ ul.topnav li.right {float: right;}
   background-color: #111;
 }
 
-
 /* alert */
 
 .alert
@@ -98,10 +96,11 @@ ul.topnav li.right {float: right;}
 /* table  */
  #tablemeow
 {
+  font-family: 'Work Sans', sans-serif;
   margin-left: 230px;
   font-size: 15px;
   margin-top: 30px;
-  width: 1400px;
+  overflow: hidden;
 }
 
 #tablemeow a
@@ -119,6 +118,7 @@ input.searchbar
 /* `content` */
 .content
 {
+  font-family: 'Work Sans', sans-serif;
   margin-left: 230px;
   padding-top: 30px;
   font-size: 18px;

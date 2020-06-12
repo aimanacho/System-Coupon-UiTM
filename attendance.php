@@ -20,7 +20,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <body>
     <!-- topbar-->
     <ul class="topnav" id= "main">
-      <li class="right"><a href="logout.php">Logout</a></li>
+      <li class="right"><a href="logout.php">Logouts</a></li>
     </ul>
 
     <!-- sidebar-->
@@ -39,11 +39,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content -->
     <p class = "content"><b>Select which event you organize</b></p>
-    <input type="text" class = "searchbar"id="mySearch" onkeyup="myFunction()" placeholder="Search" title="Type in a category" style = "margin-left: 1400px;">
-      <a href = "#">
-        <i class="fa fa-fw fa-search"></i>
-      </a>
-    <br />
+
 
 
     <!-- table -->
@@ -61,23 +57,34 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-        $sql = "SELECT * from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+        //change past event that hasnt change eventstatus
+        $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
-            echo "<form action = 'coupon.php' method = 'post' target = '_blank'>";
+            echo "<form action = coupon.php method = post target = _blank>";
             echo "<tr>";
             echo "<td>".$row["eventname"]."</td>";
-            echo "<td>".$row["eventdate"]."</td>";
-            echo "<td>".$row["timestart"]."</td>";
-            echo "<td>".$row["timeend"]."</td>";
+            echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
-            echo "<td><button>Enter</button></td>";
+            if($row['date_dif']==0){
+              if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
+                echo "<td><button onClick=window.location.reload();>Enter</button></td>";
+              else {
+                echo "<td>Not available</td>";
+              }
+            }
+            else{
+              echo "<td>Not available</td>";
+            }
             echo "</tr>";
             echo "</form>";
-
           }
+           $_SESSION['test'] =0;
+           $_SESSION['coupon']=0;
           ?>
       </tbody>
     </table>
@@ -121,6 +128,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
