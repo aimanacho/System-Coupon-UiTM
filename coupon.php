@@ -13,10 +13,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title></title>
-
+    <link rel="stylesheet" href= "styledashboardsidebar.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
-  <body>
+  <body style = "background-color: white;">
     <!--process -->
 <?php
     include("connection.php");
@@ -109,16 +109,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     }
     // for quantity coupon left purposes
       //coupon quantity
-      $couponQ = "SELECT couponq FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
+      $couponQ = "SELECT * FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
       $resultC = mysqli_query($conn, $couponQ);
       $c = mysqli_fetch_assoc($resultC);
       $coupon = $c['couponq'];
-      //coupon quantity used
-      $couponU = "SELECT couponused FROM events WHERE eventcode = '".$_SESSION["eventcode"]."'";
-      $resultCU = mysqli_query($conn, $couponU);
-      $cu = mysqli_fetch_assoc($resultCU);
-      $couponused = $cu['couponused'];
+      $couponused = $c['couponused'];
       $_SESSION['couponleft'] = ($coupon - $couponused);
+      $eventnametmp = $c['eventname'];
       //$couponleft = $coupon - $couponused;
     //time
     $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$_SESSION['eventcode']."'";
@@ -132,13 +129,20 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            mysqli_query($conn,$sqlUpdate);
     }
 ?>
-     <form method = "post" style = "text-align:center;margin-top: 200px;">
-       <lable>Enter Matric No: </lable>
-       <input type ="text" id = "matricno" name = "matricno" />
-       <button type="submit" class="btn btn-info" name = "searchmatric" onclick = "searchmatric()">Enter</button>
-       <br>
-       <p> Coupon Quantity left: <?php echo $_SESSION['couponleft']; ?> </p>
+<!-- topbar-->
+<ul class="topnav" id= "main">
+  <li class="right"><a href="attendance.php">Back</a></li>
+  <p style = "text-align:center;margin-top:15px;color:white;"> <?php echo $eventnametmp; ?></p>
+</ul>
+
+  <div class = "couponform">
+     <form method = "post" style = "margin-top:25px;">
+         <lable style = "font-size: 28px;"><strong>Enter Matric Number</strong></lable> </br></br>
+         <input style = "width:100%;"type ="text" id = "matricno" name = "matricno" /> </br> </br>
+         <button style = "width:100%;" type="submit" class="btn btn-primary" name = "searchmatric" onclick = "searchmatric()">Enter</button><br> </br>
+         <p style = "font-size: 25px;"> Coupon quantity left: <?php echo $_SESSION['couponleft']; ?> </p>
      </form>
+   </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>

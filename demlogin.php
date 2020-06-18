@@ -23,9 +23,9 @@
       <p class = "login" > DEM LOGIN </p>
         <form action = "pdemlogin.php" method = "post" id = "login" name = "login" target = "_self">
           <div style = "text-align: center;">
-            <label for="fname">Username</label><br/>
+            <label >Username</label><br/>
             <input style = "border-color: black;" type="text" id="studno" name="studno" placeholder="Student ID"><br>
-            <label for="lname">Password</label><br/>
+            <label >Password</label><br/>
             <input style = "border-color: black;" type="password" id="password" name="password" placeholder="Password"><br><br>
             <input type="submit" value="Login" class="btn btn-primary">
           </div>

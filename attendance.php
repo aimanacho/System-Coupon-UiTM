@@ -62,7 +62,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
-            echo "<form action = coupon.php method = post target = _blank>";
+            echo "<form action = coupon.php method = post>";
             echo "<tr>";
             echo "<td>".$row["eventname"]."</td>";
             echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
