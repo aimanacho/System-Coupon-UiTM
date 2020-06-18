@@ -9,30 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
-  <body>
-
-    <!-- jumbotron -->
-    <div class="jumbotron jumbotron-fluid" >
-      <div class="container">
-        <h1>System Coupon UiTM</h1>
-      </div>
-    </div>
+  <body style = "background-color: rgb(163, 194, 194);">
 
     <!-- table  -->
     <div class="meow">
-      <p class = "login"> HEP LOGIN </p>
-        <form action = "pheplogin.php" method = "post" id = "login" name = "login">
-          <div style = "text-align: center;">
-            <label for="fname">Username</label><br/>
-            <input style = "border-color: black;" type="text" id="studno" name="studno" placeholder="Student ID"><br>
-            <label for="lname">Password</label><br/>
-            <input style = "border-color: black;" type="password" id="password" name="password" placeholder="Password"><br><br>
+      <div class="loginform">
+      <p class = "login" style="font-size:30px;"> HEP LOGIN </p>
+        <form action = "pheplogin.php" method = "post" id = "login" name = "login" target = "_self">
+          <div>
+            <label >Username</label><br/>
+            <input style = "border-color: black;margin-left:12px;" type="text" id="studno" name="studno" placeholder="Student ID"><br>
+            <label >Password</label><br/>
+            <input style = "border-color: black;margin-left:12px;" type="password" id="password" name="password" placeholder="Password"><br><br>
             <input type="submit" value="Login" class="btn btn-primary">
+            <input type="submit" formaction="index.php" value="Back" class="btn btn-default">
           </div>
-        </form> <br />
-        <form action = "index.php" style = "text-align: center;">
-          <button type="submit" class="btn btn-default"> Back</button>
         </form>
+        <div class="alert alert-danger" style="margin-top:50px;width:230px;">
+          <strong>You've entered wrong Student ID or Password!</strong>
+        </div>
+        </div>
+        <img src = "campus.jpg"/>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>

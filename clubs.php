@@ -45,8 +45,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <p class = "content"><b>All clubs information</b></p>
 
   <!-- table -->
-  <table class="table table-bordered" id= "tablemeow">
-    <thead
+  <table class="table table-striped" id= "tablemeow">
+    <thead>
       <tr>
         <th style = "text-align:center;">Club Name</th>
       </tr>
@@ -54,7 +54,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <tbody>
       <?php
       include("connection.php");
-
       $sql = "SELECT * from clubs ORDER BY clubName";
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0)

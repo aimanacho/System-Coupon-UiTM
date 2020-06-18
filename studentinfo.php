@@ -45,7 +45,7 @@ header("Location: index.php");
 
 
 <!-- table -->
-<table class="table table-bordered" id= "tablemeow">
+<table class="table table-striped" id= "tablemeow">
   <thead>
     <tr>
       <th>ID</th>
