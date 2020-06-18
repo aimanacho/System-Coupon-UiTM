@@ -54,20 +54,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
               <input type="time" placeholder="24:00" id="timestart" name="timestart"><br>
            <label >Time End</label>
               <input type="time" placeholder="24:00" id="timeend" name="timeend"><br>
-      <!--     <label >Merit: </label>
-              <select id="eventmerit" name="eventmerit">
-                 <option>1</option>
-                 <option>2</option>
-                 <option>3</option>
-                 <option>4</option>
-                 <option>5</option>
-              </select> <br>
-               <label >Coupon Quantity: </label>
-                  <input type="text" id="couponq" name="couponq"><br>
-              <label >Event Status: </label>
-                  <input type="text" id="eventstatus" name="eventstatus"><br>
-          <label >Club Code</label>
-              <input type="text" id="clubcode" name="clubcode"><br><br>-->
               <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
          </div>
        </form> <br />
