@@ -69,6 +69,7 @@ header("Location: index.php");
         //echo "<td>".$row["merit"]."</td>";
         echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
         //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
+        echo "<td><button>Enter</button></td>";
         echo "</tr>";
         echo "</form>";
       }
