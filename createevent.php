@@ -49,11 +49,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            <label>Event Venue: </label>
               <input type="text" id="eventvenue" name="eventvenue"><br>
            <label >Date: </label>
-              <input type="date" id="eventdate" name="eventdate"><br>
+              <input type="date" placeholder = "yyyy-mm-dd" id="eventdate" name="eventdate"><br>
            <label >Time Start</label>
-              <input type="time" id="timestart" name="timestart"><br>
+              <input type="time" placeholder="24:00" id="timestart" name="timestart"><br>
            <label >Time End</label>
-              <input type="time" id="timeend" name="timeend"><br>
+              <input type="time" placeholder="24:00" id="timeend" name="timeend"><br>
       <!--     <label >Merit: </label>
               <select id="eventmerit" name="eventmerit">
                  <option>1</option>
