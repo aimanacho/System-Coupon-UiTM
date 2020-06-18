@@ -1,0 +1,157 @@
+/* top bar */
+body {margin: 0;font-family: "Lato", sans-serif;}
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  background-color: #145;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111; float: right;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right,
+  ul.topnav li {float: none;}
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* side bar */
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #333;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  border-right: 1px solid black;
+  /* padding-top: 50px; */
+}
+
+.sidenav a{
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  background-color: #333;
+  color: white;
+  display: block;
+  text-align: center;
+  /* border-bottom: 1px solid darkgrey; */
+}
+
+
+.sidenav a.active, .sidenav a:hover, .dropdown-btn a:hover{
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 0px;
+}
+
+.dropdown-container
+{
+  display:none;
+}
+
+.dropdown-container a
+{
+  background-color: #111;
+}
+
+
+/* alert */
+
+.alert
+{
+  margin-left: 97px;
+}
+
+/* table  */
+ #tablemeow
+{
+  margin-left: 230px;
+  font-size: 15px;
+  margin-top: 30px;
+  width: 1400px;
+}
+
+#tablemeow a
+{
+  color: black;
+}
+
+/* search bar  ( bila float kanan logo hilang idfk why )*/
+input.searchbar
+{
+
+
+}
+
+/* `content` */
+.content
+{
+  margin-left: 230px;
+  padding-top: 30px;
+  font-size: 18px;
+}
+
+/*registration form*/
+div.meow {
+  background-color: lightblue;
+  width: 300px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 170px;
+  border-top: 1px solid black;
+
+}
+
+.container
+{
+  margin-left: 200px;
+  font-family: "Lato", sans-serif;
+}
+
+/* uitm logo */
+.sidenav img
+{
+  width: 200px;
+  height: 100px;
+  background-attachment: fixed;
+}
+
+
+/* createevent.php table create event */
+.form-control input
+{
+  border-color: black;
+}
