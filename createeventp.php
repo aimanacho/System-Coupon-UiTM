@@ -19,7 +19,11 @@
     mysqli_query($conn, $sql);
 
     //send email
+<<<<<<< HEAD
     require_once('PHPMailerAutoload.php');
+=======
+    require_once('PHPMailer/PHPMailerAutoload.php');
+>>>>>>> caf4447e41948655d06c1344891a97bb196a003a
     $mail = new PHPMailer();
     $mail ->isSMTP();
     $mail ->SMTPAuth = true;
