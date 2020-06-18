@@ -162,9 +162,10 @@ div.meow {
 /*coupon form */
 .couponform
 {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align:center;
   font-family: 'Work Sans', sans-serif;
-  background-color: lightblue;
+  background-color: rgb(163, 194, 194);
   width: 500px;
   height: 300px;
   padding: 10px;
