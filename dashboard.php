@@ -5,7 +5,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   header("Location: index.php");
 }
 include ("connection.php");
-
+// change eventstatus if certain events havent change the eventstatus right after the event finished
 $sql = "SELECT COUNT(eventcode) AS count FROM events";
 $result = mysqli_query($conn, $sql);
 $t = mysqli_fetch_assoc($result);
@@ -28,19 +28,12 @@ for ( $x = 1; $x < $count; $x++)
   {
     if ($currenttime >= $timeend )
     {
-      $sqlevent = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$x."'";
+      $sqlevent = "UPDATE events SET eventstatus = '7' WHERE eventcode = '".$x."'";
       $result = mysqli_query($conn, $sqlevent);
     }
   }
 }
-
-
-/*
-for ($x = 0; $x <= 100; $x+=10) {
-  echo "The number is: $x <br>";
-}
-*/
- ?>
+?>
 
 <!DOCTYPE html>
 <html>

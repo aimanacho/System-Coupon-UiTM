@@ -128,6 +128,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            $result = mysqli_query($conn, $sqlUpdate);
            mysqli_query($conn,$sqlUpdate);
     }
+
 ?>
 <!-- topbar-->
 <ul class="topnav" id= "main">
