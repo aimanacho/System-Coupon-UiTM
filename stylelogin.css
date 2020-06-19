@@ -1,14 +1,10 @@
-body
-{
-  background-color: lightgrey;
-}
-
 
 div.meow {
   font-family: 'Work Sans', sans-serif;
   background-color: white;
   width: 1000px;
   height: 600px;
+  display: block;
   margin: auto;
   margin-top: 170px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -20,19 +16,45 @@ div.meow {
 
 .loginform
 {
-  padding-top: 10px;
   width: 230px;
   height: 300px;
-  background-color: #ffd9b3;
   margin-left: 150px;
   margin-top: 130px;
   text-align: center;
   border-radius: 3px;
 }
 
+.loginmeow
+{
+  margin-top:80px;
+}
+
+.loginmeow input
+{
+  width: 200px;
+}
+
+.loginform input[type = "submit"]:hover
+{
+  background-color: rgb(163, 194, 194);
+  transition: 0.25s;
+}
 .meow img
 {
   height:600px;
   width: 500px;
   float:right;
 }
+
+/*
+.loginform input[type = "text"], .loginform input[type = "password"]
+{
+  padding-left: 5px;
+}
+
+.loginform input[type = "text"]:hover, .loginform input[type = "password"]:hover
+{
+  border-radius: 20px;
+  transition: 0.5s;
+}
+*/

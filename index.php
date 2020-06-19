@@ -8,15 +8,16 @@
     <link rel="stylesheet" href= "stylelogin.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body style = "background-color: rgb(163, 194, 194);">
     <!-- table  -->
     <div class="meow">
         <div class = "loginform">
-          <div class = "loginmeow" style = "padding-left:45px;margin-top:80px;">
+          <div class = "loginmeow">
             <p style="font-size:20px"><b>Login as</b></p>
-            <form action="demlogin.php">
-              <input type="submit" value="DEM" class="btn btn-primary">
+            <form class = "buttons" action="demlogin.php">
+              <input style = "width:100%;" type="submit" value="DEM" class="btn btn-primary"> <br><br>
               <input type="submit" formaction="heplogin.php" value="HEP" class="btn btn-info">
             </form>
           </div>

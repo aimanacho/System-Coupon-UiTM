@@ -100,23 +100,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
 <!-- script -->
 <script>
-
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myDIV");
-var btns = header.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  if (current.length > 0) {
-    current[0].className = current[0].className.replace(" active", "");
-  }
-  this.className += " active";
-  });
-}
-
-  /* close alert once login script */
-
-
   /*dropdown*/
   var dropdown = document.getElementsByClassName("dropdown-btn");
   var i;
@@ -125,11 +108,10 @@ for (var i = 0; i < btns.length; i++) {
     dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-    dropdownContent.style.display = "none";
-    } else {
-    dropdownContent.style.display = "block";
-    }
+    if (dropdownContent.style.display === "block")
+      dropdownContent.style.display = "none";
+    else
+      dropdownContent.style.display = "block";
     });
   }
 

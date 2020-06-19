@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
   <body style = "background-color: rgb(163, 194, 194);">
-
     <!-- table  -->
     <div class="meow">
       <div class="loginform">
-      <p class = "login" style="font-size:30px;"> HEP LOGIN </p>
+        <p style="font-size:30px;"> HEP LOGIN </p>
         <form action = "pheplogin.php" method = "post" id = "login" name = "login" target = "_self">
           <div>
             <label >Username</label><br/>
@@ -25,10 +24,10 @@
             <input type="submit" formaction="index.php" value="Back" class="btn btn-default">
           </div>
         </form>
-        <div class="alert alert-danger" style="margin-top:50px;width:230px;">
-          <strong>You've entered wrong Student ID or Password!</strong>
-        </div>
-        </div>
+          <div class="alert alert-danger" style="margin-top:50px;width:230px;">
+            <strong>You've entered wrong Student ID or Password!</strong>
+          </div>
+      </div>
         <img src = "campus.jpg"/>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

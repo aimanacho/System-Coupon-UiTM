@@ -87,7 +87,8 @@ ul.topnav li.right {float: right;}
 
 .dropdown-container a
 {
-  background-color: #111;
+  background-color: #222;
+  border-radius: 0px;
 }
 
 /* alert */

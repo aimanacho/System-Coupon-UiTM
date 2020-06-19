@@ -13,7 +13,7 @@
     <!-- table  -->
     <div class="meow">
       <div class="loginform">
-        <p class = "login" style="font-size:30px;"> DEM LOGIN </p>
+        <p style="font-size:30px;"> DEM LOGIN </p>
         <form action = "pdemlogin.php" method = "post" id = "login" name = "login" target = "_self">
           <div>
             <label >Username</label><br/>
