@@ -1,3 +1,4 @@
+<?php session_start(); $_SESSION['alerttmp'] = 0; ?>
 <!DOCTYPE html>
 <html>
   <head>

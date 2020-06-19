@@ -1,3 +1,4 @@
+<?php session_start(); echo $_SESSION['alerttmp'];?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -26,15 +27,18 @@
             <label >Password</label><br/>
             <div class="input-container">
               <i class="fa fa-key icon"></i>
-              <input class="input-field" type="password" placeholder="Password" name="psw">
+              <input class="input-field" type="password" placeholder="Password" id="password" name="password">
             </div>
             <input type="submit" value="Login" class="btn btn-primary">
             <input type="submit" formaction="index.php" value="Back" class="btn btn-info">
           </div>
         </form>
+        <?php if ($_SESSION['alerttmp'] == 1)
+        { ?>
           <div class="alert alert-danger" style="margin-top:50px;width:230px;">
             <strong>You've entered wrong Student ID or Password!</strong>
           </div>
+        <?php } ?>
       </div>
         <img src = "campus.jpg"/>
     </div>

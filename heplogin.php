@@ -24,7 +24,7 @@
             </div>
             <div class="input-container">
               <i class="fa fa-key icon"></i>
-              <input class="input-field" type="password" placeholder="Password" name="psw">
+              <input class="input-field" type="password" placeholder="Password" id="password" name="password">
             </div>
             <input type="submit" value="Login" class="btn btn-primary">
             <input type="submit" formaction="index.php" value="Back" class="btn btn-info">
