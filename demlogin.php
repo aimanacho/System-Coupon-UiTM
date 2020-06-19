@@ -1,4 +1,4 @@
-<?php session_start(); echo $_SESSION['alerttmp'];?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
   <head>

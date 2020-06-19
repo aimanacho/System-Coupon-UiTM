@@ -4,6 +4,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 {
   header("Location: index.php");
 }
+include("updateeventstatus.php");
  ?>
 
 <!DOCTYPE html>
