@@ -6,7 +6,7 @@ div.meow {
   height: 600px;
   display: block;
   margin: auto;
-  margin-top: 170px;
+  margin-top: 120px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .meow div
@@ -45,16 +45,25 @@ div.meow {
   width: 500px;
   float:right;
 }
-
-/*
-.loginform input[type = "text"], .loginform input[type = "password"]
+/* icon for login*/
+.input-field
 {
-  padding-left: 5px;
+  width: 100%;
+  padding: 10px;
 }
 
-.loginform input[type = "text"]:hover, .loginform input[type = "password"]:hover
+.icon
 {
-  border-radius: 20px;
-  transition: 0.5s;
+  padding: 15px;
+  background: rgb(163, 194, 194);
+  color: white;
+  min-width: 50px;
+  text-align: center;
 }
-*/
+
+.input-container
+{
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
