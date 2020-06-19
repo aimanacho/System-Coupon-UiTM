@@ -3,7 +3,7 @@ session_start();
 if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 {
   header("Location: index.php");
-} 
+}
  ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p class = "content"><b>Upcoming events</b></p>
 
     <!-- table view event -->
-    <table class="table table-bordered" id= "tablemeow">
+    <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
           <th><a>Event Name</a></th>

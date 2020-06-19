@@ -62,7 +62,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p class = "content"><b>History events</b></p>
 
     <!-- table view event -->
-    <table class="table table-bordered" id= "tablemeow">
+    <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
           <th>Event Name</th>

@@ -25,8 +25,6 @@ include("updateeventstatus.php");
     </ul>
 
     <!-- sidebar-->
-
-    <?php if ($_SESSION['userlevelid']== 1){ ?>
       <div class="sidenav">
         <img src = "uitm.jpg"/>
         <a href="dashboard.php" class = "btn "> Dashboard</a>
@@ -39,13 +37,12 @@ include("updateeventstatus.php");
           <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
         </div>
       </div>
-    <?php } ?>
 
     <!-- content -->
     <p class = "content"><b>View events</b></p>
 
     <!-- table view event -->
-    <table class="table table-bordered" id= "tablemeow">
+    <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
           <th>Event Name</th>

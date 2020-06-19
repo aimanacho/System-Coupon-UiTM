@@ -71,7 +71,7 @@ for ( $x = 1; $x < $count; $x++)
 
 
     <!-- table -->
-    <table class="table table-bordered" id= "tablemeow">
+    <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
           <th>Event Name</th>
