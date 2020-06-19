@@ -1,7 +1,6 @@
 /* top bar */
 body
 {
-  margin: 0;
   font-family: "Lato", sans-serif;
 }
 
@@ -105,6 +104,7 @@ ul.topnav li.right {float: right;}
   margin-left: 230px;
   font-size: 15px;
   margin-top: 30px;
+  table-layout: auto;
 }
 
 #tablemeow a
@@ -122,10 +122,10 @@ input.searchbar
 /* `content` */
 .content
 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Lato", sans-serif;
   margin-left: 230px;
   padding-top: 30px;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 /*registration form*/
