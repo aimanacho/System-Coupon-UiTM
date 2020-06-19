@@ -19,12 +19,10 @@
         <p style="font-size:30px;"> DEM LOGIN </p>
         <form action = "pdemlogin.php" method = "post" id = "login" name = "login" target = "_self">
           <div>
-            <label>Username</label><br/>
             <div class="input-container">
               <i class="fa fa-user icon"></i>
               <input class="input-field" type="text" id="studno" name="studno" placeholder="Student ID" >
             </div>
-            <label >Password</label><br/>
             <div class="input-container">
               <i class="fa fa-key icon"></i>
               <input class="input-field" type="password" placeholder="Password" id="password" name="password">
