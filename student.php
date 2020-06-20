@@ -58,9 +58,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Total Merit:".$row["merit"]."</p>";
         }
       ?>
-
-
- </div>
+    </div>
+    
 
   <!-- script -->
 <script>
