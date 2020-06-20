@@ -33,14 +33,15 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      <i class = "fa fa-caret-down"></i>
    </a>
    <div class = "dropdown-container" >
-     <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+     <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+     <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
    </div>
    <a href="report.php" class = "btn">Report</a>
  </div>
 
  <!-- content -->
- <p class = "content"><b>Status of Events</b></p>
+ <p class = "content"><b>Pending Events</b></p>
 
 
  <!-- table -->
@@ -50,7 +51,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        <th>Events</th>
        <th>Date</th>
        <th>Organizer</th>
-       <th>Status</th>
        <th>Edit</th>
      </tr>
    </thead>
@@ -65,14 +65,14 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
        echo "<form method = post action = hepevents.php>
        <tr>
          <td>".$row["eventname"]."</td>
-         <td>".$row["eventdate"]."</td>
+         <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
          <td>".$row["clubName"]."</td>";
-         echo "<td>Pending</td>";
          echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />
          <td><button>Hit me</button></td>
          </tr>
        </form>";
      }
+     $_SESSION['norepeat'] = 0;
      ?>
    </tbody>
  </table>
@@ -109,3 +109,4 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
  </body>
+</html>

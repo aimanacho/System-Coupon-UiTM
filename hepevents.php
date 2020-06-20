@@ -33,8 +33,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <i class = "fa fa-caret-down"></i>
     </a>
     <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
       <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
     </div>
     <a href="report.php" class = "btn">Report</a>
   </div>
@@ -45,22 +46,27 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <button type="submit" class="btn btn-primary"> Back</button>
     </form>
     <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event detailss </p><br>
+    <p style = "text-align: center;font-size: 23px;">Event details</p><br>
     <?php
       include ("connection.php");
-      $eventcode =  $_POST['eventcode'];
-      $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$eventcode."'";
+      if ($_SESSION['norepeat']==0)
+      {
+          $eventcode =  $_POST['eventcode'];
+          $_SESSION['eventcode'] = $eventcode;
+          $_SESSION['norepeat'] = 1;
+      }
+      $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$_SESSION['eventcode']."'";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-          echo "<p> Event Name:".$row["eventname"]."</p>";
-          echo "<p> Event Venue:".$row["eventvenue"]."</p>";
-          echo "<p> Event Date:".$row["eventdate"]."</p>";
-          echo "<p> Event Time Start:".$row["timestart"]."</p>";
-          echo "<p> Event Times End:".$row["timeend"]."</p>";
-        //  echo "<p> Merit:".$row["meritE"]."</p>";
-          //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
-          echo "<p> Organizer:".$row["clubName"]."</p>";
+          echo "<p> Event Name: ".$row["eventname"]."</p>";
+          echo "<p> Event Venue: ".$row["eventvenue"]."</p>";
+          echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
+          echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
+          echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
+          echo "<p> Merit: ".$row["meritE"]."</p>";
+          echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
+          echo "<p> Organizer: ".$row["clubName"]."</p>";
           $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
@@ -83,22 +89,22 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
           //$result = mysqli_query($conn, $sql);
           //mysqli_query($conn,$sql);
-          echo "<script language = 'javascript'>alert('Meow!');window.location='accEvent.php';</script>";
+          echo "<script language = 'javascript'>alert('Event Accepted!');window.location='accEvent.php';</script>";
       }
       function rejected()
       {
           include ("connection.php");
-          $eventcode = $_SESSION['eventcode'];
-          $sql = "UPDATE events SET eventstatus = '3' WHERE eventcode = '".$eventcode."'";
-          $result = mysqli_query($conn, $sql);
-          mysqli_query($conn,$sqlupdate);
-          echo "<script language = 'javascript'>alert('Event rejected!');window.location='pendingevent.php';</script>";
+        //$eventcode = $_SESSION['eventcode'];
+        //$sql = "UPDATE events SET eventstatus = '3' WHERE eventcode = '".$eventcode."'";
+        //$result = mysqli_query($conn, $sql);
+        //mysqli_query($conn,$sqlupdate);
+        echo "<script language = 'javascript'>alert('Event rejected!');window.location='rejected.php';</script>";
       }
        ?>
 
       <form method = "post">
-        <button type= "submit" name ="approve" class = "btn btn-default" style = "background-color: #4CAF50;">Accept</button>
-        <button type= "submit" name = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
+        <button type= "submit" name ="approve" id = "approve" class = "btn btn-default" style = "background-color: #4CAF50;">Accept</button>
+        <button type= "submit" name = "reject" id = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
       </form>
  </div>
 

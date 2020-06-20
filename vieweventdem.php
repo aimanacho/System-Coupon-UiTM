@@ -30,7 +30,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <img src = "uitm.jpg"/>
         <a href="dashboard.php" class = "btn "> Dashboard</a>
         <a href="attendance.php" class = "btn">Attendance</a>
-        <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+        <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
           <i class = "fa fa-caret-down"></i>
         </a>
         <div class = "dropdown-container" >
@@ -40,26 +40,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       </div>
     <?php } ?>
 
-    <?php if ($_SESSION['userlevelid']== 2){ ?>
-      <div class="sidenav" id = "myDIV">
-        <img src = "uitm.jpg"/>
-        <a href="dashboard.php" class = "btn"> Dashboard</a>
-        <a href="clubs.php" class = "btn">Clubs</a>
-        <a href="studentinfo.php" class = "btn">Student Info</a>
-        <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
-          <i class = "fa fa-caret-down"></i>
-        </a>
-        <div class = "dropdown-container" >
-          <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
-          <a class = "btn" href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
-        </div>
-        <a href="report.php" class = "btn">Report</a>
-      </div>
-    <?php } ?>
-
     <!-- content -->
     <p class = "content"><b>View events</b></p>
-    <br />
 
     <!-- table view event -->
     <table class="table table-bordered" id= "tablemeow">
@@ -69,26 +51,47 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <th>Date</th>
           <th>Time Start</th>
           <th>Time End</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-        $sql = "SELECT * from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+        $sql = "SELECT * from events WHERE clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0)
+        while ($row = mysqli_fetch_assoc($result))
         {
-          while ($row = mysqli_fetch_assoc($result))
-          {
-            echo "<tr>
-              <td><a>".$row["eventname"]."</a></td>
-              <td>".$row["eventdate"]."</td>
-              <td>".$row["timestart"]."</td>
-              <td>".$row["timeend"]."</td>";
-            echo "</tr>";
-          }
+          echo "<form method = post action = viewrejected.php>";
+          echo "<tr>
+            <td><a>".$row["eventname"]."</a></td>
+            <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+            <td>".date("H:i",strtotime($row["timestart"]))."</td>
+            <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+            if ( $row["eventstatus"]==1)
+            {
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />";
+              echo "<td><button>Pending</button></td>";
+            }
+            else if ($row["eventstatus"]==2)
+            {
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />";
+              echo "<td><button>Accepted</button></td>";
+            }
+            else if ($row["eventstatus"]==3)
+            {
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />";
+              echo "<td><button>Rejected </button></td>";
+            }
+            else if ($row["eventstatus"]==4)
+            {
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />";
+              echo "<td><button>Past</button></td>";
+            }
+          echo "</tr>";
+          echo "</form>";
         }
+        $_SESSION['norepeat'] = 0;
           ?>
       </tbody>
     </table>
@@ -115,6 +118,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

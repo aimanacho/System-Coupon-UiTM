@@ -20,11 +20,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <body>
     <!-- topbar-->
     <ul class="topnav" id= "main">
-      <li class="right"><a href="logout.php">Logout</a></li>
+      <li class="right"><a href="logout.php">Logouts</a></li>
     </ul>
 
     <!-- sidebar-->
-     <div class="sidenav">
+      <div class="sidenav">
         <img src = "uitm.jpg"/>
         <a href="dashboard.php" class = "btn "> Dashboard</a>
         <a href="attendance.php" class = "btn active">Attendance</a>
@@ -61,17 +61,16 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <?php
         include("connection.php");
         $clubcode = $_SESSION['clubCode'];
-        $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+         $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
-            $event_date=$row['eventdate'];
             echo "<form action = coupon.php method = post target = _blank>";
             echo "<tr>";
             echo "<td>".$row["eventname"]."</td>";
-            echo "<td>".$row["eventdate"]."</td>";
-            echo "<td>".$row["timestart"]."</td>";
-            echo "<td>".$row["timeend"]."</td>";
+            echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
+            echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
             echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
             if($row['date_dif']==0){
@@ -84,11 +83,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             else{
               echo "<td>Not available</td>";
             }
-
             echo "</tr>";
             echo "</form>";
           }
            $_SESSION['test'] =0;
+           $_SESSION['coupon']=0;
           ?>
       </tbody>
     </table>

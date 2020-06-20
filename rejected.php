@@ -14,7 +14,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title></title>
     <link rel="stylesheet" href= "styledashboardsidebar.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -25,52 +24,36 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-  <div class="sidenav">
-    <img src = "uitm.jpg"/>
-    <a href="dashboard.php" class = "btn"> Dashboard</a>
-    <a href="clubs.php" class = "btn active">Clubs</a>
-    <a href="studentinfo.php" class = "btn">Student Info</a>
-    <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
-      <i class = "fa fa-caret-down"></i>
-    </a>
-    <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
-      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
-      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
+    <div class="sidenav">
+      <img src = "uitm.jpg"/>
+      <a href="dashboard.php" class = "btn "> Dashboard</a>
+      <a href="attendance.php" class = "btn">Attendance</a>
+      <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+        <i class = "fa fa-caret-down"></i>
+      </a>
+      <div class = "dropdown-container" >
+        <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
+        <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
+      </div>
     </div>
-    <a href="report.php" class = "btn">Report</a>
-  </div>
 
   <!-- content -->
-  <p class = "content"><b>All clubs information</b></p>
+  <div class = "content">
+    <form action = "hepevents.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
+    <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
+      <div class = "form-control" style = "text-align: center;">
+        <br>
+            <label >Remarks: </label>
+               <input type="text" id="remarks" name="remarks"><br>
+           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+           <?php echo $_SESSION['eventcode'] ?>
+      </div>
+    </form> <br />
+ </div>
 
-  <!-- table -->
-  <table class="table table-bordered" id= "tablemeow">
-    <thead
-      <tr>
-        <th style = "text-align:center;">Club Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      include("connection.php");
-
-      $sql = "SELECT * from clubs ORDER BY clubName";
-      $result = mysqli_query($conn, $sql);
-      if (mysqli_num_rows($result) > 0)
-      {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<tr>
-            <td>".$row["clubName"]."</td>
-          </tr>";
-        }
-      }
-        ?>
-    </tbody>
-  </table>
-
-<!-- script -->
+  <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -92,6 +75,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+
+    $("button").click(function() {
+      var fired_button = $(this).val();
+      alert(fired_button);
+  });
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

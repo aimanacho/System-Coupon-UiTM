@@ -41,8 +41,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
 
   <div class = "content">
+    <form action = "hepevents.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
+    </form>
     <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <div class = "form-control" style = "text-align: center;">
+        <br>
        <label >Merit: </label>
            <select id="eventmerit" name="eventmerit">
               <option>1</option>
@@ -79,6 +83,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          dropdownContent.style.display = "block";
        }
        });
+       $("button").click(function() {
+         var fired_button = $(this).val();
+         alert(fired_button);
+     });
    }
 
  </script>
