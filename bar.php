@@ -38,3 +38,38 @@
   <a href="report.php" class = "btn">Report</a>
 </div>
 <?php } ?>
+
+<!-- alert -->
+<?php if ($_SESSION['userlevelid']== 1){ ?>
+  <?php
+    if ( $_SESSION['alert'] == 0)
+    {
+   ?>
+   <div class = "alert">
+     <div class="alert alert-success alert-dismissible fade in">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Welcome <?php echo $_SESSION['clubName']; ?>!</strong>
+     </div>
+   </div>
+   <?php
+  $_SESSION['alert'] =1;
+  }
+   ?>
+ <?php } ?>
+
+ <?php if ($_SESSION['userlevelid']== 2){ ?>
+   <?php
+     if ( $_SESSION['alert'] == 0)
+     {
+    ?>
+    <div class = "alert">
+      <div class="alert alert-success alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Welcome Admin!</strong>
+      </div>
+    </div>
+    <?php
+   $_SESSION['alert'] =1;
+   }
+    ?>
+  <?php } ?>

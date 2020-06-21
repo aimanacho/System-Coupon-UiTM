@@ -53,7 +53,6 @@ ul.topnav li.right {float: right;}
   height: 100%;
   width: 200px;
   position: fixed;
-  z-index: 1;
   top: 0;
   left: 0;
   background-color: #333;
@@ -104,7 +103,18 @@ ul.topnav li.right {float: right;}
   margin-left: 230px;
   font-size: 15px;
   margin-top: 30px;
-  table-layout: auto;
+}
+
+#recentactivity
+{
+  margin-top: 30px;
+  margin-left: 230px;
+  width: 100%;
+}
+
+#recentactivity th
+{
+  background-color: rgb(163, 194, 194);
 }
 
 #tablemeow a
