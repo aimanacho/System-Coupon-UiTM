@@ -48,19 +48,45 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <?php
       include ("connection.php");
       $matricNo = $_POST['matricNo'];
-      $sql = "SELECT * from student WHERE matricNo = '".$matricNo."'";
+    //  $sql = "SELECT sum(e.meritE) AS merit FROM student s JOIN attendance a ON s.studentno = a.matricno JOIN events e ON a.eventcode = e.eventcode GROUP BY e.eventcode WHERE matricNo = '".$matricNo."'";
+      $sql = "SELECT *,SUM(e.meritE) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student    s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."' GROUP BY a.matricNo";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
           echo "<p> ID:".$row["matricNo"]."</p>";
           echo "<p> Name:".$row["studentname"]."</p>";
           echo "<p> Semester:".$row["sem"]."</p>";
-          echo "<p> Total Merit:".$row["merit"]."</p>";
+          echo "<p> Total Merit:".$row['merit']."</p>";
         }
       ?>
-    </div>
-    
+ </div>
+ <table class="table table-striped" id= "tablemeow">
+   <thead>
+     <tr>
+       <th>Event Name</th>
+       <th>Date</th>
+       <th>Time Attend</th>
+       <th>Merit</th>
+     </tr>
+   </thead>
+   <tbody>
+     <?php
+     include("connection.php");
+     $sql = "SELECT * FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."'";
+     $result = mysqli_query($conn, $sql);
+       while ($row = mysqli_fetch_assoc($result))
+       {
 
+         echo "<tr>
+           <td>".$row["eventname"]."</td>
+           <td>".date("jS M Y",strtotime($row["date"]))."</td>
+           <td>".date("H:i",strtotime($row["date"]))."</td>
+           <td>".$row["meritE"]."</td>";
+         echo "</tr>";
+       }
+       ?>
+   </tbody>
+ </table>
   <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
