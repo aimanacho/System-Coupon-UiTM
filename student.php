@@ -58,6 +58,16 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Semester:".$row["sem"]."</p>";
           echo "<p> Total Merit:".$row['merit']."</p>";
         }
+        else //kalau student tu takde merit lagi
+        {
+          $sql = "SELECT * FROM student WHERE matricNo = '".$matricNo."'";
+          $result = mysqli_query($conn, $sql);
+          $row = mysqli_fetch_assoc($result);
+          echo "<p> ID:".$row["matricNo"]."</p>";
+          echo "<p> Name:".$row["studentname"]."</p>";
+          echo "<p> Semester:".$row["sem"]."</p>";
+          echo "<p> Total Merit:0</p>";
+        }
       ?>
  </div>
  <table class="table table-striped" id= "tablemeow">

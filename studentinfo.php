@@ -51,7 +51,6 @@ header("Location: index.php");
       <th>ID</th>
       <th>Name</th>
       <th>Semester</th>
-      <th>More Details</th>
     </tr>
   </thead>
   <tbody>
@@ -63,13 +62,10 @@ header("Location: index.php");
       {
         echo "<form action = student.php method = post >";
         echo "<tr>";
-        echo "<td>".$row["matricNo"]."</td>";
+        echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."'/>";
+        echo "<td><button style = background-color:transparent;outline:none;border:none;>".$row["matricNo"]."</button></td>";
         echo "<td>".$row["studentname"]."</td>";
         echo "<td>".$row["sem"]."</td>";
-        //echo "<td>".$row["merit"]."</td>";
-        echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
-        //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
-        echo "<td><button>Enter</button></td>";
         echo "</tr>";
         echo "</form>";
       }

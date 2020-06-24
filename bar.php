@@ -6,7 +6,7 @@
 <!-- sidebar-->
 <!-- dem-->
 <?php if ($_SESSION['userlevelid']== 1){ ?>
-  <div class="sidenav" id = "myDIV">
+  <div class="sidenav">
     <img src = "uitm.jpg"/>
     <a href="dashboard.php" class = "btn active"> Dashboard</a>
     <a href="attendance.php" class = "btn">Attendance</a>
@@ -22,7 +22,7 @@
 
 <!-- hep-->
 <?php if ($_SESSION['userlevelid']== 2){ ?>
-<div class="sidenav" id = "myDIV">
+<div class="sidenav">
   <img src = "uitm.jpg"/>
   <a href="dashboard.php" class = "btn active"> Dashboard</a>
   <a href="clubs.php" class = "btn">Clubs</a>
