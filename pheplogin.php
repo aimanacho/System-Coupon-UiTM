@@ -5,7 +5,7 @@ include("connection.php");
 $studno = mysqli_real_escape_string($conn, $_POST['studno']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-$sql = "SELECT * FROM hep WHERE hepID = '".$studno."' AND passwordP = '".$password."'";
+$sql = "SELECT * FROM hep WHERE hepID = '".$studno."' AND hepPass = '".$password."'";
 $qry = mysqli_query($conn, $sql);
 $row = mysqli_num_rows($qry);
 

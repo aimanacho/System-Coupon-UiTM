@@ -5,7 +5,7 @@ include("connection.php");
 $studno = mysqli_real_escape_string($conn, $_POST['studno']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-$sql = "SELECT * FROM dem d JOIN clubs c on c.clubCode = d.clubCode WHERE demID = '".$studno."' AND passwordD = '".$password."'";
+$sql = "SELECT * FROM dem d JOIN clubs c on c.clubCode = d.clubCode WHERE demID = '".$studno."' AND demPass = '".$password."'";
 $qry = mysqli_query($conn, $sql);
 $row = mysqli_num_rows($qry);
 
