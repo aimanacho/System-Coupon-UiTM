@@ -97,7 +97,7 @@ for ( $x = 1; $x < $count; $x++)
             echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
             echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
             echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
-            echo "<input type = 'hidden' name = 'meritE' value = '".$row['meritE']."' />";
+            echo "<input type = 'hidden' name = 'meritE' value = '".$row['merit']."' />";
             if($row['date_dif']==0){
               if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
                 echo "<td><button onClick=window.location.reload();>Enter</button></td>";
