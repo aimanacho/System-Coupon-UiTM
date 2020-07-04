@@ -41,32 +41,22 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
   <!-- content -->
   <div class = "content">
-    <form action = "studentinfo.php">
-      <button type="submit" class="btn btn-primary" style="float:left;"> Back</button>
-      <p id = "studentcenter" style = "font-size: 30px;"><b>Student information</b></p><br>
+    <form action = "studentinfo.php" style = "text-align: center;">
+      <button type="submit" class="btn btn-primary"> Back</button>
     </form>
-
+    <p style = "text-align: center;font-size: 30px;"><b>Student information</b></p><br>
     <?php
       include ("connection.php");
       $matricNo = $_POST['matricNo'];
+    //  $sql = "SELECT sum(e.meritE) AS merit FROM student s JOIN attendance a ON s.studentno = a.matricno JOIN events e ON a.eventcode = e.eventcode GROUP BY e.eventcode WHERE matricNo = '".$matricNo."'";
       $sql = "SELECT *,SUM(e.merit) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricno=s.matricNo WHERE a.matricNo = '".$matricNo."' GROUP BY a.matricNo";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-          echo "<div id=studentinfo>
-            <div class=gallery>
-              <a target=_blank>
-                <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
-              </a>
-              <div class=desc>";
-              echo "<p> ".$row["matricNo"]."</p>";
-              echo "<p> ".$row["studentname"]."</p>";
-              echo "<p> Semester:".$row["sem"]."</p>";
-              echo "<p> Total Merit:".$row['merit']."</p>";
-              echo "</div>
-            </div>
-          </div>";
-
+          echo "<p> ".$row["matricNo"]."</p>";
+          echo "<p> ".$row["studentname"]."</p>";
+          echo "<p> Semester:".$row["sem"]."</p>";
+          echo "<p> Total Merit:".$row['merit']."</p>";
         }
         else //kalau student tu takde merit lagi
         {

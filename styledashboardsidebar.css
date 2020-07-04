@@ -138,6 +138,13 @@ input.searchbar
   font-size: 25px;
 }
 
+#studentcenter
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*registration form*/
 div.meow {
   background-color: lightblue;
@@ -184,4 +191,37 @@ div.meow {
   margin-top: 170px;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+/* student info*/
+#studentinfo
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+}
+
+div.gallery
+{
+  margin: 5px;
+  border: 1.5px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover
+{
+  border: 1.5px solid rgb(163, 194, 194);
+}
+
+div.gallery img
+{
+  width: 100%;
+  height: auto;
+}
+
+div.desc
+{
+  padding: 15px;
 }

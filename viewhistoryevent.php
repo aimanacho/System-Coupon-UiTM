@@ -82,7 +82,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
             echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
             echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
-            echo "<p> Merit: ".$row["meritE"]."</p>";
+            echo "<p> Merit: ".$row["merit"]."</p>";
             echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
             echo "<p> Organizer:".$row["clubName"]."</p>";
             if ($row['eventstatus'] == 3)

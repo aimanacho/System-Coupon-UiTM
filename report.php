@@ -40,7 +40,45 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn active">Report</a>
   </div>
 
+<!--bruh idk what to put here-->
+<!-- content -->
+<p class = "content"><b>Qualification for College Placement</b></p>
 
+
+<!-- table -->
+<table class="table table-bordered" id= "tablemeow">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Semester</th>
+      <th>Total Coupons</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    include("connection.php");
+    $sql = "SELECT student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student join attendance on student.matricNo=attendance.matricno join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY student.matricNo, student.studentname, student.sem";
+    $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_assoc($result))
+      {
+        echo "<form action = student.php method = post >";
+        echo "<tr>";
+        echo "<td>".$row["matricNo"]."</td>";
+        echo "<td>".$row["studentname"]."</td>";
+        echo "<td>".$row["sem"]."</td>";
+        echo "<td>".$row["totalmerit"]."</td>";
+
+    // echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
+        //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
+      // echo "<td><button>Enter</button></td>";
+        echo "</tr>";
+        echo "</form>";
+      }
+      ?>
+  </tbody>
+</table>
 <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

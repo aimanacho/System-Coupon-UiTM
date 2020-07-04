@@ -25,7 +25,6 @@ if ( $row > 0)
 }
 else
 {
-  $_SESSION['alerttmp'] = 1;
   echo "<script language ='javascript'> alert('User does not exist.');window.location='demlogin.php';</script>";
 }
  ?>
