@@ -40,10 +40,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content-->
     <div class = "content">
-      <form action = "vieweventdem.php" style = "text-align: center;">
-        <button type="submit" class="btn btn-primary"> Back</button>
+      <form action = "vieweventdem.php" >
+        <button type="submit" class="btn btn-primary"> Back</button> </br>
       </form>
-      <p style = "text-align: center;font-size: 30px;"><b>Event Details</b></p><br>
+      <p style = "font-size: 30px;"><b>Event Details</b></p><br>
       <?php
         include ("connection.php");
         if ($_SESSION['norepeat']==0)
