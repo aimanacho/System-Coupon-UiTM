@@ -45,7 +45,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 <!-- content -->
 <p class = "content"><b>Qualification for College Placement</b></p>
 
-
 <!-- table -->
 <table class="table table-bordered" id= "tablemeow">
   <thead>
@@ -70,10 +69,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<td>".$row["studentname"]."</td>";
         echo "<td>".$row["sem"]."</td>";
         echo "<td>".$row["totalmerit"]."</td>";
-
-    // echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
-        //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
-      // echo "<td><button>Enter</button></td>";
         echo "</tr>";
         echo "</form>";
       }
