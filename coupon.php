@@ -54,48 +54,60 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
      function searchmatric()
      {
        include("connection.php");
-       $matricno = $_POST['matricno'];
-       //$meritE = $_SESSION['meritE'];
-       $eventcode = $_SESSION['eventcode'];
-       //found matric no
-       if (checkStudent($conn, $matricno)== true)
+       $sqlE = "SELECT CURRENT_TIME() as cTime, timeend FROM events WHERE eventcode = '".$_SESSION['eventcode']."'";
+       $resultT = mysqli_query($conn, $sqlE);
+       $t = mysqli_fetch_assoc($resultT);
+       if ($t['cTime'] > $t["timeend"])
        {
-         //coupon quantity
-         $couponQ = "SELECT * FROM events WHERE eventcode = '".$eventcode."'";
-         $resultC = mysqli_query($conn, $couponQ);
-         $c = mysqli_fetch_assoc($resultC);
-         $coupon = $c['couponq'];
-         //coupon quantity used
-         $couponused = $c['couponused'];
-         //validation if coupon is still not fully used
-          if  ($couponused < $coupon)
-          {
-              //if matricno does not have data inside table attendance
-              if (checkAttendance($conn, $matricno) == true)
-              {
-                echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
-              }
-              else
-              {
-                $repeats = 1;
-                $couponused = $couponused  + 1;
-                $sqlstudent = "INSERT INTO attendance (matricno, eventcode) VALUES ('".$matricno."', '".$eventcode."')";
-                $result = mysqli_query($conn, $sqlstudent);
-                $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
-                $result = mysqli_query($conn, $sqlevent);
-                echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
-              }
-          }
-          else
-          {
-            echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
-          }
+         echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
+              $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
+              $result = mysqli_query($conn, $sqlUpdate);
+              mysqli_query($conn,$sqlUpdate);
        }
        else
        {
-          echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
+         $matricno = $_POST['matricno'];
+         //$meritE = $_SESSION['meritE'];
+         $eventcode = $_SESSION['eventcode'];
+         //found matric no
+         if (checkStudent($conn, $matricno)== true)
+         {
+           //coupon quantity
+           $couponQ = "SELECT * FROM events WHERE eventcode = '".$eventcode."'";
+           $resultC = mysqli_query($conn, $couponQ);
+           $c = mysqli_fetch_assoc($resultC);
+           $coupon = $c['couponq'];
+           //coupon quantity used
+           $couponused = $c['couponused'];
+           //validation if coupon is still not fully used
+            if  ($couponused < $coupon)
+            {
+                //if matricno does not have data inside table attendance
+                if (checkAttendance($conn, $matricno) == true)
+                {
+                  echo "<script language = 'javascript'>alert('Student already attend!');window.location='coupon.php';</script>";
+                }
+                else
+                {
+                  $repeats = 1;
+                  $couponused = $couponused  + 1;
+                  $sqlstudent = "INSERT INTO attendance (matricno, eventcode) VALUES ('".$matricno."', '".$eventcode."')";
+                  $result = mysqli_query($conn, $sqlstudent);
+                  $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
+                  $result = mysqli_query($conn, $sqlevent);
+                  echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
+                }
+            }
+            else
+            {
+              echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+            }
+         }
+         else
+         {
+            echo "<script language ='javascript'> alert('Student not found!');window.location='coupon.php';</script>";
+         }
        }
-
       }
 //post value/ test
     if ( $_SESSION['test'] == 0)
