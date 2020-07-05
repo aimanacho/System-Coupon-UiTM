@@ -64,59 +64,56 @@ for ( $x = 1; $x < $count; $x++)
           <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
         </div>
       </div>
+      <!-- content -->
+      <p class = "content"><b>Select which event you organize</b></p>
 
-    <!-- content -->
-    <p class = "content"><b>Select which event you organize</b></p>
-
-
-
-    <!-- table -->
-    <div class="col-sm-10">
-    <table class="table table-striped" id= "tablemeow">
-      <thead>
-        <tr>
-          <th>Event Name</th>
-          <th>Date</th>
-          <th>Time Start</th>
-          <th>Time End</th>
-          <th>Take Attendance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        include("connection.php");
-        $clubcode = $_SESSION['clubCode'];
-        //change past event that hasnt change eventstatus
-        $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
-        $result = mysqli_query($conn, $sql);
-          while ($row = mysqli_fetch_assoc($result))
-          {
-            echo "<form action = coupon.php method = post>";
-            echo "<tr>";
-            echo "<td>".$row["eventname"]."</td>";
-            echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
-            echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
-            echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
-            echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
-            echo "<input type = 'hidden' name = 'meritE' value = '".$row['merit']."' />";
-            if($row['date_dif']==0){
-              if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
-                echo "<td><button onClick=window.location.reload();>Enter</button></td>";
-              else {
+      <!-- table -->
+      <table class="table table-striped" id= "tablemeow">
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Time Start</th>
+            <th>Time End</th>
+            <th>Take Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          include("connection.php");
+          $clubcode = $_SESSION['clubCode'];
+          //change past event that hasnt change eventstatus
+          $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+          $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($result))
+            {
+              echo "<form action = coupon.php method = post>";
+              echo "<tr>";
+              echo "<td>".$row["eventname"]."</td>";
+              echo "<td>".date("jS M Y",strtotime($row["eventdate"]))."</td>";
+              echo "<td>".date("H:i",strtotime($row["timestart"]))."</td>";
+              echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
+              echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
+              echo "<input type = 'hidden' name = 'meritE' value = '".$row['merit']."' />";
+              if($row['date_dif']==0){
+                if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
+                  echo "<td><button onClick=window.location.reload();>Enter</button></td>";
+                else {
+                  echo "<td>Not available</td>";
+                }
+              }
+              else{
                 echo "<td>Not available</td>";
               }
+              echo "</tr>";
+              echo "</form>";
             }
-            else{
-              echo "<td>Not available</td>";
-            }
-            echo "</tr>";
-            echo "</form>";
-          }
-           $_SESSION['test'] =0;
-           $_SESSION['coupon']=0;
-          ?>
-      </tbody>
-    </table>
+             $_SESSION['test'] =0;
+             $_SESSION['coupon']=0;
+            ?>
+        </tbody>
+      </table>
+
 
 <!-- script -->
 <script>

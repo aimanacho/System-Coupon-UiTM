@@ -46,7 +46,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p class = "content"><b>Upcoming events</b></p>
 
     <!-- table view event -->
-    <div class="col-sm-10">
     <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
