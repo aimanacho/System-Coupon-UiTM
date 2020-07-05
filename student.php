@@ -58,7 +58,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <div id = studentinfo>
             <div class=col-sm-2>
               <div class=gallery>
-                <a target=_blank href=img_5terre.jpg>
+                <a >
                   <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
                 </a>
               </div>
@@ -86,7 +86,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         }
       ?>
  </div>
- <div class="col-sm-10">
    <table class="table table-striped" id= "tablemeow">
      <thead>
        <tr>
@@ -114,7 +113,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          ?>
      </tbody>
    </table>
- </div>
   <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

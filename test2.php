@@ -98,11 +98,15 @@ include("updateeventstatus.php");
 
   <!-- table -->
   <div class="content">
-    <p> meow </p>
+    <div class="dashboard">
+      <h2>Column</h2>
+      <p>Lorem ipsum dolor sit amet,</p>
+    </div>
+    <div class="dashboard">
+      <h2>Column</h2>
+      <p>Lorem ipsum dolor sit amet,</p>
+    </div>
   </div>
-
-
-
 
 <!-- script -->
 <script>

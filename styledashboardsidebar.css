@@ -91,6 +91,14 @@ ul.topnav li.right {float: right;}
   margin-left: 97px;
 }
 
+/* dashboard */
+.dashboard
+{
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
 /* table  */
  #tablemeow
 {
@@ -108,7 +116,7 @@ ul.topnav li.right {float: right;}
 {
   margin-top: 30px;
   margin-left: 230px;
-  width: 100%;
+  width: 83%;
 }
 
 #recentactivity th
