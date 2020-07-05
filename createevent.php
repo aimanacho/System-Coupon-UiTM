@@ -42,23 +42,21 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
 <!-- content -->
    <p class = "content"><b>Event Registration Form</b></p><br />
-   <div class="meowcreateevent">
-       <form action = "createeventp.php" method = "post" id = "login" name = "login" target = "_self">
+       <form action = "createeventp.php" method = "post"  target = "_self">
          <div class = "form-control" style = "text-align: center;">
            <label>Event Name: </label>
               <input type="text" id="eventname" name="eventname"><br>
            <label>Event Venue: </label>
               <input type="text" id="eventvenue" name="eventvenue"><br>
            <label >Date: </label>
-              <input type="date" placeholder = "dd/mm/yyyy" id="eventdate" name="eventdate"><br>
+              <input type="date" id="eventdate" name="eventdate"><br>
            <label >Time Start</label>
-              <input type="time" placeholder="24:00" id="timestart" name="timestart"><br>
+              <input type="time" id="timestart" name="timestart"><br>
            <label >Time End</label>
-              <input type="time" placeholder="24:00" id="timeend" name="timeend"><br>
+              <input type="time" id="timeend" name="timeend"><br>
               <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
          </div>
        </form> <br />
-   </div>
 <!-- script -->
   <script>
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

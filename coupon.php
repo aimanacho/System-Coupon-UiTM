@@ -152,7 +152,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <div class = "couponform">
      <form method = "post" style = "margin-top:25px;">
          <lable style = "font-size: 28px;"><strong>Enter Matric Number</strong></lable> </br></br>
-         <input style = "width:100%;"type ="text" id = "matricno" name = "matricno" /> </br> </br>
+         <input style = "width:100%;text-align:center;" type ="text" id = "matricno" name = "matricno" maxlength="10" /> </br> </br>
          <button style = "width:100%;" type="submit" class="btn btn-primary" name = "searchmatric" onclick = "searchmatric()">Enter</button><br> </br>
          <p style = "font-size: 25px;"> Coupon quantity left: <?php echo $_SESSION['couponleft']; ?> </p>
      </form>

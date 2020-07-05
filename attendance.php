@@ -84,7 +84,7 @@ for ( $x = 1; $x < $count; $x++)
           include("connection.php");
           $clubcode = $_SESSION['clubCode'];
           //change past event that hasnt change eventstatus
-          $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate";
+          $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate DESC";
           $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($result))
             {
@@ -96,16 +96,15 @@ for ( $x = 1; $x < $count; $x++)
               echo "<td>".date("H:i",strtotime($row["timeend"]))."</td>";
               echo "<input type = 'hidden' name = 'eventcode' value = '".$row['eventcode']."' />";
               echo "<input type = 'hidden' name = 'meritE' value = '".$row['merit']."' />";
-              if($row['date_dif']==0){
+              if($row['date_dif']==0)
+              {
                 if($row['cTime']>$row["timestart"] && $row['cTime']<$row["timeend"])
                   echo "<td><button onClick=window.location.reload();>Enter</button></td>";
-                else {
-                  echo "<td>Not available</td>";
-                }
               }
-              else{
+              else if($row['date_dif'] > 0)
+                echo "<td>Event has ended</td>";
+              else if ($row['date_dif'] < 0)
                 echo "<td>Not available</td>";
-              }
               echo "</tr>";
               echo "</form>";
             }

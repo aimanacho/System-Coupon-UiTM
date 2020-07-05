@@ -98,29 +98,69 @@ include("updateeventstatus.php");
       <?php } ?>
 
 
-  <!-- table -->
-  <table class="table table-striped" id= "recentactivity">
-    <thead>
-      <tr>
-        <th>Recent Activity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      include("connection.php");
-      $sql = "SELECT * from student ORDER BY studentname";
-      $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<form action = student.php method = post >";
-          echo "<tr>";
-          echo "<td>".$row["matricNo"]."</td>";
-          echo "</tr>";
-          echo "</form>";
-        }
-        ?>
-    </tbody>
-  </table>
+      <!-- table -->
+      <div class="content">
+        <div class="dashboard">
+          <div class="col-sm-10">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Upcoming Events</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <?php
+                    $sqldate = "SELECT CURRENT_DATE() as currentdate";
+                    $result = mysqli_query($conn, $sqldate);
+                    $t = mysqli_fetch_assoc($result);
+                    $currentdate = $t['currentdate'];
+                    $sql = "SELECT * FROM events WHERE eventstatus = '2' ORDER BY eventdate DESC LIMIT 5";
+                    $result = mysqli_query($conn, $sql);
+                    while ($x = mysqli_fetch_assoc($result))
+                    {
+                      $date = $x['eventdate'];
+                      $eventname = $x['eventname'];
+                      echo "<td style = padding:2px;font-size:16px;>
+                     <p>".$x["eventname"]."</p>
+                      <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
+                      </td>
+                      </tr>";
+                    }
+                  ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="dashboard">
+          <div class="col-sm-10">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Recent Activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <?php
+                    $sql = "SELECT * FROM events WHERE eventstatus = '1' ORDER BY timechange DESC LIMIT 5";
+                    $result = mysqli_query($conn, $sql);
+                    while ($x = mysqli_fetch_assoc($result))
+                    {
+                      $date = $x['eventdate'];
+                      $eventname = $x['eventname'];
+                      echo "<td style = padding:2px;font-size:16px;>
+                     <p>".$x["eventname"]."</p>
+                      <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
+                      </td>
+                      </tr>";
+                    }
+                  ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
 
 

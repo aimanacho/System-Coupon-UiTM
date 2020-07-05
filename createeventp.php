@@ -13,7 +13,7 @@
 
 
 
-    $sql = "INSERT INTO events (eventname, eventvenue, eventdate, timestart, timeend, meritE, couponq, eventstatus, clubCode) VALUES
+    $sql = "INSERT INTO events (eventname, eventvenue, eventdate, timestart, timeend, merit, couponq, eventstatus, clubCode) VALUES
     ('".$eventname."', '".$eventvenue."','".$eventdate."','".$timestart."','".$timeend."','".$merit."','".$couponq."','".$eventstatus."', '".$clubCode."')";
 
     mysqli_query($conn, $sql);

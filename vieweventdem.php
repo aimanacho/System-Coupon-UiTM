@@ -35,12 +35,12 @@ include("updateeventstatus.php");
         </a>
         <div class = "dropdown-container" >
           <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
-          <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
+          <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View all events</a>
         </div>
       </div>
 
     <!-- content -->
-    <p class = "content"><b>View events</b></p>
+    <p class = "content"><b>View all events</b></p>
 
     <!-- table view event -->
     <table class="table table-striped" id= "tablemeow">
