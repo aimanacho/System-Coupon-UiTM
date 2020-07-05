@@ -33,8 +33,24 @@ include("updateeventstatus.php");
           </thead>
           <tbody>
             <tr>
-              <td>John</td>
-            </tr>
+              <?php
+                $sqldate = "SELECT CURRENT_DATE() as currentdate";
+                $result = mysqli_query($conn, $sqldate);
+                $t = mysqli_fetch_assoc($result);
+                $currentdate = $t['currentdate'];
+                $sql = "SELECT * FROM events WHERE eventstatus = '2' ORDER BY eventdate DESC LIMIT 5";
+                $result = mysqli_query($conn, $sql);
+                while ($x = mysqli_fetch_assoc($result))
+                {
+                  $date = $x['eventdate'];
+                  $eventname = $x['eventname'];
+                  echo "<td style = padding:2px;font-size:16px;>
+                 <p>".$x["eventname"]."</p>
+                  <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
+                  </td>
+                  </tr>";
+                }
+              ?>
           </tbody>
         </table>
       </div>
@@ -49,8 +65,20 @@ include("updateeventstatus.php");
           </thead>
           <tbody>
             <tr>
-              <td>John</td>
-            </tr>
+              <?php
+                $sql = "SELECT * FROM events WHERE eventstatus = '1' ORDER BY timechange DESC LIMIT 5";
+                $result = mysqli_query($conn, $sql);
+                while ($x = mysqli_fetch_assoc($result))
+                {
+                  $date = $x['eventdate'];
+                  $eventname = $x['eventname'];
+                  echo "<td style = padding:2px;font-size:16px;>
+                 <p>".$x["eventname"]."</p>
+                  <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
+                  </td>
+                  </tr>";
+                }
+              ?>
           </tbody>
         </table>
       </div>

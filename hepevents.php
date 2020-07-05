@@ -46,8 +46,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <form action = "pendingevent.php" style = "text-align: center;">
       <button type="submit" class="btn btn-primary"> Back</button>
     </form>
-    <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-    <p style = "text-align: center;font-size: 23px;">Event details</p><br>
+    <p style = "text-align: center;font-size: 30px;"><b>Event Details</b></p><br>
     <?php
       include ("connection.php");
       if ($_SESSION['norepeat']==0)
@@ -65,7 +64,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
           echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
           echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
-          echo "<p> Merit: ".$row["meritE"]."</p>";
+          echo "<p> Merit: ".$row["merit"]."</p>";
           echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
           echo "<p> Organizer: ".$row["clubName"]."</p>";
           $_SESSION['eventcode'] = $row["eventcode"];
