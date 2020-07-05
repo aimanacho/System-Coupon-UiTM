@@ -100,7 +100,7 @@ ul.topnav li.right {float: right;}
  #tablemeow
 {
   font-family: 'Work Sans', sans-serif;
-  margin-left: 230px;
+  margin-left: 19%;
   font-size: 15px;
   margin-top: 30px;
 }
@@ -132,8 +132,8 @@ input.searchbar
 /* `content` */
 .content
 {
+  margin-left: 16%;
   font-family: "Lato", sans-serif;
-  margin-left: 230px;
   padding-top: 30px;
   font-size: 25px;
 }
@@ -194,34 +194,22 @@ div.meow {
 }
 
 /* student info*/
+
 #studentinfo
 {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 17px;
 }
 
-div.gallery
+.gallery p
 {
-  margin: 5px;
-  border: 1.5px solid #ccc;
-  float: left;
-  width: 180px;
-}
-
-div.gallery:hover
-{
-  border: 1.5px solid rgb(163, 194, 194);
+  padding-left: 10px;
+  margin-left: 20px;
 }
 
 div.gallery img
 {
-  width: 100%;
-  height: auto;
-}
-
-div.desc
-{
-  padding: 15px;
+  float: left;
+  width: 180px;
+  padding-top: 5px;
+  height: 212px;
 }

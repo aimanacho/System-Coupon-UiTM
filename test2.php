@@ -23,19 +23,24 @@ include("updateeventstatus.php");
     <?php  include("bar.php"); ?>
 
   <!-- table -->
-    <div id="studentinfo">
+  <div class="content">
+    <div class="col-sm-2">
       <div class="gallery">
         <a target="_blank" href="img_5terre.jpg">
           <img src="unknownpic.jpg" alt="Cinque Terre" width="600" height="400">
         </a>
-        <div class="desc">
-          <p> Name</p>
-          <p> Matric no </p>
-          <p> Semester</p>
-          <p> Total Merit</p>
-        </div>
       </div>
     </div>
+  <div class="col-sm-5">
+    <div style="margin-left: 10px;padding-top: 15px;">
+      <p> Namedasdasdadaas</p>
+      <p> Matric no </p>
+      <p> Semester</p>
+      <p> Total Merit</p>
+    </div>
+  </div>
+  </div>
+
 
 
 

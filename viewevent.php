@@ -46,12 +46,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p class = "content"><b>Upcoming events</b></p>
 
     <!-- table view event -->
+    <div class="col-sm-10">
     <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
           <th><a>Event Name</a></th>
           <th>Date</th>
-          <th>Time Start<</th>
+          <th>Time Start</th>
           <th>Time End</th>
         </tr>
       </thead>

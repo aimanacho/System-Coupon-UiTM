@@ -71,6 +71,7 @@ for ( $x = 1; $x < $count; $x++)
 
 
     <!-- table -->
+    <div class="col-sm-10">
     <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>

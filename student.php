@@ -24,27 +24,28 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-  <div class="sidenav">
-    <img src = "uitm.jpg"/>
-    <a href="dashboard.php" class = "btn"> Dashboard</a>
-    <a href="clubs.php" class = "btn">Clubs</a>
-    <a href="studentinfo.php" class = "btn active">Student Info</a>
-    <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
-      <i class = "fa fa-caret-down"></i>
-    </a>
-    <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
-      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+    <div class="sidenav">
+      <img src = "uitm.jpg"/>
+      <a href="dashboard.php" class = "btn"> Dashboard</a>
+      <a href="clubs.php" class = "btn">Clubs</a>
+      <a href="studentinfo.php" class = "btn active">Student Info</a>
+      <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+        <i class = "fa fa-caret-down"></i>
+      </a>
+      <div class = "dropdown-container" >
+        <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
+        <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+        <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
+      </div>
+      <a href="report.php" class = "btn">Report</a>
     </div>
-    <a href="report.php" class = "btn">Report</a>
-  </div>
 
   <!-- content -->
   <div class = "content">
     <form action = "studentinfo.php">
-      <button type="submit" class="btn btn-primary" style="float:left;"> Back</button>
-      <p id = "studentcenter" style = "font-size: 30px;"><b>Student information</b></p><br>
+      <button type="submit" class="btn btn-primary"> Back</button>
     </form>
+    <p style = "font-size: 30px;"><b>Student Information</b></p>
 
     <?php
       include ("connection.php");
@@ -53,17 +54,22 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-          echo "<div id=studentinfo>
-            <div class=gallery>
-              <a target=_blank>
-                <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
-              </a>
-              <div class=desc>";
-              echo "<p> ".$row["matricNo"]."</p>";
-              echo "<p> ".$row["studentname"]."</p>";
-              echo "<p> Semester:".$row["sem"]."</p>";
-              echo "<p> Total Merit:".$row['merit']."</p>";
-              echo "</div>
+          echo "
+          <div id = studentinfo>
+            <div class=col-sm-2>
+              <div class=gallery>
+                <a target=_blank href=img_5terre.jpg>
+                  <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
+                </a>
+              </div>
+            </div>
+            <div class=col-sm-5>
+              <div style=margin-left: 10px;padding-top: 15px;>
+                <p> Namedasdasdadaas</p>
+                <p> Matric no </p>
+                <p> Semester</p>
+                <p> Total Merit</p>
+              </div>
             </div>
           </div>";
 
@@ -80,33 +86,35 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         }
       ?>
  </div>
- <table class="table table-striped" id= "tablemeow">
-   <thead>
-     <tr>
-       <th>Event Name</th>
-       <th>Date</th>
-       <th>Time Attend</th>
-       <th>Merit</th>
-     </tr>
-   </thead>
-   <tbody>
-     <?php
-     include("connection.php");
-     $sql = "SELECT * FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."'";
-     $result = mysqli_query($conn, $sql);
-       while ($row = mysqli_fetch_assoc($result))
-       {
+ <div class="col-sm-10">
+   <table class="table table-striped" id= "tablemeow">
+     <thead>
+       <tr>
+         <th>Event Name</th>
+         <th>Date</th>
+         <th>Time Attend</th>
+         <th>Merit</th>
+       </tr>
+     </thead>
+     <tbody>
+       <?php
+       include("connection.php");
+       $sql = "SELECT * FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."'";
+       $result = mysqli_query($conn, $sql);
+         while ($row = mysqli_fetch_assoc($result))
+         {
 
-         echo "<tr>
-           <td>".$row["eventname"]."</td>
-           <td>".date("jS M Y",strtotime($row["date"]))."</td>
-           <td>".date("H:i",strtotime($row["date"]))."</td>
-           <td>".$row["merit"]."</td>";
-         echo "</tr>";
-       }
-       ?>
-   </tbody>
- </table>
+           echo "<tr>
+             <td>".$row["eventname"]."</td>
+             <td>".date("jS M Y",strtotime($row["date"]))."</td>
+             <td>".date("H:i",strtotime($row["date"]))."</td>
+             <td>".$row["merit"]."</td>";
+           echo "</tr>";
+         }
+         ?>
+     </tbody>
+   </table>
+ </div>
   <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
