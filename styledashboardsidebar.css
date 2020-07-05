@@ -94,12 +94,14 @@ ul.topnav li.right {float: right;}
 /* table  */
  #tablemeow
 {
+  table-layout: fixed;
   font-family: 'Work Sans', sans-serif;
   margin-left: 230px;
   font-size: 15px;
   margin-top: 30px;
   overflow-y: auto;
   overflow-x: hidden;
+  width: 83%;
 }
 
 #recentactivity
@@ -129,11 +131,20 @@ input.searchbar
 /* `content` */
 .content
 {
-  margin-left: 16%;
+  margin-left: 230px;
   font-family: "Lato", sans-serif;
   padding-top: 30px;
   font-size: 25px;
 }
+
+.button
+{
+  background-color: rgb(163, 194, 194);
+  border-radius: 5px;
+  border: 1px solid rgb(163, 194, 194);
+  font-size: 19px;
+}
+
 
 #studentcenter
 {

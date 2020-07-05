@@ -43,7 +43,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <!-- content -->
   <div class = "content">
     <form action = "studentinfo.php">
-      <button type="submit" class="btn btn-primary"> Back</button>
+      <button type="submit" class="button"> Back</button>
     </form>
     <p style = "font-size: 30px;"><b>Student Information</b></p>
 
