@@ -122,7 +122,8 @@ include("updateeventstatus.php");
                       $eventname = $x['eventname'];
                       echo "<tr>
                               <td style = padding:2px;font-size:15px;>
-                                <p>".$x["eventname"]."</p>
+                                <p><i>".$x["eventname"]."</i></p>
+                                <p> by ".$x["clubCode"]."</p>
                                 <p>".$x["eventvenue"]."</p>
                                 <p>".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
                               </td>
@@ -151,9 +152,9 @@ include("updateeventstatus.php");
                       $eventname = $x['eventname'];
                       echo "<tr>
                               <td style = padding:2px;font-size:15px;>
-                                <p>".$x["eventname"]."</p>
-                                <p>".$x["eventvenue"]."</p>
-                                <p>".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
+                                <p><i> ".$x["eventname"]."</i></p>
+                                <p> by ".$x["clubCode"]."</p>
+                                <p> Created on ".date("H:i",strtotime($x["timechange"])).", ".date("jS M Y",strtotime($x["timechange"]))."</p>
                                </td>
                             </tr>";
                     }

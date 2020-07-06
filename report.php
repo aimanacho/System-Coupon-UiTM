@@ -61,18 +61,18 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     include("connection.php");
     $sql = "SELECT student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student join attendance on student.matricNo=attendance.matricno join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY student.matricNo, student.studentname, student.sem";
     $result = mysqli_query($conn, $sql);
-      while ($row = mysqli_fetch_assoc($result))
-      {
-        echo "<form action = student.php method = post >";
-        echo "<tr>";
-        echo "<td>".$row["matricNo"]."</td>";
-        echo "<td>".$row["studentname"]."</td>";
-        echo "<td>".$row["sem"]."</td>";
-        echo "<td>".$row["totalmerit"]."</td>";
-        echo "</tr>";
-        echo "</form>";
-      }
-      ?>
+    while ($row = mysqli_fetch_assoc($result))
+    {
+      echo "<form action = student.php method = post >";
+      echo "<tr>";
+      echo "<td>".$row["matricNo"]."</td>";
+      echo "<td>".$row["studentname"]."</td>";
+      echo "<td>".$row["sem"]."</td>";
+      echo "<td>".$row["totalmerit"]."</td>";
+      echo "</tr>";
+      echo "</form>";
+    }
+    ?>
   </tbody>
 </table>
 <!-- script -->

@@ -63,7 +63,7 @@ include("updateeventstatus.php");
         {
           echo "<form method = post action = viewrejected.php>";
           echo "<tr>
-            <td><a>".$row["eventname"]."</a></td>
+            <td>".$row["eventname"]."</td>
             <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
             <td>".date("H:i",strtotime($row["timestart"]))."</td>
             <td>".date("H:i",strtotime($row["timeend"]))."</td>";

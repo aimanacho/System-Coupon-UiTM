@@ -40,19 +40,23 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
   <!-- content -->
   <div class = "content">
-    <form action = "hepevents.php" style = "text-align: center;">
-      <button type="submit" class="btn btn-primary"> Back</button>
+    <form action = "hepevents.php">
+      <button type="submit" class="button"> Back</button>
     </form>
-    <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
-      <div class = "form-control" style = "text-align: center;">
-        <br>
-            <label >Remarks: </label>
-               <input type="text" id="remarks" name="remarks"><br>
-           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
-           <?php echo $_SESSION['eventcode'] ?>
-      </div>
-    </form> <br />
- </div>
+    <p style = "font-size: 30px;"><b>Rejection event</b></p>
+  </div>
+  <form action = "rejectedp.php" method = "post" id = "login" name = "login" target = "_self">
+    <table class="table table-bordered" id= "tablemeow">
+      <tbody>
+        <tr>
+          <td style = "width:15%;">Remarks</td>
+          <td><input type="text" id="remarks" name="remarks"><br></td>
+        </tr>
+      </tbody>
+    </table>
+  <input style="margin-left:230px;" type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+  </form>
+
 
   <!-- script -->
 <script>

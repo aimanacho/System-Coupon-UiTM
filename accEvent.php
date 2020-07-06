@@ -40,29 +40,38 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn">Report</a>
   </div>
 
-
+  <!-- content -->
   <div class = "content">
-    <form action = "hepevents.php" style = "text-align: center;">
-      <button type="submit" class="btn btn-primary"> Back</button>
+    <form action = "hepevents.php">
+      <button type="submit" class="button"> Back</button>
     </form>
+    <p style = "font-size: 30px;"><b>Approval event</b></p>
+  </div>
+  
     <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
-      <div class = "form-control" style = "text-align: center;">
-        <br>
-       <label >Merit: </label>
-           <select id="eventmerit" name="eventmerit">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-           </select> <br>
-            <label >Coupon Quantity: </label>
-               <input type="text" id="couponq" name="couponq"><br>
-           <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
-           <?php echo $_SESSION['eventcode'] ?>
-      </div>
-    </form> <br />
- </div>
+      <table class="table table-bordered" id= "tablemeow">
+        <tbody>
+          <tr>
+            <td style = "width:15%;">Merit </td>
+            <td>
+              <select id="eventmerit" name="eventmerit">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select> <br>
+            </td>
+          </tr>
+          <tr>
+            <td style = "width:15%;">Coupon quantity</td>
+            <td><input type="text" id="couponq" name="couponq"><br></td>
+          </tr>
+        </tbody>
+      </table>
+    <input style="margin-left:230px;" type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+    </form>
+
  <!-- script -->
  <script>
    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

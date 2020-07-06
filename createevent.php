@@ -41,22 +41,35 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       </div>
 
 <!-- content -->
-   <p class = "content"><b>Event Registration Form</b></p><br />
-       <form action = "createeventp.php" method = "post"  target = "_self">
-         <div class = "form-control" style = "text-align: center;">
-           <label>Event Name: </label>
-              <input type="text" id="eventname" name="eventname"><br>
-           <label>Event Venue: </label>
-              <input type="text" id="eventvenue" name="eventvenue"><br>
-           <label >Date: </label>
-              <input type="date" id="eventdate" name="eventdate"><br>
-           <label >Time Start</label>
-              <input type="time" id="timestart" name="timestart"><br>
-           <label >Time End</label>
-              <input type="time" id="timeend" name="timeend"><br>
-              <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
-         </div>
-       </form> <br />
+   <p class = "content"><b>Event Registration Form</b></p>
+   <form action = "createeventp.php" method = "post"  target = "_self">
+     <table class="table table-bordered" id= "tablemeow">
+       <tbody>
+         <tr>
+           <td style = "width:15%;">Event name </td>
+           <td><input type="text" id="eventname" name="eventname"><br></td>
+         </tr>
+         <tr>
+           <td style = "width:15%;">Event venue </td>
+           <td><input type="text" id="eventvenue" name="eventvenue"><br></td>
+         </tr>
+         <tr>
+           <td style = "width:15%;">Event date </td>
+           <td><input type="date" id="eventdate" name="eventdate"><br></td>
+         </tr>
+         <tr>
+           <td style = "width:15%;">Time start </td>
+           <td><input type="time" id="timestart" name="timestart"><br></td>
+         </tr>
+         <tr>
+           <td style = "width:15%;">Time end </td>
+           <td><input type="time" id="timeend" name="timeend"><br></td>
+         </tr>
+       </tbody>
+     </table>
+     <input style="margin-left:230px;"type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+   </form>
+
 <!-- script -->
   <script>
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

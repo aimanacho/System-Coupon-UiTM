@@ -102,41 +102,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
             $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
-
-      <?php
-      if (array_key_exists('approve', $_POST))
-      {
-        approved();
-      }
-
-      if (array_key_exists('reject', $_POST))
-      {
-        rejected();
-      }
-
-      function approved()
-      {
-          include ("connection.php");
-          //$eventcode = $_SESSION['eventcode'];
-          //$sql = "UPDATE events SET eventstatus = '2' WHERE eventcode = '".$eventcode."'";
-          //$result = mysqli_query($conn, $sql);
-          //mysqli_query($conn,$sql);
-          echo "<script language = 'javascript'>alert('Event Accepted!');window.location='accEvent.php';</script>";
-      }
-      function rejected()
-      {
-          include ("connection.php");
-        //$eventcode = $_SESSION['eventcode'];
-        //$sql = "UPDATE events SET eventstatus = '3' WHERE eventcode = '".$eventcode."'";
-        //$result = mysqli_query($conn, $sql);
-        //mysqli_query($conn,$sqlupdate);
-        echo "<script language = 'javascript'>alert('Event rejected!');window.location='rejected.php';</script>";
-      }
-       ?>
-
-      <form method = "post" id = "btnrejectapprove">
+      <form method = "post" id = "btnrejectapprove" name = "btnrejectapprove" action="accEvent.php">
         <button type= "submit" name ="approve" id = "approve" class = "btn btn-default" style = "background-color: #4CAF50;">Accept</button>
-        <button type= "submit" name = "reject" id = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
+        <button formaction="rejected.php" type= "submit" name = "reject" id = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
       </form>
 
   <!-- script -->

@@ -35,12 +35,6 @@
             <input type="submit" formaction="index.php" value="Back" class="btn btn-info">
           </div>
         </form>
-        <?php if ($_SESSION['alerttmp'] == 1)
-        { ?>
-          <div class="alert alert-danger" style="margin-top:50px;width:230px;">
-            <strong>You've entered wrong Student ID or Password!</strong>
-          </div>
-        <?php } ?>
       </div>
         <img src = "campus.jpg"/>
     </div>
