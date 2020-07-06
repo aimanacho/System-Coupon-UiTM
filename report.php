@@ -69,6 +69,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<td>".$row["studentname"]."</td>";
         echo "<td>".$row["sem"]."</td>";
         echo "<td>".$row["totalmerit"]."</td>";
+        $totalmerit = $row["totalmerit"];
+        $status = "";
+        if ($totalmerit > 3)
+          echo "<td>"."Eligible"."</td>";
+        else
+          echo "<td>"."Disqualified"."</td>";
 
     // echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
         //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
