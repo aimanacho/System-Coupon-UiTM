@@ -14,13 +14,16 @@
   </head>
   <body style = "background-color: rgb(163, 194, 194);">
     <!-- table  -->
+    <div class = "header">
+      <p> System Coupon UiTM</p>
+    </div>
     <div class="meow">
         <div class = "loginform">
           <div class = "loginmeow">
-            <p style="font-size:20px"><b>Login as</b></p>
+            <p style="font-size: 25px;"><b>Login as</b></p>
             <form class = "buttons" action="demlogin.php">
-              <input style = "width:100%;" type="submit" value="DEM" class="btn btn-primary"> <br><br>
-              <input type="submit" formaction="heplogin.php" value="HEP" class="btn btn-info">
+              <input style = "width:100%;font-size: 15px;" type="submit" value="DEM" class="btn btn-primary"> <br><br>
+              <input style="font-size: 15px;"type="submit" formaction="heplogin.php" value="HEP" class="btn btn-info">
             </form>
           </div>
         </div>

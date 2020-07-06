@@ -97,8 +97,8 @@ include("updateeventstatus.php");
         ?>
       <?php } ?>
 
-
       <!-- table -->
+      <?php if ($_SESSION['userlevelid']== 2){ ?>
       <div class="content">
         <div class="dashboard">
           <div class="col-sm-10">
@@ -161,8 +161,7 @@ include("updateeventstatus.php");
           </div>
         </div>
       </div>
-
-
+      <?php } ?>
 
 <!-- script -->
 <script>
