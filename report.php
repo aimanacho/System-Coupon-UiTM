@@ -132,7 +132,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 </style>
 </head>
 <body>
-  <form action = "testpdf.php" style = "text-align: center;">
+  <form action = "kelayakankolejUITMR.php" style = "text-align: center;">
     <button type="submit" class="btn btn-primary">Print PDF</button>
   </form>
 
