@@ -16,9 +16,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <link rel="stylesheet" href= "styledashboardsidebar.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
     <!-- topbar-->
+
     <ul class="topnav" id= "main">
       <li class="right"><a href="index.php">Logout</a></li>
     </ul>
@@ -40,10 +42,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn active">Report</a>
   </div>
 
-<!--bruh idk what to put here-->
 <!-- content -->
 <p class = "content"><b>Qualification for College Placement</b></p>
-
 
 <!-- table -->
 <table class="table table-bordered" id= "tablemeow">
@@ -59,30 +59,31 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <tbody>
     <?php
     include("connection.php");
-    $sql = "SELECT student.matricNo, student.studentname, student.sem, sum(events.meritE) as totalmerit from student join attendance on student.matricNo=attendance.matricno join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY student.matricNo, student.studentname, student.sem";
+    $sql = "select student.matricNo, student.studentname, student.sem, sum(events.meritE) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
     $result = mysqli_query($conn, $sql);
-      while ($row = mysqli_fetch_assoc($result))
-      {
-        echo "<form action = student.php method = post >";
-        echo "<tr>";
-        echo "<td>".$row["matricNo"]."</td>";
-        echo "<td>".$row["studentname"]."</td>";
-        echo "<td>".$row["sem"]."</td>";
-        echo "<td>".$row["totalmerit"]."</td>";
-        $totalmerit = $row["totalmerit"];
-        $status = "";
-        if ($totalmerit > 3)
-          echo "<td>"."Eligible"."</td>";
-        else
-          echo "<td>"."Disqualified"."</td>";
+    while ($row = mysqli_fetch_assoc($result))
+    {
+      echo "<tr>";
+      echo "<td>".$row["matricNo"]."</td>";
+      echo "<td>".$row["studentname"]."</td>";
+      echo "<td>".$row["sem"]."</td>";
 
-    // echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
-        //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
-      // echo "<td><button>Enter</button></td>";
-        echo "</tr>";
-        echo "</form>";
-      }
-      ?>
+      $totalmerit = $row["totalmerit"];
+      $status = "";
+      if ($totalmerit == null)
+        $totalmerit = 0;
+
+      echo "<td>".$totalmerit."</td>";
+
+      if ($totalmerit > 3)
+        echo "<td>"."Eligible"."</td>";
+      else
+        echo "<td>"."Disqualified"."</td>";
+
+      echo "</tr>";
+
+    }
+    ?>
   </tbody>
 </table>
 <!-- script -->
@@ -107,11 +108,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
-
 </script>
 
-//<!--DOCTYPE html-->
-
+<!--DOCTYPE html-->
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Add icon library -->
@@ -136,12 +135,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <form action = "testpdf.php" style = "text-align: center;">
     <button type="submit" class="btn btn-primary">Print PDF</button>
   </form>
-
-
-    </div>
- </div>
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
