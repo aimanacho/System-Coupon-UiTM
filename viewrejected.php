@@ -40,10 +40,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content-->
     <div class = "content">
-      <form action = "vieweventdem.php" >
-        <button type="submit" class="btn btn-primary"> Back</button> </br>
+      <form action = "vieweventdem.php">
+        <button type="submit" class="button"> Back</button>
       </form>
-      <p style = "font-size: 30px;"><b>Event Details</b></p><br>
+      <p style = "font-size: 30px;"><b>Event Details</b></p>
+    </div>
       <?php
         include ("connection.php");
         if ($_SESSION['norepeat']==0)
@@ -54,21 +55,51 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         }
         $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$_SESSION['eventcode']."'";
         $result = mysqli_query($conn, $sql);
-          if ($row = mysqli_fetch_assoc($result))
-          {
-            echo "<p> Event Name:".$row["eventname"]."</p>";
-            echo "<p> Event Venue:".$row["eventvenue"]."</p>";
-            echo "<p> Event Date:".date("jS M Y",strtotime($row["eventdate"]))."</p>";
-            echo "<p> Event Time Start:".date("H:i",strtotime($row["timestart"]))."</p>";
-            echo "<p> Event Times End:".date("H:i",strtotime($row["timeend"]))."</p>";
-          //  echo "<p> Merit:".$row["meritE"]."</p>";
-            //echo "<p> Coupon Quantity Given:".$row["couponq"]."</p>";
-            echo "<p> Organizer:".$row["clubName"]."</p>";
-            if ($row['eventstatus'] == 3)
-              echo "<p> Remarks:".$row["remarks"]."</p>";
-            $_SESSION['eventcode'] = $row["eventcode"];
-          }
-        ?>
+        if ($row = mysqli_fetch_assoc($result))
+        {
+          echo "<div style=width:100%;>
+            <table class='table table-bordered table-striped' id= tablemeow>
+              <tbody>
+                <tr>
+                  <td style=width:15%;>Event name </td>
+                  <td>".$row["eventname"]."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event venue </td>
+                  <td>".$row["eventvenue"]."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event date </td>
+                  <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event time start </td>
+                  <td>".date("H:i",strtotime($row["timestart"]))."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event time end</td>
+                  <td>".date("H:i",strtotime($row["timeend"]))."</td>
+                </tr>";
+                if ($row['eventstatus'] == 3)
+                {
+                  echo "<tr>
+                          <td style=width:15%;>Remarks</td>
+                          <td>".$row["remarks"]."</td>
+                        <tr>";
+                }
+                if ($row['eventstatus']==4)
+                {
+                  echo "<tr>
+                          <td style=width:15%;>Total of student attended</td>
+                          <td>".$row["couponused"]."</td>
+                        <tr>";
+                }
+              echo "</tbody>
+            </table>
+          </div>";
+          $_SESSION['eventcode'] = $row["eventcode"];
+        }
+      ?>
       <!-- script -->
       <script>
         /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

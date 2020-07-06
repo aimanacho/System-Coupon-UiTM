@@ -67,10 +67,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <thead>
         <tr>
           <th>Event Name</th>
+          <th>Event Venue</th>
           <th>Date</th>
           <th>Time Start</th>
           <th>Time End</th>
-          <th>Time Modify</th>
+          <!-- <th>Time Modify</th> -->
           <th>Status</th>
           <th>Details</th>
         </tr>
@@ -85,10 +86,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           echo "<form method = post action = viewhistoryevent.php>";
           echo "<tr>
             <td>".$row["eventname"]."</td>
+            <td>".$row["eventvenue"]."</td>
             <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
             <td>".date("H:i",strtotime($row["timestart"]))."</td>
-            <td>".date("H:i",strtotime($row["timeend"]))."</td>
-            <td>".date("H:i, j M Y",strtotime($row["timechange"]))."</td>";
+            <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+            /*<td>".date("H:i, j M Y",strtotime($row["timechange"]))."</td>"; */
             if ($row['eventstatus'] == 1)
               echo "<td>Pending</td>";
             if ($row['eventstatus'] == 2)

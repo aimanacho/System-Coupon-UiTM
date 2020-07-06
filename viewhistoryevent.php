@@ -61,11 +61,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content-->
     <div class = "content">
-      <form action = "historyevent.php" style = "text-align: center;">
-        <button type="submit" class="btn btn-primary"> Back</button>
+      <form action = "historyevent.php">
+        <button type="submit" class="button"> Back</button>
       </form>
-      <p style = "text-align: center;font-size: 30px;"><b>Status of Events</b></p><br>
-      <p style = "text-align: center;font-size: 23px;">Event details</p><br>
+      <p style = "font-size: 30px;"><b>Status of Events</b></p>
+    </div>
+
       <?php
         include ("connection.php");
         if ($_SESSION['norepeat']==0)
@@ -78,18 +79,54 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         $result = mysqli_query($conn, $sql);
           if ($row = mysqli_fetch_assoc($result))
           {
-            echo "<p> Event Name: ".$row["eventname"]."</p>";
-            echo "<p> Event Venue: ".$row["eventvenue"]."</p>";
-            echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
-            echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
-            echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
-            echo "<p> Merit: ".$row["merit"]."</p>";
-            echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
-            echo "<p> Organizer:".$row["clubName"]."</p>";
+            echo "<div style=width:100%;>
+              <table class='table table-striped table-bordered' id= tablemeow>
+                <tbody>
+                  <tr>
+                    <td style=width:15%;>Event name </td>
+                    <td>".$row["eventname"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event venue </td>
+                    <td>".$row["eventvenue"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event date </td>
+                    <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event time start </td>
+                    <td>".date("H:i",strtotime($row["timestart"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event time end</td>
+                    <td>".date("H:i",strtotime($row["timeend"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Merit</td>
+                    <td>".$row["merit"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Coupon quantity </td>
+                    <td>".$row["couponq"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Organizer</td>
+                    <td>".$row["clubName"]."</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>";
             if ($row['eventstatus'] == 3)
-              echo "<p> Remarks: ".$row["remarks"]."</p>";
+              echo "<tr>
+                      <td style=width:15%;>Remarks</td>
+                      <td>".$row["remarks"]."</td>
+                    </tr>";
             if ($row['eventstatus'] == 4)
-              echo "<p> Total of student attended: ".$row["couponused"]."</p>";
+            echo "<tr>
+                    <td style=width:15%;>Total of student attended</td>
+                    <td>".$row["couponused"]."</td>
+                  </tr>";
             $_SESSION['eventcode'] = $row["eventcode"];
           }
         ?>

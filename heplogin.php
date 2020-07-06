@@ -24,7 +24,7 @@
           <div>
             <div class="input-container">
               <i class="fa fa-user icon"></i>
-              <input class="input-field" type="text" id="studno" name="studno" placeholder="Student ID" >
+              <input class="input-field" type="text" id="studno" name="studno" placeholder="Staff ID" >
             </div>
             <div class="input-container">
               <i class="fa fa-key icon"></i>

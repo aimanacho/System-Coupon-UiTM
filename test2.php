@@ -21,68 +21,17 @@ include("updateeventstatus.php");
   <body>
     <!-- topbar-->
     <?php  include("bar.php"); ?>
+
   <!-- table -->
-  <div class="content">
-    <div class="dashboard">
-      <div class="col-sm-10">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Upcoming Events</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <?php
-                $sqldate = "SELECT CURRENT_DATE() as currentdate";
-                $result = mysqli_query($conn, $sqldate);
-                $t = mysqli_fetch_assoc($result);
-                $currentdate = $t['currentdate'];
-                $sql = "SELECT * FROM events WHERE eventstatus = '2' ORDER BY eventdate DESC LIMIT 5";
-                $result = mysqli_query($conn, $sql);
-                while ($x = mysqli_fetch_assoc($result))
-                {
-                  $date = $x['eventdate'];
-                  $eventname = $x['eventname'];
-                  echo "<td style = padding:2px;font-size:16px;>
-                 <p>".$x["eventname"]."</p>
-                  <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
-                  </td>
-                  </tr>";
-                }
-              ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="dashboard">
-      <div class="col-sm-10">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Recent Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <?php
-                $sql = "SELECT * FROM events WHERE eventstatus = '1' ORDER BY timechange DESC LIMIT 5";
-                $result = mysqli_query($conn, $sql);
-                while ($x = mysqli_fetch_assoc($result))
-                {
-                  $date = $x['eventdate'];
-                  $eventname = $x['eventname'];
-                  echo "<td style = padding:2px;font-size:16px;>
-                 <p>".$x["eventname"]."</p>
-                  <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
-                  </td>
-                  </tr>";
-                }
-              ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="col-sm-10">
+    <table class="table table-bordered " id= "tablemeow">
+      <tbody>
+        <tr>
+          <td style="width: 15%;">2018282566</td>
+          <td>Aiman</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 <!-- script -->

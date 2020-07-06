@@ -49,7 +49,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <table class="table table-striped" id= "tablemeow">
     <thead>
       <tr>
-        <th>Events</th>
+        <th>Event</th>
+        <th>Event Venue</th>
         <th>Date</th>
         <th>Organizer</th>
         <th>Edit</th>
@@ -66,6 +67,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<form method = post action = hepevents.php>
         <tr>
           <td>".$row["eventname"]."</td>
+          <td>".$row["eventvenue"]."</td>
           <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
           <td>".$row["clubName"]."</td>";
           echo "<input type = hidden name = eventcode value = ".$_SESSION['eventcode']." />

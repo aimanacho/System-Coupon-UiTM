@@ -117,6 +117,13 @@ ul.topnav li.right {float: right;}
   border: 1px solid #ccc;
   font-size: 17px;
 }
+
+/*button accept or reject on hepevents.php */
+#btnrejectapprove
+{
+  margin-left: 230px;
+}
+
 /* table  */
  #tablemeow
 {

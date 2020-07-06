@@ -109,7 +109,6 @@ include("updateeventstatus.php");
                 </tr>
               </thead>
               <tbody>
-                <tr>
                   <?php
                     $sqldate = "SELECT CURRENT_DATE() as currentdate";
                     $result = mysqli_query($conn, $sqldate);
@@ -121,11 +120,13 @@ include("updateeventstatus.php");
                     {
                       $date = $x['eventdate'];
                       $eventname = $x['eventname'];
-                      echo "<td style = padding:2px;font-size:16px;>
-                     <p>".$x["eventname"]."</p>
-                      <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
-                      </td>
-                      </tr>";
+                      echo "<tr>
+                              <td style = padding:2px;font-size:15px;>
+                                <p>".$x["eventname"]."</p>
+                                <p>".$x["eventvenue"]."</p>
+                                <p>".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
+                              </td>
+                            </tr>";
                     }
                   ?>
               </tbody>
@@ -141,7 +142,6 @@ include("updateeventstatus.php");
                 </tr>
               </thead>
               <tbody>
-                <tr>
                   <?php
                     $sql = "SELECT * FROM events WHERE eventstatus = '1' ORDER BY timechange DESC LIMIT 5";
                     $result = mysqli_query($conn, $sql);
@@ -149,11 +149,13 @@ include("updateeventstatus.php");
                     {
                       $date = $x['eventdate'];
                       $eventname = $x['eventname'];
-                      echo "<td style = padding:2px;font-size:16px;>
-                     <p>".$x["eventname"]."</p>
-                      <p>".date("jS M Y",strtotime($x["eventdate"]))."</p>
-                      </td>
-                      </tr>";
+                      echo "<tr>
+                              <td style = padding:2px;font-size:15px;>
+                                <p>".$x["eventname"]."</p>
+                                <p>".$x["eventvenue"]."</p>
+                                <p>".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
+                               </td>
+                            </tr>";
                     }
                   ?>
               </tbody>

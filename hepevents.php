@@ -46,7 +46,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <form action = "pendingevent.php">
       <button type="submit" class="button"> Back</button>
     </form>
-    <p style = "font-size: 30px;"><b>Event Details</b></p><br>
+    <p style = "font-size: 30px;"><b>Event Details</b></p>
+  </div>
+    <!-- content -->
     <?php
       include ("connection.php");
       if ($_SESSION['norepeat']==0)
@@ -59,15 +61,45 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-          echo "<p> Event Name: ".$row["eventname"]."</p>";
-          echo "<p> Event Venue: ".$row["eventvenue"]."</p>";
-          echo "<p> Event Date: ".date("jS M Y",strtotime($row["eventdate"]))."</p>";
-          echo "<p> Event Time Start: ".date("H:i",strtotime($row["timestart"]))."</p>";
-          echo "<p> Event Times End: ".date("H:i",strtotime($row["timeend"]))."</p>";
-          echo "<p> Merit: ".$row["merit"]."</p>";
-          echo "<p> Coupon Quantity: ".$row["couponq"]."</p>";
-          echo "<p> Organizer: ".$row["clubName"]."</p>";
-          $_SESSION['eventcode'] = $row["eventcode"];
+            echo "<div style=width:100%;>
+              <table class='table table-bordered table-striped' id= tablemeow>
+                <tbody>
+                  <tr>
+                    <td style=width:15%;>Event name </td>
+                    <td>".$row["eventname"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event venue </td>
+                    <td>".$row["eventvenue"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event date </td>
+                    <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event time start </td>
+                    <td>".date("H:i",strtotime($row["timestart"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Event time end</td>
+                    <td>".date("H:i",strtotime($row["timeend"]))."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Merit</td>
+                    <td>".$row["merit"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Coupon quantity </td>
+                    <td>".$row["couponq"]."</td>
+                  </tr>
+                  <tr>
+                    <td style=width:15%;>Organizer</td>
+                    <td>".$row["clubName"]."</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>";
+            $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
 
@@ -102,11 +134,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
        ?>
 
-      <form method = "post">
+      <form method = "post" id = "btnrejectapprove">
         <button type= "submit" name ="approve" id = "approve" class = "btn btn-default" style = "background-color: #4CAF50;">Accept</button>
         <button type= "submit" name = "reject" id = "reject" class = "btn btn-default" style = "background-color: #f44336;" >Reject</button>
       </form>
- </div>
 
   <!-- script -->
 <script>

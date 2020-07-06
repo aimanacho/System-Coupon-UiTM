@@ -50,7 +50,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <table class="table table-striped" id= "tablemeow">
       <thead>
         <tr>
-          <th><a>Event Name</a></th>
+          <th><a>Event</a></th>
+          <th>Event Venue</th>
           <th>Date</th>
           <th>Time Start</th>
           <th>Time End</th>
@@ -66,6 +67,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           {
             echo "<tr>
               <td>".$row["eventname"]."</td>
+              <td>".$row["eventvenue"]."</td>
               <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
               <td>".date("H:i",strtotime($row["timestart"]))."</td>
               <td>".date("H:i",strtotime($row["timeend"]))."</td>";
