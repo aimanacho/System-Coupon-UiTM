@@ -98,6 +98,46 @@ include("updateeventstatus.php");
       <?php } ?>
 
       <!-- table -->
+      <!-- DEM -->
+      <?php if ($_SESSION['userlevelid']== 1){ ?>
+        <div class="content">
+          <div class="dashboard">
+            <div class="col-sm-10">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Upcoming Events</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php
+                      $sqldate = "SELECT CURRENT_DATE() as currentdate";
+                      $result = mysqli_query($conn, $sqldate);
+                      $t = mysqli_fetch_assoc($result);
+                      $currentdate = $t['currentdate'];
+                      $sql = "SELECT * FROM events WHERE eventstatus = '2' ORDER BY eventdate DESC LIMIT 5";
+                      $result = mysqli_query($conn, $sql);
+                      while ($x = mysqli_fetch_assoc($result))
+                      {
+                        $date = $x['eventdate'];
+                        $eventname = $x['eventname'];
+                        echo "<tr>
+                                <td style = padding:2px;font-size:15px;>
+                                  <p><i>".$x["eventname"]."</i></p>
+                                  <p> by ".$x["clubCode"]."</p>
+                                  <p>".$x["eventvenue"].", ".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
+                                </td>
+                              </tr>";
+                      }
+                    ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <?php } ?>
+
+        <!-- HEP -->
       <?php if ($_SESSION['userlevelid']== 2){ ?>
       <div class="content">
         <div class="dashboard">
@@ -124,8 +164,7 @@ include("updateeventstatus.php");
                               <td style = padding:2px;font-size:15px;>
                                 <p><i>".$x["eventname"]."</i></p>
                                 <p> by ".$x["clubCode"]."</p>
-                                <p>".$x["eventvenue"]."</p>
-                                <p>".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
+                                <p>".$x["eventvenue"].", ".date("jS M Y",strtotime($x["eventdate"])).", ".date("H:i",strtotime($x["timestart"]))." - ".date("H:i",strtotime($x["timeend"]))."</p>
                               </td>
                             </tr>";
                     }

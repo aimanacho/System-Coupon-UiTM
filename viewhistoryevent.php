@@ -101,32 +101,42 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
                   <tr>
                     <td style=width:15%;>Event time end</td>
                     <td>".date("H:i",strtotime($row["timeend"]))."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Merit</td>
-                    <td>".$row["merit"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Coupon quantity </td>
-                    <td>".$row["couponq"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Organizer</td>
-                    <td>".$row["clubName"]."</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>";
-            if ($row['eventstatus'] == 3)
-              echo "<tr>
-                      <td style=width:15%;>Remarks</td>
-                      <td>".$row["remarks"]."</td>
-                    </tr>";
-            if ($row['eventstatus'] == 4)
-            echo "<tr>
-                    <td style=width:15%;>Total of student attended</td>
-                    <td>".$row["couponused"]."</td>
                   </tr>";
+                  if ($row['eventstatus'] == 2)
+                  echo "<tr>
+                          <td style=width:15%;>Merit</td>
+                          <td>".$row["merit"]."</td>
+                        </tr>
+                        <tr>
+                          <td style=width:15%;>Coupon quantity </td>
+                          <td>".$row["couponq"]."</td>
+                        </tr>";
+                  if ($row['eventstatus'] == 3)
+                    echo "<tr>
+                            <td style=width:15%;>Remarks</td>
+                            <td>".$row["remarks"]."</td>
+                          </tr>";
+                  if ($row['eventstatus'] == 4)
+                  echo "<tr>
+                          <td style=width:15%;>Merit</td>
+                          <td>".$row["merit"]."</td>
+                        </tr>
+                        <tr>
+                          <td style=width:15%;>Coupon quantity </td>
+                          <td>".$row["couponq"]."</td>
+                        </tr>
+                        <tr>
+                          <td style=width:15%;>Total of student attended</td>
+                          <td>".$row["couponused"]."</td>
+                        </tr>";
+                  echo "<tr>
+                          <td style=width:15%;>Organizer</td>
+                            <td>".$row["clubName"]."</td>
+                        </tr>";
+
+                  echo "</tbody>
+                      </table>
+                    </div>";
             $_SESSION['eventcode'] = $row["eventcode"];
           }
         ?>

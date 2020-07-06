@@ -61,45 +61,47 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {
-            echo "<div style=width:100%;>
-              <table class='table table-bordered table-striped' id= tablemeow>
-                <tbody>
-                  <tr>
-                    <td style=width:15%;>Event name </td>
-                    <td>".$row["eventname"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Event venue </td>
-                    <td>".$row["eventvenue"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Event date </td>
-                    <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Event time start </td>
-                    <td>".date("H:i",strtotime($row["timestart"]))."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Event time end</td>
-                    <td>".date("H:i",strtotime($row["timeend"]))."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Merit</td>
-                    <td>".$row["merit"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Coupon quantity </td>
-                    <td>".$row["couponq"]."</td>
-                  </tr>
-                  <tr>
-                    <td style=width:15%;>Organizer</td>
-                    <td>".$row["clubName"]."</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>";
-            $_SESSION['eventcode'] = $row["eventcode"];
+          echo "<div style=width:100%;>
+            <table class='table table-bordered table-striped' id= tablemeow>
+              <tbody>
+                <tr>
+                  <td style=width:15%;>Event name </td>
+                  <td>".$row["eventname"]."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event venue </td>
+                  <td>".$row["eventvenue"]."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event date </td>
+                  <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event time start </td>
+                  <td>".date("H:i",strtotime($row["timestart"]))."</td>
+                </tr>
+                <tr>
+                  <td style=width:15%;>Event time end</td>
+                  <td>".date("H:i",strtotime($row["timeend"]))."</td>
+                </tr>";
+                if ($row['eventstatus'] == 3)
+                {
+                  echo "<tr>
+                          <td style=width:15%;>Remarks</td>
+                          <td>".$row["remarks"]."</td>
+                        <tr>";
+                }
+                if ($row['eventstatus']==4)
+                {
+                  echo "<tr>
+                          <td style=width:15%;>Total of student attended</td>
+                          <td>".$row["couponused"]."</td>
+                        <tr>";
+                }
+              echo "</tbody>
+            </table>
+          </div>";
+          $_SESSION['eventcode'] = $row["eventcode"];
         }
       ?>
       <form method = "post" id = "btnrejectapprove" name = "btnrejectapprove" action="accEvent.php">

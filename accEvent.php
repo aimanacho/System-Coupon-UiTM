@@ -25,20 +25,21 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-  <div class="sidenav">
-    <img src = "uitm.jpg"/>
-    <a href="dashboard.php" class = "btn"> Dashboard</a>
-    <a href="clubs.php" class = "btn">Clubs</a>
-    <a href="studentinfo.php" class = "btn">Student Info</a>
-    <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
-      <i class = "fa fa-caret-down"></i>
-    </a>
-    <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
-      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+    <div class="sidenav">
+      <img src = "uitm.jpg"/>
+      <a href="dashboard.php" class = "btn"> Dashboard</a>
+      <a href="clubs.php" class = "btn">Clubs</a>
+      <a href="studentinfo.php" class = "btn">Student Info</a>
+      <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
+        <i class = "fa fa-caret-down"></i>
+      </a>
+      <div class = "dropdown-container" >
+        <a class = "btn" href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
+        <a class = "btn" href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+        <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
+      </div>
+      <a href="report.php" class = "btn">Report</a>
     </div>
-    <a href="report.php" class = "btn">Report</a>
-  </div>
 
   <!-- content -->
   <div class = "content">
@@ -47,7 +48,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </form>
     <p style = "font-size: 30px;"><b>Approval event</b></p>
   </div>
-  
+
     <form action = "accEventp.php" method = "post" id = "login" name = "login" target = "_self">
       <table class="table table-bordered" id= "tablemeow">
         <tbody>
