@@ -43,6 +43,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </div>
 
 <!-- content -->
+<form action="kelayakankolejUITMR.php" style = "text-align: center;">
+  <button type="submit" class="button"> Print PDF</button>
+</form>
 <p class = "content"><b>Qualification for College Placement</b></p>
 
 <!-- table -->
@@ -110,31 +113,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   }
 </script>
 
-<!--DOCTYPE html-->
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.btn {
-  background-color: Grey;
-  border: none;
-  color: white;
-  padding: 12px 30px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: Darkgrey;
-}
-</style>
-</head>
-<body>
-  <form action = "kelayakankolejUITMR.php" style = "text-align: center;">
-    <button type="submit" class="btn btn-primary">Print PDF</button>
-  </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
