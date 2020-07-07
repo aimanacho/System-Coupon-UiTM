@@ -20,6 +20,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </head>
   <body>
     <!-- topbar-->
+
     <ul class="topnav" id= "main">
       <li class="right"><a href="index.php">Logout</a></li>
     </ul>
@@ -41,8 +42,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <a href="report.php" class = "btn active">Report</a>
   </div>
 
-<!--bruh idk what to put here-->
 <!-- content -->
+<form action="kelayakankolejUITMR.php" style = "text-align: center;">
+  <button type="submit" class="button"> Print PDF</button>
+</form>
 <p class = "content"><b>Qualification for College Placement</b></p>
 
 <!-- table -->
@@ -59,18 +62,29 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <tbody>
     <?php
     include("connection.php");
-    $sql = "SELECT student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student join attendance on student.matricNo=attendance.matricno join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY student.matricNo, student.studentname, student.sem";
+    $sql = "select student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result))
     {
-      echo "<form action = student.php method = post >";
       echo "<tr>";
       echo "<td>".$row["matricNo"]."</td>";
       echo "<td>".$row["studentname"]."</td>";
       echo "<td>".$row["sem"]."</td>";
-      echo "<td>".$row["totalmerit"]."</td>";
+
+      $totalmerit = $row["totalmerit"];
+      $status = "";
+      if ($totalmerit == null)
+        $totalmerit = 0;
+
+      echo "<td>".$totalmerit."</td>";
+
+      if ($totalmerit > 3)
+        echo "<td>"."Eligible"."</td>";
+      else
+        echo "<td>"."Disqualified"."</td>";
+
       echo "</tr>";
-      echo "</form>";
+
     }
     ?>
   </tbody>
@@ -98,6 +112,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       });
   }
 </script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
