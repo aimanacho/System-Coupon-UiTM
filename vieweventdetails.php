@@ -61,7 +61,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 
     <!-- content-->
     <div class = "content">
-      <form action = "historyevent.php">
+      <form action = "viewevent.php">
         <button type="submit" class="button"> Back</button>
       </form>
       <p style = "font-size: 30px;"><b>Event details</b></p>

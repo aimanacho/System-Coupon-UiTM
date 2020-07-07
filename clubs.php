@@ -60,9 +60,12 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       {
         while ($row = mysqli_fetch_assoc($result))
         {
+          echo "<form action = clubsinfo.php method = post >";
           echo "<tr>
-            <td>".$row["clubName"]."</td>
+            <input type = 'hidden' name = 'matricNo' value = '".$row['clubCode']."'/>
+            <td><button style = background-color:transparent;outline:none;border:none;>".$row["clubName"]."</button></td>
           </tr>";
+          echo "</form>";
         }
       }
         ?>

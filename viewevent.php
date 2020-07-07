@@ -55,6 +55,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
           <th>Date</th>
           <th>Time Start</th>
           <th>Time End</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
@@ -65,13 +66,17 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           {
+            echo "<form method = post action = vieweventdetails.php>";
             echo "<tr>
               <td>".$row["eventname"]."</td>
               <td>".$row["eventvenue"]."</td>
               <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
               <td>".date("H:i",strtotime($row["timestart"]))."</td>
               <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+              echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />
+              <td><button>Hit me</button></td>";
             echo "</tr>";
+            echo "</form>";
           }
           ?>
       </tbody>

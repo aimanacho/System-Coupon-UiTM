@@ -28,6 +28,8 @@
             right: 'month,agendaWeek,agendaDay'
           },
           events:'calendarload.php',
+          selectable:true,
+          selectHelper:true,
         });
     });
   </script>

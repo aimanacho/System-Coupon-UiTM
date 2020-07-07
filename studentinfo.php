@@ -43,10 +43,6 @@ header("Location: index.php");
 
 <!-- content -->
 <p class = "content"><b>Student Info</b></p>
-<form method = "post" action="test.php"style="float:right;">
-  <input type ="text" id = "matricno" name = "matricno" />
-  <button type="submit" name = "searchmatric" onclick = "searchmatric()"><i class="fa fa-search"></i></button>
-</form>
 
 
 <!-- table -->
