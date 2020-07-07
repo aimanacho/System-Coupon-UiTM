@@ -83,7 +83,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
    <tbody>
      <?php
      include("connection.php");
-     $sql = "SELECT * FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."'";
+     $clubCode = $_POST['clubCode'];
+     $sql = "SELECT * FROM events e JOIN clubs a ON e.clubCode = a.clubCode WHERE a.matricNo = '".$matricNo."'";
      $result = mysqli_query($conn, $sql);
        while ($row = mysqli_fetch_assoc($result))
        {
