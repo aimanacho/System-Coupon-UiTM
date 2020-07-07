@@ -140,6 +140,9 @@ include("updateeventstatus.php");
         <!-- HEP -->
       <?php if ($_SESSION['userlevelid']== 2){ ?>
       <div class="content">
+        <form action = "calendar.php">
+          <button type="submit" class="button">View calendar</button>
+        </form>
         <div class="dashboard">
           <div class="col-sm-10">
             <table class="table table-hover">
