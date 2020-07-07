@@ -47,9 +47,9 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     <p style = "text-align: center;font-size: 30px;"><b>Student information</b></p><br>
     <?php
       include ("connection.php");
-      $matricNo = $_POST['matricNo'];
+      $matricNo = $_POST["matricNo"];
     //  $sql = "SELECT sum(e.meritE) AS merit FROM student s JOIN attendance a ON s.studentno = a.matricno JOIN events e ON a.eventcode = e.eventcode GROUP BY e.eventcode WHERE matricNo = '".$matricNo."'";
-      $sql = "SELECT *,SUM(e.meritE) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student    s ON a.matricNo=s.matricNo WHERE a.matricNo = '".$matricNo."' GROUP BY a.matricNo";
+      $sql = "SELECT *,SUM(e.meritE) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student    s ON a.matricno=s.matricNo WHERE a.matricno = '".$matricNo."' GROUP BY a.matricNo";
       $result = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($result))
         {

@@ -33,13 +33,55 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       <i class = "fa fa-caret-down"></i>
     </a>
     <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
       <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
     </div>
     <a href="report.php" class = "btn active">Report</a>
   </div>
 
+<!--bruh idk what to put here-->
+<!-- content -->
+<p class = "content"><b>Qualification for College Placement</b></p>
 
+
+<!-- table -->
+<table action="toPDF.php" method="post" class="table table-bordered" id= "tablemeow">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Semester</th>
+      <th>Total Coupons</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    include("connection.php");
+    $sql = "SELECT *, sum(e.meritE) as totalmerit from student s join attendance a on s.matricNo=a.matricno join events e on e.eventcode = a.eventcode Group by s.matricNo ORDER BY s.matricNo, s.studentname, s.sem";
+    $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_assoc($result))
+      {
+        echo "<form action = toPDF.php method = post >";
+        echo "<tr>";
+        echo "<td>".$row["matricNo"]."</td>";
+        echo "<td>".$row["studentname"]."</td>";
+        echo "<td>".$row["sem"]."</td>";
+        echo "<td>".$row['totalmerit']."</td>";
+        echo "<td>test</td>";
+    // echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."' />";
+        //echo "<td>".$row[""]."</td>"; <-- tambah sql statement for sum (join table)
+        echo "</tr>";
+
+      }
+      echo "<td><button type='submit' class='btn btn-success btn-block'>Download PDF</button></td>";
+      echo "</form>";
+      ?>
+
+  </tbody>
+</table>
 <!-- script -->
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
@@ -62,6 +104,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       }
       });
   }
+  $("button").click(function() {
+    var fired_button = $(this).val();
+    alert(fired_button);
+});
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
