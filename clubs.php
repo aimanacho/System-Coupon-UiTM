@@ -56,19 +56,17 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       include("connection.php");
       $sql = "SELECT * from clubs ORDER BY clubName";
       $result = mysqli_query($conn, $sql);
-      if (mysqli_num_rows($result) > 0)
+      while ($row = mysqli_fetch_assoc($result))
       {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<form action = clubsinfo.php method = post >";
-          echo "<tr>
-            <input type = 'hidden' name = 'matricNo' value = '".$row['clubCode']."'/>
-            <td><button style = background-color:transparent;outline:none;border:none;>".$row["clubName"]."</button></td>
-          </tr>";
-          echo "</form>";
-        }
+        echo "<form action = clubsinfo.php method = post >";
+        echo "<tr>
+          <input type = 'hidden' name = 'clubCode' value = '".$row['clubCode']."'/>
+          <td><button style = background-color:transparent;outline:none;border:none;>".$row["clubName"]."</button></td>
+        </tr>";
+        echo "</form>";
       }
-        ?>
+      $_SESSION['norepeats'] = 0;
+      ?>
     </tbody>
   </table>
 

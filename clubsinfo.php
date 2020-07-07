@@ -28,74 +28,82 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <div class="sidenav">
     <img src = "uitm.jpg"/>
     <a href="dashboard.php" class = "btn"> Dashboard</a>
-    <a href="clubs.php" class = "btn">Clubs</a>
-    <a href="studentinfo.php" class = "btn active">Student Info</a>
+    <a href="clubs.php" class = "btn active">Clubs</a>
+    <a href="studentinfo.php" class = "btn">Student Info</a>
     <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
       <i class = "fa fa-caret-down"></i>
     </a>
     <div class = "dropdown-container" >
-      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">View events</a>
+      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
       <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
     </div>
     <a href="report.php" class = "btn">Report</a>
   </div>
 
   <!-- content -->
   <div class = "content">
-    <form action = "studentinfo.php" style = "text-align: center;">
-      <button type="submit" class="btn btn-primary"> Back</button>
+    <form action = "clubs.php">
+      <button type="submit" class="button"> Back</button>
     </form>
-    <p style = "text-align: center;font-size: 30px;"><b>Student information</b></p><br>
+    <p style = "font-size: 30px;"><b>Club Information</b></p><br>
+
     <?php
       include ("connection.php");
-      $matricNo = $_POST['matricNo'];
-    //  $sql = "SELECT sum(e.meritE) AS merit FROM student s JOIN attendance a ON s.studentno = a.matricno JOIN events e ON a.eventcode = e.eventcode GROUP BY e.eventcode WHERE matricNo = '".$matricNo."'";
-      $sql = "SELECT *,SUM(e.merit) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricno=s.matricNo WHERE a.matricNo = '".$matricNo."' GROUP BY a.matricNo";
+      if ( $_SESSION['norepeats'] == 0)
+      {
+          $clubCode = $_POST['clubCode'];
+          $_SESSION['clubCode'] = $clubCode;
+          $_SESSION['norepeats'] = 1;
+      }
+      $sql = "SELECT * FROM events e JOIN clubs a ON e.clubCode = a.clubCode WHERE e.clubCode = '".$_SESSION['clubCode']."'";
       $result = mysqli_query($conn, $sql);
-        if ($row = mysqli_fetch_assoc($result))
-        {
-          echo "<p> ".$row["matricNo"]."</p>";
-          echo "<p> ".$row["studentname"]."</p>";
-          echo "<p> Semester:".$row["sem"]."</p>";
-          echo "<p> Total Merit:".$row['merit']."</p>";
-        }
-        else //kalau student tu takde merit lagi
-        {
-          $sql = "SELECT * FROM student WHERE matricNo = '".$matricNo."'";
-          $result = mysqli_query($conn, $sql);
-          $row = mysqli_fetch_assoc($result);
-          echo "<p> ".$row["matricNo"]."</p>";
-          echo "<p> ".$row["studentname"]."</p>";
-          echo "<p> ".$row["sem"]."</p>";
-          echo "<p> Total Merit:0</p>";
-        }
+      if ($row = mysqli_fetch_assoc($result))
+      {
+        echo "<p> ".$row["clubName"]."</p>";
+        echo "<p> ".$row["clubCode"]."</p>";
+      }
+      else
+      {
+        $sql = "SELECT * FROM clubs WHERE clubCode = '".$clubCode."'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        echo "<p> ".$row["clubName"]."</p>";
+        echo "<p> ".$row["clubCode"]."</p>";
+      }
       ?>
  </div>
  <table class="table table-striped" id= "tablemeow">
    <thead>
      <tr>
        <th>Event Name</th>
+       <th>Event Venue</th>
        <th>Date</th>
-       <th>Time Attend</th>
-       <th>Merit</th>
+       <th>Time Start</th>
+       <th>Time End</th>
+       <th>Details</th>
      </tr>
    </thead>
    <tbody>
      <?php
      include("connection.php");
-     $clubCode = $_POST['clubCode'];
-     $sql = "SELECT * FROM events e JOIN clubs a ON e.clubCode = a.clubCode WHERE a.matricNo = '".$matricNo."'";
+     $sql = "SELECT * from events WHERE clubCode = '".$_SESSION['clubCode']."' ORDER BY eventdate";
      $result = mysqli_query($conn, $sql);
        while ($row = mysqli_fetch_assoc($result))
        {
-
+         echo "<form method = post action = viewclubevent.php>";
          echo "<tr>
            <td>".$row["eventname"]."</td>
-           <td>".date("jS M Y",strtotime($row["date"]))."</td>
-           <td>".date("H:i",strtotime($row["date"]))."</td>
-           <td>".$row["merit"]."</td>";
+           <td>".$row["eventvenue"]."</td>
+           <td>".date("jS M Y",strtotime($row["eventdate"]))."</td>
+           <td>".date("H:i",strtotime($row["timestart"]))."</td>
+           <td>".date("H:i",strtotime($row["timeend"]))."</td>";
+           echo "<input type = hidden name = eventcode value = ".$row['eventcode']." />
+           <td><button>Hit me</button></td>";
          echo "</tr>";
+         echo "</form>";
        }
+       $_SESSION['norepeat'] = 0;
        ?>
    </tbody>
  </table>

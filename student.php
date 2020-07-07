@@ -53,51 +53,51 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $matricNo = $_POST['matricNo'];
       $sql = "SELECT *,SUM(e.merit) AS merit FROM events e JOIN attendance a ON e.eventcode = a.eventcode JOIN student s ON a.matricno=s.matricNo WHERE a.matricNo = '".$matricNo."' GROUP BY a.matricNo";
       $result = mysqli_query($conn, $sql);
-        if ($row = mysqli_fetch_assoc($result))
-        {
-          echo "
-          <div id = studentinfo>
-            <div class=col-sm-2>
-              <div class=gallery>
-                <a >
-                  <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
-                </a>
-              </div>
+      if ($row = mysqli_fetch_assoc($result))
+      {
+        echo "
+        <div id = studentinfo>
+          <div class=col-sm-2>
+            <div class=gallery>
+              <a >
+                <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
+              </a>
             </div>
-            <div class=col-sm-5>
-              <div style=margin-left: 10px;padding-top: 20px;>
-                <p> ".$row["studentname"]."</p>
-                <p> ".$row["matricNo"]."</p>
-                <p> Semester ".$row["sem"]."</p>
-                <p> Total merit: ".$row["merit"]."</p>
-              </div>
+          </div>
+          <div class=col-sm-5>
+            <div style=margin-left: 10px;padding-top: 20px;>
+              <p> ".$row["studentname"]."</p>
+              <p> ".$row["matricNo"]."</p>
+              <p> Semester ".$row["sem"]."</p>
+              <p> Total merit: ".$row["merit"]."</p>
             </div>
-          </div>";
-        }
-        else //kalau student tu takde merit lagi
-        {
-          $sql = "SELECT * FROM student WHERE matricNo = '".$matricNo."'";
-          $result = mysqli_query($conn, $sql);
-          $row = mysqli_fetch_assoc($result);
-          echo "
-          <div id = studentinfo>
-            <div class=col-sm-2>
-              <div class=gallery>
-                <a >
-                  <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
-                </a>
-              </div>
+          </div>
+        </div>";
+      }
+      else //kalau student tu takde merit lagi
+      {
+        $sql = "SELECT * FROM student WHERE matricNo = '".$matricNo."'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        echo "
+        <div id = studentinfo>
+          <div class=col-sm-2>
+            <div class=gallery>
+              <a >
+                <img src=unknownpic.jpg alt=Unknown picture width=600 height=400>
+              </a>
             </div>
-            <div class=col-sm-5>
-              <div style=margin-left: 10px;padding-top: 20px;>
-                <p> ".$row["studentname"]."</p>
-                <p> ".$row["matricNo"]."</p>
-                <p> Semester ".$row["sem"]."</p>
-                <p> Total merit: 0</p>
-              </div>
+          </div>
+          <div class=col-sm-5>
+            <div style=margin-left: 10px;padding-top: 20px;>
+              <p> ".$row["studentname"]."</p>
+              <p> ".$row["matricNo"]."</p>
+              <p> Semester ".$row["sem"]."</p>
+              <p> Total merit: 0</p>
             </div>
-          </div>";
-        }
+          </div>
+        </div>";
+      }
       ?>
  </div>
    <table class="table table-striped" id= "tablemeow">
