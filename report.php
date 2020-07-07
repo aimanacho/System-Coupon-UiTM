@@ -47,6 +47,26 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   <button type="submit" class="button"> Print PDF</button>
 </form>
 <p class = "content"><b>Qualification for College Placement</b></p>
+<?php
+include("connection.php");
+$totalEligible = 0;
+$totalDisqualified = 0;
+$averageMerit = 3;
+$sql = "select student.matricNo, student.studentname, student.sem, sum(events.meritE) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($result))
+{
+
+  $totalmerit = $row["totalmerit"];
+  if ($totalmerit == null || $totalmerit <= $averageMerit)
+    $totalDisqualified++;
+  else if ($totalmerit > $averageMerit)
+    $totalEligible++;
+
+}
+
+echo "<h7><center>", "Eligible: ", $totalEligible, "\t", "Disqualified: ", $totalDisqualified, "<center></h7>";
+?>
 
 <!-- table -->
 <table class="table table-bordered" id= "tablemeow">
