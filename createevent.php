@@ -43,7 +43,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 <!-- content -->
    <p class = "content"><b>Event Registration Form</b></p>
    <form action = "createeventp.php" method = "post"  target = "_self">
-     <table class="table table-bordered" id= "tablemeow">
+     <table class="table table-bordered table-striped" id= "tablemeow">
        <tbody>
          <tr>
            <td style = "width:15%;">Event name </td>
