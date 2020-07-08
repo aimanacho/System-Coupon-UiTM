@@ -16,11 +16,16 @@ $result = $statement->fetchAll();
 
 foreach($result as $row)
 {
+  $eventdate= $row["eventdate"];
+  $timestart= $row["timestart"];
+  $timeend= $row["timeend"];
+  $combinedstart = date('Y-m-d H:i', strtotime("$eventdate $timestart"));
+  $combinedend = date('Y-m-d H:i', strtotime("$eventdate $timeend"));
  $data[] = array(
   'id'   => $row["eventcode"],
   'title'   => $row["eventname"],
-  'start'   => $row["timestart"],
-  'end'   => $row["timeend"]
+  'start'   => $combinedstart,
+  'end'   => $combinedend
  );
 }
 
