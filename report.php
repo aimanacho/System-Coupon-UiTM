@@ -45,7 +45,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
 <!-- content -->
 
 <div class = "content">
-  <form action = "kelayakankolejUITMR.php">
+  <form action = "kelayakankolejUITMR.php" target="_blank">
     <button type="submit" class="button"> Print PDF</button>
   </form>
   <p style = "font-size: 30px;"><b>Qualification for Collage Placement</b></p>

@@ -60,16 +60,44 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $result = mysqli_query($conn, $sql);
       if ($row = mysqli_fetch_assoc($result))
       {
-        echo "<p> ".$row["clubName"]."</p>";
-        echo "<p> ".$row["clubCode"]."</p>";
+        echo "
+        <div id = studentinfo>
+          <div class=col-sm-2>
+            <div class=gallery>
+              <a >
+                <img src=clubslogo.jpg alt=Club Logo width=600 height=400>
+              </a>
+            </div>
+          </div>
+          <div class=col-sm-5>
+            <div style=margin-left: 10px;margin-top:40px;>
+              <p> ".$row["clubName"]."</p>
+              <p> ".$row["clubCode"]."</p>
+            </div>
+          </div>
+        </div>";
       }
       else
       {
-        $sql = "SELECT * FROM clubs WHERE clubCode = '".$clubCode."'";
+        $sql = "SELECT * FROM clubs WHERE clubCode = '".$_SESSION['clubCode']."'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-        echo "<p> ".$row["clubName"]."</p>";
-        echo "<p> ".$row["clubCode"]."</p>";
+        echo "
+        <div id = studentinfo>
+          <div class=col-sm-2>
+            <div class=gallery>
+              <a >
+                <img src=clubslogo.jpg alt=Club Logo width=600 height=400>
+              </a>
+            </div>
+          </div>
+          <div class=col-sm-5>
+            <div style=margin-left: 10px;margin-top:40px;>
+              <p> ".$row["clubName"]."</p>
+              <p> ".$row["clubCode"]."</p>
+            </div>
+          </div>
+        </div>";
       }
       ?>
  </div>

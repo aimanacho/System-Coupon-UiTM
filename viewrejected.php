@@ -55,6 +55,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         }
         $sql = "SELECT * from events e JOIN clubs c ON c.clubCode = e.clubCode WHERE eventcode = '".$_SESSION['eventcode']."'";
         $result = mysqli_query($conn, $sql);
+        $sql2 = "SELECT *, COUNT(eventcode) AS totalattend FROM attendance WHERE eventcode = '".$_SESSION['eventcode']."'";
+        $result2 = mysqli_query($conn, $sql2);
+        $row2 = mysqli_fetch_assoc($result2);
+        $totalattend = $row2['totalattend'];
         if ($row = mysqli_fetch_assoc($result))
         {
           echo "<div style=width:100%;>
@@ -105,7 +109,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
                       </tr>
                       <tr>
                         <td style=width:15%;>Total of student attended</td>
-                        <td>".$row["couponused"]."</td>
+                        <td>".$totalattend."</td>
                       </tr>";
                 echo "</tbody>
                     </table>

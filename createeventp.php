@@ -12,7 +12,7 @@
     $couponq = 0;
     $eventstatus = 1;
     $clubCode = $_SESSION['clubCode'];
-
+    $clubName = $_SESSION['clubName'];
 
 
     $sql = "INSERT INTO events (eventname, eventvenue, eventdate, timestart, timeend, merit, couponq, eventstatus, clubCode) VALUES
@@ -34,12 +34,12 @@
     $mail ->Host = 'smtp.gmail.com';
     $mail ->Port = '465';
     $mail ->isHTML();
-    $mail ->Username = 'aimanachotest@gmail.com';
-    $mail ->Password = 'test1201';
-    $mail ->SetFrom('aimanachotest@gmail.com');
-    $mail ->Subject = 'A new submission from student';
-    $mail ->Body = ''.$clubCode.' has created program! Please check our website [Login HEP -> Events -> Pending Events]';
-    $mail ->AddAddress('aimanachotest@gmail.com');
+    $mail ->Username = 'eventalert.systemcouponuitmr@gmail.com';
+    $mail ->Password = 'scuitmr2020';
+    $mail ->SetFrom('eventalert.systemcouponuitmr@gmail.com');
+    $mail ->Subject = 'A new submission from '.$clubCode.'';
+    $mail ->Body = ''.$clubName.' has created a program! Please check our website [Login HEP -> Events -> Pending Events]';
+    $mail ->AddAddress('hepuitmr@gmail.com');
     $mail->Send();
 
     echo "<script language = 'javascript'>alert('Registration is success.');window.location='dashboard.php';</script>";
