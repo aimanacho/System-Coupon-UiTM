@@ -10,71 +10,23 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-      <form method = "post">
-        <input type ="text" id = "matricno" name = "matricno" />
-        <button type="submit" name = "searchmatric" onclick = "searchmatric()"><i class="fa fa-search"></i></button>
-      </form>
-
-
       <?php
-      include("connection.php");
-      if (array_key_exists('searchmatric',$_POST))
-       {
-         searchmatric();
-       }
-       //check if matric number exist or not
-       function checkStudent($conn, $matricno)
-       {
-         $found = false;
-         $foundM = "SELECT matricNo from student WHERE matricNo = '".$matricno."'";
-         $resultF = mysqli_query($conn, $foundM);
-         $row = mysqli_num_rows($resultF);
-         if ( $row > 0)
-         {
-           $found = true;
-         }
-         return $found;
-       }
+        $datetime = $_POST['datetime'];
+        $eventdate = $_POST['eventdate'];
+        $timestart =  date("H:i:s", strtotime("$_POST[timestart]"));
+        $date = new DateTime($eventdate);
+        $time = new DateTime($timestart);
 
-       function searchmatric()
-       {
-         include("connection.php");
-         $matricno = $_POST['matricno'];
-         //sql statement
-         if (checkStudent($conn, $matricno)== true)
-         {
-           //coupon quantity
-           $couponQ = "SELECT * FROM student WHERE matricNo = '".$matricno."'";
-           $resultC = mysqli_query($conn, $couponQ);
-           while ($row = mysqli_fetch_assoc($resultC))
-           {
-             echo "<table class=table table-striped>
-               <thead>
-                 <tr>
-                   <th>ID</th>
-                   <th>Name</th>
-                   <th>Semester</th>
-                 </tr>
-               </thead>
-               <tbody>";
-                 echo "<form action = student.php method = post >";
-                 echo "<tr>";
-                 echo "<input type = 'hidden' name = 'matricNo' value = '".$row['matricNo']."'/>";
-                 echo "<td><button style = background-color:transparent;outline:none;border:none;>".$row["matricNo"]."</button></td>";
-                 echo "<td>".$row["studentname"]."</td>";
-                 echo "<td>".$row["sem"]."</td>";
-                 echo "</tr>";
-                 echo "</form>";
-          }
-             echo "</tbody>
-            </table>";
-           }
-         else
-         {
-            echo "<script language ='javascript'> alert('meow!');window.location='test.php';</script>";
-         }
-       }
-     ?>
+        $merge = new DateTime($date->format('Y-m-d') .' ' .$time->format('H:i'));
+        echo $merge->format('Y-m-d H:i:s');
+        echo "<br>";
+        echo $eventdate;
+        echo "<br>";
+        echo $timestart;
+       ?>
+
+
+
       <!-- script -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>

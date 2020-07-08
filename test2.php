@@ -20,20 +20,25 @@ include("updateeventstatus.php");
   </head>
   <body>
     <!-- topbar-->
-    <?php  include("bar.php"); ?>
 
   <!-- table -->
-  <div class="col-sm-10">
-    <table class="table table-bordered " id= "tablemeow">
-      <tbody>
-        <tr>
-          <td style="width: 15%;">2018282566</td>
-          <td>Aiman</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+  <form method="post" action="test.php">
+    <div style = "margin-top:10%;margin-left:10%">
+      <tr>
+        <td style = "width:15%;">Event date </td>
+        <td><input type="date" id="eventdate" name="eventdate"><br></td>
+      </tr>
+      <tr>
+        <td style = "width:15%;">Time start </td>
+        <td><input type="time" id="timestart" name="timestart"><br></td>
+      </tr>
+      <tr>
+        <td style = "width:15%;">Date time</td>
+        <td><input type="datetime-local" name="datetime" id = "datetime" step="1"></td>
+      </tr>
+      <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+    </div>
+</form>
 <!-- script -->
 <script>
   /*dropdown*/

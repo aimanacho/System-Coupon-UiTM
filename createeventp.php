@@ -6,6 +6,8 @@
     $eventdate = $_POST['eventdate'];
     $timestart =  date("H:i", strtotime("$_POST[timestart]"));
     $timeend = date("H:i", strtotime("$_POST[timeend]"));
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $timestart"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $timeend"));
     $merit = 0;
     $couponq = 0;
     $eventstatus = 1;
@@ -14,7 +16,7 @@
 
 
     $sql = "INSERT INTO events (eventname, eventvenue, eventdate, timestart, timeend, merit, couponq, eventstatus, clubCode) VALUES
-    ('".$eventname."', '".$eventvenue."','".$eventdate."','".$timestart."','".$timeend."','".$merit."','".$couponq."','".$eventstatus."', '".$clubCode."')";
+    ('".$eventname."', '".$eventvenue."','".$eventdate."','".$combinedstart."','".$combinedend."','".$merit."','".$couponq."','".$eventstatus."', '".$clubCode."')";
 
     mysqli_query($conn, $sql);
 
