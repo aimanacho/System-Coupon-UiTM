@@ -77,10 +77,13 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            $resultC = mysqli_query($conn, $couponQ);
            $c = mysqli_fetch_assoc($resultC);
            $coupon = $c['couponq'];
+           $sql2 = "SELECT *, COUNT(eventcode) AS totalattend FROM attendance WHERE eventcode = '".$_SESSION['eventcode']."'";
+           $result2 = mysqli_query($conn, $sql2);
+           $row2 = mysqli_fetch_assoc($result2);
            //coupon quantity used
-           $couponused = $c['couponused'];
+           $totalattend = $row2['totalattend'];
            //validation if coupon is still not fully used
-            if  ($couponused < $coupon)
+            if  ($totalattend < $coupon)
             {
                 //if matricno does not have data inside table attendance
                 if (checkAttendance($conn, $matricno) == true)
@@ -90,11 +93,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
                 else
                 {
                   $repeats = 1;
-                  $couponused = $couponused  + 1;
                   $sqlstudent = "INSERT INTO attendance (matricno, eventcode) VALUES ('".$matricno."', '".$eventcode."')";
                   $result = mysqli_query($conn, $sqlstudent);
-                  $sqlevent = "UPDATE events SET couponused = '".$couponused."' WHERE eventcode = '".$eventcode."'";
-                  $result = mysqli_query($conn, $sqlevent);
                   echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
                 }
             }
@@ -126,8 +126,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
       $resultC = mysqli_query($conn, $couponQ);
       $c = mysqli_fetch_assoc($resultC);
       $coupon = $c['couponq'];
-      $couponused = $c['couponused'];
-      $_SESSION['couponleft'] = ($coupon - $couponused);
+      $sql2 = "SELECT *, COUNT(eventcode) AS totalattend FROM attendance WHERE eventcode = '".$_SESSION['eventcode']."'";
+      $result2 = mysqli_query($conn, $sql2);
+      $row2 = mysqli_fetch_assoc($result2);
+      $totalattend = $row2['totalattend'];
+      $_SESSION['couponleft'] = ($coupon - $totalattend);
       $eventnametmp = $c['eventname'];
       //$couponleft = $coupon - $couponused;
     //time
