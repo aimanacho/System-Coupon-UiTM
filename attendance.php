@@ -84,7 +84,7 @@ for ( $x = 1; $x < $count; $x++)
           include("connection.php");
           $clubcode = $_SESSION['clubCode'];
           //change past event that hasnt change eventstatus
-          $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE eventstatus = '2' AND clubCode = '".$clubcode."' ORDER BY eventdate DESC";
+          $sql = "SELECT *,DATEDIFF(CURRENT_DATE(), `eventdate`) as date_dif, CURRENT_TIME() as cTime from events WHERE (eventstatus = '2'OR eventstatus = '4') AND clubCode = '".$clubcode."' ORDER BY eventdate DESC";
           $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($result))
             {

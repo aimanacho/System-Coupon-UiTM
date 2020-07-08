@@ -62,7 +62,6 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
          echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
               $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
               $result = mysqli_query($conn, $sqlUpdate);
-              mysqli_query($conn,$sqlUpdate);
        }
        else
        {
@@ -82,6 +81,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
            $row2 = mysqli_fetch_assoc($result2);
            //coupon quantity used
            $totalattend = $row2['totalattend'];
+           $diff = $coupon - $totalattend;
            //validation if coupon is still not fully used
             if  ($totalattend < $coupon)
             {
@@ -98,9 +98,11 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
                   echo "<script language = 'javascript'>alert('Attendance accepted!');window.location='coupon.php';</script>";
                 }
             }
-            else
+            if ($diff == 0)
             {
-              echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='coupon.php';</script>";
+              $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
+              $result = mysqli_query($conn, $sqlUpdate);
+              echo "<script language = 'javascript'>alert('Quantity coupon already maxed out!');window.location='dashboard.php';</script>";
             }
          }
          else
@@ -139,10 +141,10 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     $t = mysqli_fetch_assoc($resultT);
     if ($t['cTime'] > $t["timeend"])
     {
+      $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
+      mysqli_query($conn,$sqlUpdate);
       echo "<script language = 'javascript'>alert('Event has ended!');window.location='attendance.php';</script>";
-           $sqlUpdate = "UPDATE events SET eventstatus = '4' WHERE eventcode = '".$_SESSION['eventcode']."'";
-           $result = mysqli_query($conn, $sqlUpdate);
-           mysqli_query($conn,$sqlUpdate);
+
     }
 
 ?>
