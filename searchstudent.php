@@ -43,7 +43,10 @@ header("Location: index.php");
 
 <!-- content -->
 <div class = "content">
-  <p><b>Student Info</b></p>
+  <form action = "studentinfo.php">
+    <button type="submit" class="button"> Back</button>
+  </form>
+  <p><b>Search Student</b></p>
   <form action="searchstudent.php" method="post">
     <td><input type="text" id="searchstudent" name="searchstudent" placeholder="Search student" style="float:right;font-size:17px;"><br></td>
   </form>
@@ -61,7 +64,13 @@ header("Location: index.php");
   <tbody>
     <?php
     include("connection.php");
-    $sql = "SELECT * from student ORDER BY studentname";
+    if ($_SESSION['norepeat']==0)
+    {
+      $searchstudent =  $_POST['searchstudent'];
+      $_SESSION['searchstudent'] = $searchstudent;
+      $_SESSION['norepeat'] = 1;
+    }
+    $sql = "SELECT * from student WHERE studentname LIKE '".$_SESSION['searchstudent']."%'";
     $result = mysqli_query($conn, $sql);
       while ($row = mysqli_fetch_assoc($result))
       {
@@ -74,7 +83,6 @@ header("Location: index.php");
         echo "</tr>";
         echo "</form>";
       }
-      $_SESSION['norepeat']=0;
       ?>
   </tbody>
 </table>

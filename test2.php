@@ -25,18 +25,10 @@ include("updateeventstatus.php");
   <form method="post" action="test.php">
     <div style = "margin-top:10%;margin-left:10%">
       <tr>
-        <td style = "width:15%;">Event date </td>
-        <td><input type="date" id="eventdate" name="eventdate"><br></td>
-      </tr>
-      <tr>
-        <td style = "width:15%;">Time start </td>
-        <td><input type="time" id="timestart" name="timestart"><br></td>
-      </tr>
-      <tr>
-        <td style = "width:15%;">Date time</td>
-        <td><input type="datetime-local" name="datetime" id = "datetime" step="1"></td>
+        <td><input type="text" id="searchstudent" name="searchstudent"><br></td>
       </tr>
       <input type="submit" name = "submit" id = "submit" value="Submit" class="btn btn-secondary">
+      <?php $_SESSION['norepeat'] = 0; ?>
     </div>
 </form>
 <!-- script -->
