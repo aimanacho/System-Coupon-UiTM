@@ -6,7 +6,7 @@ $connect = new PDO('mysql:host=localhost;dbname=its332new2020', 'root', '');
 
 $data = array();
 
-$query = "SELECT * FROM events ORDER BY eventcode";
+$query = "SELECT * FROM events WHERE eventstatus = '2' || eventstatus = '4' ORDER BY eventcode";
 
 $statement = $connect->prepare($query);
 
