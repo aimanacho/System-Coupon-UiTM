@@ -31,10 +31,14 @@ function Footer()
 }
 }
 
-$sql="select student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
+$sql="SELECT student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
 $result = mysqli_query($conn, $sql);
 $number_of_row = mysqli_num_rows($result);
 
+//initialize $totalEligible & $totalDisqualified
+$totalEligible = 0;
+$totalDisqualified = 0;
+$averageMerit = 3;
 //Initialize the 4 columns
 $column_matricNo = "";
 $column_name = "";
@@ -51,14 +55,18 @@ if(mysqli_num_rows($result)>0)
     $semester = $row["sem"];
     $totalmerit = $row["totalmerit"];
     //set status
-    if ($totalmerit > 3)
+    if ($totalmerit > $averageMerit){
       $status = "Eligible";
-    else
+      $totalEligible++;
+    }
+    else {
       $status = "Disqualified";
-
+      $totalDisqualified++;
+    }
     //set null merit to 0
     if ($totalmerit == null)
       $totalmerit = 0;
+
     //to pass data
     $column_matricNo = $column_matricNo.$matricNo."\n";
     $column_name = $column_name.$name."\n";
@@ -77,15 +85,20 @@ $pdf=new FPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
-//for($i=1;$i<=40;$i++)
 $pdf->Cell(25,10,'Qualification for College Placement (Universiti Teknologi MARA Raub, Pahang)',0,1);
+$pdf->SetX(10);
+$pdf->Cell(10,10,"Eligible: $totalEligible",0,1);
+$pdf->SetY(20);
+$pdf->SetX(30);
+$pdf->Cell(10,10,"Disqualified: $totalDisqualified",0,1);
 //Fields Name position
-$Y_Fields_Name_position = 20;
+$Y_Fields_Name_position = 30;
 //Table position, under Fields Name
-$Y_Table_Position = 26;
+$Y_Table_Position = 36;
 
 //First create each Field Name
 //Gray color filling each Field Name box
+
 $pdf->SetFillColor(232,232,232);
 //Bold Font for Field Name
 $pdf->SetFont('Arial','B',10);
