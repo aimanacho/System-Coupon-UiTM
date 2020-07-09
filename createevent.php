@@ -31,7 +31,7 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         <img src = "uitm.jpg"/>
         <a href="dashboard.php" class = "btn "> Dashboard</a>
         <a href="attendance.php" class = "btn">Attendance</a>
-        <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+        <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
           <i class = "fa fa-caret-down"></i>
         </a>
         <div class = "dropdown-container" >
