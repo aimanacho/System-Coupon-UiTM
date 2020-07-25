@@ -42,7 +42,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
   </div>
 
   <!-- content -->
-  <p class = "content"><b>All clubs information</b></p>
+  <p class = "content"><b>All clubs information</b> <br>
+  <a href= "addclubs.php"> + Add new club
 
   <!-- table -->
   <table class="table table-striped" id= "tablemeow">
@@ -61,7 +62,8 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
         echo "<form action = clubsinfo.php method = post >";
         echo "<tr>
           <input type = 'hidden' name = 'clubCode' value = '".$row['clubCode']."'/>
-          <td><button style = background-color:transparent;outline:none;border:none;>".$row["clubName"]."</button></td>
+          <td><button style = background-color:transparent;outline:none;border:none;>".$row["clubName"]."<button formaction=deleteclubs.php style=float:right;>Delete</button> </button> <button formaction=editclubs.php style=float:right;> Edit </button> </td>
+
         </tr>";
         echo "</form>";
       }

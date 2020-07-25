@@ -27,43 +27,47 @@ if ( !isset($_SESSION['userlogged']) || $_SESSION['userlogged'] != 1)
     </ul>
 
     <!-- sidebar-->
-      <div class="sidenav">
-        <img src = "uitm.jpg"/>
-        <a href="dashboard.php" class = "btn "> Dashboard</a>
-        <a href="attendance.php" class = "btn">Attendance</a>
-        <a class= "dropdown-btn btn active" style = "font-size: 25px;">Events
-          <i class = "fa fa-caret-down"></i>
-        </a>
-        <div class = "dropdown-container" >
-          <a href= "createevent.php" style= "text-align: left;font-size: 18px;">Create events</a>
-          <a href= "vieweventdem.php" style= "text-align: left;font-size: 18px;">View events</a>
-        </div>
-      </div>
+    <div class="sidenav">
+    <img src = "uitm.jpg"/>
+    <a href="dashboard.php" class = "btn"> Dashboard</a>
+    <a href="clubs.php" class = "btn active">Clubs</a>
+    <a href="studentinfo.php" class = "btn">Student Info</a>
+    <a class= "dropdown-btn btn" style = "font-size: 25px;">Events
+      <i class = "fa fa-caret-down"></i>
+    </a>
+    <div class = "dropdown-container" >
+      <a href= "viewevent.php" style= "text-align: left;font-size: 18px;">Upcoming events</a>
+      <a href= "pendingevent.php" style= "text-align: left;font-size: 18px;">Pending events</a>
+      <a class = "btn" href= "historyevent.php" style= "text-align: left;font-size: 18px;">History events</a>
+    </div>
+    <a href="report.php" class = "btn">Report</a>
+    </div>
 
 <!-- content -->
-   <p class = "content"><b>Event Registration Form</b></p>
-   <form action = "createeventp.php" method = "post"  target = "_self">
+  <div class = "content">
+    <form action = "clubs.php">
+      <button type="submit" class="button"> Back</button>
+    </form>
+  </div>
+   <p class = "content"><b>Add New Club</b></p>
+   <form action = "addclubsp.php" method = "post"  target = "_self">
      <table class="table table-bordered table-striped" id= "tablemeow">
        <tbody>
          <tr>
-           <td style = "width:15%;">Event name </td>
-           <td><input type="text" id="eventname" name="eventname"><br></td>
+           <td style = "width:15%;">Clubs Name </td>
+           <td><input type="text" id="clubname" name="clubname"><br></td>
          </tr>
          <tr>
-           <td style = "width:15%;">Event venue </td>
-           <td><input type="text" id="eventvenue" name="eventvenue"><br></td>
+           <td style = "width:15%;">Club Code <i>(MAX 5 LETTER)</i> </td>
+           <td><input type="text" id="clubcode" name="clubcode" maxlength="5" style="text-transform: uppercase;"><br></td>
          </tr>
          <tr>
-           <td style = "width:15%;">Event date </td>
-           <td><input type="date" id="eventdate" name="eventdate"><br></td>
+           <td style = "width:15%;">DEM ID </td>
+           <td><input type="text" id="demid" name="demid"><br></td>
          </tr>
          <tr>
-           <td style = "width:15%;">Time start </td>
-           <td><input type="time" id="timestart" name="timestart"><br></td>
-         </tr>
-         <tr>
-           <td style = "width:15%;">Time end </td>
-           <td><input type="time" id="timeend" name="timeend"><br></td>
+           <td style = "width:15%;">DEM Password </td>
+           <td><input type="password" id="dempass" name="dempass"><br></td>
          </tr>
        </tbody>
      </table>
