@@ -91,7 +91,7 @@ echo " <div class = content style = margin-left:220px;padding-top:5px;>
   <tbody>
     <?php
     include("connection.php");
-    $sql = "select student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY totalmerit desc";
+    $sql = "select student.matricNo, student.studentname, student.sem, sum(events.merit) as totalmerit from student left join attendance on student.matricNo=attendance.matricno left join events on events.eventcode = attendance.eventcode Group by student.matricNo ORDER BY  totalmerit desc ,student.sem desc";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result))
     {
